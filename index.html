@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Énergie Solaire Spatiale — Satellite & Drone</title>
+<title>Énergie Solaire Spatiale — Satellite · Drone · Composants</title>
 <style>
 :root {
     --space-dark: #05060f;
@@ -12,10 +12,7 @@
     --solar-gold: #ffb800;
     --solar-orange: #ff6b00;
     --beam-cyan: #00e5ff;
-    --beam-glow: #00b4d8;
     --beam-green: #00ff88;
-    --earth-blue: #2b6cb0;
-    --earth-green: #38a169;
     --text-primary: #e8ecf5;
     --text-dim: #8b93a8;
     --accent: #4fd1c5;
@@ -60,87 +57,49 @@ body {
     animation: twinkle 8s infinite alternate;
 }
 .starfield::after { background-position: 100px 100px; animation-delay: -4s; opacity: 0.3; }
-@keyframes twinkle {
-    from { opacity: 0.3; }
-    to   { opacity: 0.8; }
-}
+@keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.8; } }
 
-/* ============ STRUCTURE ============ */
-.container {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
+.container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 
 /* ============ HERO ============ */
-.hero {
-    text-align: center;
-    padding: 40px 20px 20px;
-}
+.hero { text-align: center; padding: 30px 20px 10px; }
 .hero-badge {
-    display: inline-block;
-    padding: 6px 16px;
+    display: inline-block; padding: 6px 16px;
     background: rgba(79, 209, 197, 0.1);
     border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
+    border-radius: 999px; font-size: 0.8rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
 }
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 800; line-height: 1.2; margin-bottom: 20px;
     background: linear-gradient(135deg, var(--solar-gold) 0%, var(--solar-orange) 50%, var(--beam-cyan) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -1px;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; letter-spacing: -1px;
 }
-.hero p {
-    font-size: 1.15rem;
-    color: var(--text-dim);
-    max-width: 700px;
-    margin: 0 auto;
-}
+.hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 700px; margin: 0 auto; }
 
 /* ============ ONGLETS ============ */
 .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 40px 0;
-    flex-wrap: wrap;
+    display: flex; justify-content: center; gap: 12px;
+    margin: 40px 0; flex-wrap: wrap;
 }
 .tab-btn {
-    padding: 12px 28px;
-    background: rgba(20, 26, 58, 0.6);
-    border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    color: var(--text-dim);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    padding: 12px 28px; background: rgba(20, 26, 58, 0.6);
+    border: 1px solid var(--panel-border); border-radius: 999px;
+    color: var(--text-dim); font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease;
+    display: inline-flex; align-items: center; gap: 10px;
     font-family: inherit;
 }
 .tab-btn:hover {
     border-color: rgba(79, 209, 197, 0.5);
-    color: var(--text-primary);
-    transform: translateY(-2px);
+    color: var(--text-primary); transform: translateY(-2px);
 }
 .tab-btn.active {
     background: linear-gradient(135deg, rgba(79, 209, 197, 0.2), rgba(0, 229, 255, 0.1));
-    border-color: var(--accent);
-    color: var(--text-primary);
+    border-color: var(--accent); color: var(--text-primary);
     box-shadow: 0 0 20px rgba(79, 209, 197, 0.3);
 }
 .tab-icon { font-size: 1.2rem; }
@@ -153,70 +112,41 @@ body {
 
 /* ============ SCÈNE SVG ============ */
 .scene {
-    width: 100%;
-    height: auto;
-    margin: 20px 0 40px;
-    border-radius: 16px;
-    overflow: hidden;
+    width: 100%; margin: 20px 0 40px;
+    border-radius: 16px; overflow: hidden;
     background: linear-gradient(180deg, #05060f 0%, #0a0e27 60%, #0f1a3a 100%);
     border: 1px solid var(--panel-border);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(79, 209, 197, 0.08);
     position: relative;
 }
-.scene svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: transform 0.1s ease-out;
-}
+.scene svg { display: block; width: 100%; height: auto; transition: transform 0.1s ease-out; }
 
 /* ============ SECTIONS ============ */
 .section { margin: 60px 0; }
 .section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 12px;
     color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
 }
 .section-title::before {
-    content: '';
-    width: 4px;
-    height: 28px;
+    content: ''; width: 4px; height: 28px;
     background: linear-gradient(180deg, var(--solar-gold), var(--solar-orange));
     border-radius: 2px;
 }
-.section-subtitle {
-    color: var(--text-dim);
-    margin-bottom: 30px;
-    font-size: 1.05rem;
-}
+.section-subtitle { color: var(--text-dim); margin-bottom: 30px; font-size: 1.05rem; }
 
 /* ============ CARTES ============ */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-}
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
 .card {
     background: linear-gradient(135deg, rgba(20, 26, 58, 0.8), rgba(10, 14, 39, 0.8));
-    border: 1px solid var(--panel-border);
-    border-radius: 14px;
-    padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--panel-border); border-radius: 14px;
+    padding: 24px; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
 }
 .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--solar-gold), var(--beam-cyan));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: linear-gradient(90deg, var(--solar-gold), var(--beam-cyan));
+    opacity: 0; transition: opacity 0.3s ease;
 }
 .card:hover {
     transform: translateY(-4px);
@@ -225,54 +155,34 @@ body {
 }
 .card:hover::before { opacity: 1; }
 .card-number {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
+    display: inline-block; width: 32px; height: 32px;
+    line-height: 32px; text-align: center;
     background: rgba(255, 184, 0, 0.15);
-    color: var(--solar-gold);
-    border-radius: 8px;
-    font-weight: 700;
-    margin-bottom: 14px;
+    color: var(--solar-gold); border-radius: 8px;
+    font-weight: 700; margin-bottom: 14px;
 }
 .card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
 .card p { color: var(--text-dim); font-size: 0.95rem; }
 
 /* ============ COMPARATIF ============ */
-.compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
-}
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
 .compare-col {
     background: rgba(10, 14, 39, 0.6);
     border: 1px solid var(--panel-border);
-    border-radius: 14px;
-    padding: 24px;
+    border-radius: 14px; padding: 24px;
 }
 .compare-col.microwave { border-color: rgba(0, 229, 255, 0.4); }
 .compare-col.laser      { border-color: rgba(255, 107, 0, 0.4); }
 .compare-col.green      { border-color: rgba(0, 255, 136, 0.4); }
-.compare-col h3 {
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.compare-col h3 { font-size: 1.2rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 .microwave h3 { color: var(--beam-cyan); }
 .laser h3      { color: var(--solar-orange); }
 .green h3      { color: var(--beam-green); }
 .compare-col ul { list-style: none; padding: 0; }
 .compare-col li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    display: flex;
-    justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-dim); font-size: 0.95rem;
+    display: flex; justify-content: space-between;
 }
 .compare-col li:last-child { border-bottom: none; }
 .compare-col li span:last-child { color: var(--text-primary); font-weight: 600; }
@@ -280,83 +190,56 @@ body {
 /* ============ INTERACTIF ============ */
 .interactive-panel {
     background: linear-gradient(135deg, rgba(20, 26, 58, 0.9), rgba(10, 14, 39, 0.9));
-    border: 1px solid var(--panel-border);
-    border-radius: 16px;
-    padding: 30px;
-    margin-top: 20px;
+    border: 1px solid var(--panel-border); border-radius: 16px;
+    padding: 30px; margin-top: 20px;
 }
 .control-group { margin-bottom: 24px; }
 .control-group label {
-    display: block;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-weight: 600;
+    display: block; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--accent); margin-bottom: 10px; font-weight: 600;
 }
 .control-group input[type="range"] {
-    width: 100%;
-    height: 6px;
+    width: 100%; height: 6px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 3px;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
+    border-radius: 3px; outline: none;
+    -webkit-appearance: none; appearance: none;
 }
 .control-group input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px;
     background: linear-gradient(135deg, var(--solar-gold), var(--solar-orange));
-    border-radius: 50%;
-    cursor: pointer;
+    border-radius: 50%; cursor: pointer;
     box-shadow: 0 0 15px rgba(255, 184, 0, 0.6);
 }
 .control-group input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     background: linear-gradient(135deg, var(--solar-gold), var(--solar-orange));
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
+    border-radius: 50%; cursor: pointer; border: none;
     box-shadow: 0 0 15px rgba(255, 184, 0, 0.6);
 }
 .control-value {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-top: 8px;
+    display: flex; justify-content: space-between;
+    font-size: 0.9rem; color: var(--text-dim); margin-top: 8px;
 }
 .control-value strong { color: var(--solar-gold); font-size: 1.1rem; }
 .output-panel {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px; margin-top: 20px;
 }
 .output-stat {
     background: rgba(5, 6, 15, 0.6);
     border: 1px solid var(--panel-border);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
+    border-radius: 10px; padding: 16px; text-align: center;
 }
 .output-stat .label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-dim); margin-bottom: 8px;
 }
 .output-stat .value {
-    font-size: 1.6rem;
-    font-weight: 800;
+    font-size: 1.6rem; font-weight: 800;
     background: linear-gradient(135deg, var(--solar-gold), var(--beam-cyan));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 .output-stat .unit { font-size: 0.85rem; color: var(--text-dim); margin-left: 4px; }
@@ -364,48 +247,144 @@ body {
 /* ============ TIMELINE ============ */
 .timeline { position: relative; padding-left: 30px; margin-top: 20px; }
 .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px; top: 8px; bottom: 8px;
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
     width: 2px;
     background: linear-gradient(180deg, var(--solar-gold), var(--beam-cyan), transparent);
 }
 .timeline-item { position: relative; margin-bottom: 28px; }
 .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -30px; top: 6px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+    content: ''; position: absolute; left: -30px; top: 6px;
+    width: 18px; height: 18px; border-radius: 50%;
     background: var(--space-dark);
     border: 2px solid var(--accent);
     box-shadow: 0 0 12px var(--accent);
 }
 .timeline-year {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    font-size: 0.85rem; color: var(--accent);
+    font-weight: 700; letter-spacing: 1px; margin-bottom: 4px;
 }
 .timeline-content {
     background: rgba(20, 26, 58, 0.6);
     border: 1px solid var(--panel-border);
-    border-radius: 10px;
-    padding: 16px 20px;
+    border-radius: 10px; padding: 16px 20px;
 }
 .timeline-content h4 { font-size: 1rem; margin-bottom: 6px; color: var(--text-primary); }
 .timeline-content p { font-size: 0.9rem; color: var(--text-dim); }
 
-/* ============ FOOTER ============ */
+/* ============ BIBLIOTHÈQUE DE COMPOSANTS ============ */
+.filters {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 30px; justify-content: center;
+}
+.filter-btn {
+    padding: 8px 18px; background: rgba(20, 26, 58, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px; color: var(--text-dim);
+    font-size: 0.9rem; cursor: pointer;
+    transition: all 0.3s ease; font-family: inherit;
+}
+.filter-btn:hover { color: var(--text-primary); border-color: rgba(79, 209, 197, 0.5); }
+.filter-btn.active {
+    background: linear-gradient(135deg, rgba(255, 184, 0, 0.2), rgba(255, 107, 0, 0.15));
+    border-color: var(--solar-gold); color: var(--solar-gold);
+}
+
+.accordion {
+    margin-bottom: 16px;
+    background: rgba(10, 14, 39, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px; overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+.accordion:hover { border-color: rgba(79, 209, 197, 0.4); }
+.accordion-header {
+    padding: 18px 24px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(90deg, rgba(20, 26, 58, 0.8), rgba(10, 14, 39, 0.8));
+    transition: background 0.3s ease;
+    user-select: none;
+}
+.accordion-header:hover { background: rgba(79, 209, 197, 0.05); }
+.accordion-title {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 1.05rem; font-weight: 600; color: var(--text-primary);
+}
+.accordion-tag {
+    font-size: 0.7rem; padding: 3px 10px;
+    border-radius: 999px; text-transform: uppercase;
+    letter-spacing: 1px; font-weight: 700;
+}
+.tag-satellite { background: rgba(0, 229, 255, 0.15); color: var(--beam-cyan); }
+.tag-drone     { background: rgba(0, 255, 136, 0.15); color: var(--beam-green); }
+.tag-both      { background: rgba(255, 184, 0, 0.15); color: var(--solar-gold); }
+.accordion-icon {
+    font-size: 1.2rem; color: var(--accent);
+    transition: transform 0.3s ease;
+}
+.accordion.open .accordion-icon { transform: rotate(180deg); }
+.accordion-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+.accordion.open .accordion-body { max-height: 3000px; }
+.accordion-content {
+    padding: 20px 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Tableau technique */
+.tech-table {
+    width: 100%; border-collapse: collapse;
+    margin-top: 12px; font-size: 0.9rem;
+}
+.tech-table th {
+    text-align: left; padding: 10px 12px;
+    background: rgba(79, 209, 197, 0.1);
+    color: var(--accent); font-weight: 700;
+    font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(79, 209, 197, 0.3);
+}
+.tech-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-dim); vertical-align: top;
+}
+.tech-table td:first-child {
+    color: var(--text-primary); font-weight: 600;
+    width: 35%;
+}
+.tech-table tr:last-child td { border-bottom: none; }
+
+.callout {
+    margin-top: 16px; padding: 14px 18px;
+    background: rgba(255, 184, 0, 0.08);
+    border-left: 3px solid var(--solar-gold);
+    border-radius: 6px; font-size: 0.9rem;
+    color: #ffcc66;
+}
+.callout strong { color: var(--solar-gold); }
+
+/* ============ FOOTER + BOUTON PRINT ============ */
 footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-dim);
-    font-size: 0.85rem;
+    text-align: center; padding: 40px 20px;
+    color: var(--text-dim); font-size: 0.85rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     margin-top: 60px;
+}
+.print-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 24px; margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(255, 184, 0, 0.2), rgba(255, 107, 0, 0.15));
+    border: 1px solid var(--solar-gold);
+    border-radius: 999px; color: var(--solar-gold);
+    font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease; font-family: inherit;
+}
+.print-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 184, 0, 0.35), rgba(255, 107, 0, 0.25));
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
 }
 
 /* ============ RESPONSIVE ============ */
@@ -413,53 +392,53 @@ footer {
     .compare { grid-template-columns: 1fr; }
     .container { padding: 20px 14px; }
     .hero { padding: 20px 10px; }
+    .tech-table td:first-child { width: 45%; }
+    .accordion-content { padding: 16px; }
+    .tech-table { font-size: 0.82rem; }
+    .tech-table th, .tech-table td { padding: 8px; }
+}
+
+/* ============ IMPRESSION / PDF ============ */
+@media print {
+    .starfield, .tabs, .print-btn, footer, .hero-badge { display: none !important; }
+    body { background: white; color: black; }
+    .tab-content { display: block !important; page-break-after: always; }
+    .accordion-body { max-height: none !important; }
+    .accordion-content { padding: 12px; }
+    .card, .accordion, .interactive-panel, .compare-col {
+        border: 1px solid #999; box-shadow: none;
+        background: white; color: black;
+        page-break-inside: avoid;
+    }
+    .section-title, .accordion-title, .card h3 { color: black !important; }
+    .tech-table th { background: #eee; color: black; }
+    .tech-table td { color: #333; }
+    .tech-table td:first-child { color: black; }
 }
 
 /* ============ ANIMATIONS SVG ============ */
 .beam-pulse { animation: beamPulse 2.5s ease-in-out infinite; }
-@keyframes beamPulse {
-    0%, 100% { opacity: 0.4; }
-    50%      { opacity: 1; }
-}
+@keyframes beamPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 .satellite-float { animation: satelliteFloat 6s ease-in-out infinite; }
-@keyframes satelliteFloat {
-    0%, 100% { transform: translate(0, 0); }
-    50%      { transform: translate(0, -8px); }
-}
-.rotate-panel { animation: rotatePanel 20s linear infinite; transform-origin: center; }
-@keyframes rotatePanel {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
-.rotate-prop { animation: rotateProp 0.15s linear infinite; transform-origin: center; }
-@keyframes rotateProp {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
+@keyframes satelliteFloat { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(0, -8px); } }
 .drone-hover { animation: droneHover 3s ease-in-out infinite; }
-@keyframes droneHover {
-    0%, 100% { transform: translate(0, 0); }
-    50%      { transform: translate(0, -6px); }
-}
+@keyframes droneHover { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(0, -6px); } }
 .sun-rays { animation: sunRays 4s ease-in-out infinite; }
-@keyframes sunRays {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50%      { opacity: 1; transform: scale(1.05); }
-}
+@keyframes sunRays { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
 .energy-particle { animation: energyFlow 2s linear infinite; }
 @keyframes energyFlow {
-    0%   { opacity: 0; transform: translateY(-50px); }
-    20%  { opacity: 1; }
-    80%  { opacity: 1; }
+    0% { opacity: 0; transform: translateY(-50px); }
+    20% { opacity: 1; } 80% { opacity: 1; }
     100% { opacity: 0; transform: translateY(50px); }
 }
 .energy-particle-up { animation: energyFlowUp 1.6s linear infinite; }
 @keyframes energyFlowUp {
-    0%   { opacity: 0; transform: translate(0, 30px); }
-    20%  { opacity: 1; }
-    80%  { opacity: 1; }
+    0% { opacity: 0; transform: translate(0, 30px); }
+    20% { opacity: 1; } 80% { opacity: 1; }
     100% { opacity: 0; transform: translate(0, -30px); }
 }
+.rotate-prop { animation: rotateProp 0.15s linear infinite; transform-origin: center; }
+@keyframes rotateProp { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .earth-glow { animation: earthGlow 4s ease-in-out infinite; }
 @keyframes earthGlow {
     0%, 100% { filter: drop-shadow(0 0 10px rgba(43, 108, 176, 0.5)); }
@@ -477,7 +456,7 @@ footer {
     <div class="hero">
         <div class="hero-badge">Projet SBSP · 2026</div>
         <h1>Énergie Solaire Spatiale</h1>
-        <p>Capoter la puissance du soleil 24h/24, la transmettre sans fil vers la Terre ou vers un drone, et alimenter l'humanité depuis l'orbite.</p>
+        <p>Du satellite géostationnaire au drone en vol : fiches techniques, simulateurs interactifs et bibliothèque de composants.</p>
     </div>
 
     <!-- ONGLETS -->
@@ -487,6 +466,9 @@ footer {
         </button>
         <button class="tab-btn" data-tab="drone">
             <span class="tab-icon">🚁</span> Drone en vol
+        </button>
+        <button class="tab-btn" data-tab="composants">
+            <span class="tab-icon">📚</span> Composants
         </button>
     </div>
 
@@ -523,17 +505,11 @@ footer {
                     </linearGradient>
                     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                         <feGaussianBlur stdDeviation="4" result="blur"/>
-                        <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                     </filter>
                     <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
                         <feGaussianBlur stdDeviation="10" result="blur"/>
-                        <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                     </filter>
                 </defs>
 
@@ -550,7 +526,6 @@ footer {
                     <circle cx="150" cy="200" r="0.8" fill="white"/>
                     <circle cx="700" cy="180" r="0.9" fill="white"/>
                     <circle cx="880" cy="220" r="1" fill="white"/>
-                    <circle cx="420" cy="150" r="0.8" fill="white"/>
                 </g>
 
                 <g transform="translate(850, 80)" class="sun-rays" filter="url(#glowStrong)">
@@ -563,8 +538,6 @@ footer {
                         <line x1="70" y1="0"  x2="90" y2="0"/>
                         <line x1="-50" y1="-50" x2="-65" y2="-65"/>
                         <line x1="50" y1="50"   x2="65" y2="65"/>
-                        <line x1="-50" y1="50"  x2="-65" y2="65"/>
-                        <line x1="50" y1="-50"  x2="65" y2="-65"/>
                     </g>
                 </g>
 
@@ -580,15 +553,11 @@ footer {
                         <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#4fd1c5" stroke-width="1"/>
                         <line x1="0" y1="13" x2="55" y2="13" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
                         <line x1="0" y1="26" x2="55" y2="26" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="18" y1="0" x2="18" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="37" y1="0" x2="37" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
                     </g>
                     <g transform="translate(45, -20)">
                         <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#4fd1c5" stroke-width="1"/>
                         <line x1="0" y1="13" x2="55" y2="13" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
                         <line x1="0" y1="26" x2="55" y2="26" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="18" y1="0" x2="18" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="37" y1="0" x2="37" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
                     </g>
                     <rect x="-15" y="15" width="30" height="10" rx="2" fill="#4fd1c5" opacity="0.8"/>
                     <circle cx="0" cy="25" r="3" fill="#00e5ff" filter="url(#glow)"/>
@@ -613,7 +582,6 @@ footer {
                 <g transform="translate(600, 430)">
                     <ellipse cx="0" cy="0" rx="60" ry="12" fill="#2d3748" stroke="#ffb800" stroke-width="2"/>
                     <ellipse cx="0" cy="0" rx="40" ry="8" fill="none" stroke="#ffb800" stroke-width="1" opacity="0.6"/>
-                    <ellipse cx="0" cy="0" rx="20" ry="4" fill="none" stroke="#ffb800" stroke-width="1" opacity="0.6"/>
                     <circle cx="0" cy="0" r="5" fill="#00e5ff" filter="url(#glow)" class="beam-pulse"/>
                     <line x1="0" y1="12" x2="0" y2="40" stroke="#ffb800" stroke-width="2"/>
                 </g>
@@ -623,8 +591,6 @@ footer {
                     <text x="600" y="140" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="12">🛰 SATELLITE</text>
                     <text x="600" y="470" text-anchor="middle" fill="#ffb800" font-weight="700" font-size="12">📡 RECTENNA</text>
                     <text x="500" y="490" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="12">🌍 TERRE</text>
-                    <text x="640" y="320" fill="#00e5ff" font-weight="700" font-size="11">FAISCEAU</text>
-                    <text x="640" y="333" fill="#00e5ff" font-size="10">MICRO-ONDES</text>
                 </g>
             </svg>
         </div>
@@ -633,26 +599,10 @@ footer {
             <h2 class="section-title">Le principe en 4 étapes</h2>
             <p class="section-subtitle">De la lumière solaire à votre prise électrique.</p>
             <div class="grid">
-                <div class="card">
-                    <div class="card-number">1</div>
-                    <h3>Captation solaire</h3>
-                    <p>Des panneaux photovoltaïques en orbite géostationnaire captent le rayonnement solaire 24h/24, sans nuages ni atmosphère.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">2</div>
-                    <h3>Conversion en micro-ondes</h3>
-                    <p>L'électricité produite est convertie en ondes électromagnétiques à 5,8 GHz ou 10 GHz, capables de traverser l'atmosphère.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">3</div>
-                    <h3>Transmission sans fil</h3>
-                    <p>Le faisceau est dirigé avec une précision extrême vers une antenne de réception au sol, sur Terre.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">4</div>
-                    <h3>Reconversion en électricité</h3>
-                    <p>La rectenna reconvertit les micro-ondes en courant continu, injecté dans le réseau électrique.</p>
-                </div>
+                <div class="card"><div class="card-number">1</div><h3>Captation solaire</h3><p>Des panneaux photovoltaïques en orbite géostationnaire captent le rayonnement 24h/24.</p></div>
+                <div class="card"><div class="card-number">2</div><h3>Conversion en micro-ondes</h3><p>L'électricité est convertie en ondes à 5,8 GHz, capables de traverser l'atmosphère.</p></div>
+                <div class="card"><div class="card-number">3</div><h3>Transmission sans fil</h3><p>Le faisceau est dirigé avec une précision extrême vers une antenne au sol.</p></div>
+                <div class="card"><div class="card-number">4</div><h3>Reconversion en électricité</h3><p>La rectenna reconvertit les micro-ondes en courant, injecté dans le réseau.</p></div>
             </div>
         </div>
 
@@ -668,7 +618,6 @@ footer {
                         <li><span>Précision</span><span>Moyenne</span></li>
                         <li><span>Portée</span><span>Longue</span></li>
                         <li><span>Multi-cibles</span><span>Oui</span></li>
-                        <li><span>Discrétion</span><span>Élevée</span></li>
                         <li><span>Rendement</span><span>~10-20 %</span></li>
                     </ul>
                 </div>
@@ -680,7 +629,6 @@ footer {
                         <li><span>Précision</span><span>Très élevée</span></li>
                         <li><span>Portée</span><span>Très longue</span></li>
                         <li><span>Multi-cibles</span><span>Difficile</span></li>
-                        <li><span>Discrétion</span><span>Faible</span></li>
                         <li><span>Rendement</span><span>~20-30 %</span></li>
                     </ul>
                 </div>
@@ -689,61 +637,35 @@ footer {
 
         <div class="section">
             <h2 class="section-title">Simulateur satellite</h2>
-            <p class="section-subtitle">Ajustez les paramètres et observez l'impact sur la puissance reçue au sol.</p>
+            <p class="section-subtitle">Ajustez les paramètres et observez la puissance reçue au sol.</p>
             <div class="interactive-panel">
                 <div class="control-group">
                     <label for="altitude">Altitude du satellite (km)</label>
                     <input type="range" id="altitude" min="400" max="40000" value="35786" step="100">
                     <div class="control-value">
-                        <span>Orbite basse</span>
-                        <strong id="altitudeVal">35 786 km</strong>
-                        <span>Géostationnaire</span>
+                        <span>Orbite basse</span><strong id="altitudeVal">35 786 km</strong><span>Géostationnaire</span>
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="power">Puissance émise (MW)</label>
                     <input type="range" id="power" min="1" max="1000" value="100" step="1">
-                    <div class="control-value">
-                        <span>1 MW</span>
-                        <strong id="powerVal">100 MW</strong>
-                        <span>1 000 MW</span>
-                    </div>
+                    <div class="control-value"><span>1 MW</span><strong id="powerVal">100 MW</strong><span>1 000 MW</span></div>
                 </div>
                 <div class="control-group">
                     <label for="efficiency">Rendement de la chaîne (%)</label>
                     <input type="range" id="efficiency" min="5" max="50" value="15" step="1">
-                    <div class="control-value">
-                        <span>5 %</span>
-                        <strong id="efficiencyVal">15 %</strong>
-                        <span>50 %</span>
-                    </div>
+                    <div class="control-value"><span>5 %</span><strong id="efficiencyVal">15 %</strong><span>50 %</span></div>
                 </div>
                 <div class="control-group">
                     <label for="frequency">Fréquence du faisceau (GHz)</label>
                     <input type="range" id="frequency" min="2" max="100" value="5.8" step="0.1">
-                    <div class="control-value">
-                        <span>2 GHz</span>
-                        <strong id="frequencyVal">5,8 GHz</strong>
-                        <span>100 GHz</span>
-                    </div>
+                    <div class="control-value"><span>2 GHz</span><strong id="frequencyVal">5,8 GHz</strong><span>100 GHz</span></div>
                 </div>
                 <div class="output-panel">
-                    <div class="output-stat">
-                        <div class="label">Puissance reçue</div>
-                        <div class="value"><span id="receivedPower">15</span><span class="unit">MW</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Foyers alimentés</div>
-                        <div class="value"><span id="homes">30 000</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Surface rectenna</div>
-                        <div class="value"><span id="rectennaSize">2,5</span><span class="unit">km²</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Densité au sol</div>
-                        <div class="value"><span id="density">10</span><span class="unit">W/m²</span></div>
-                    </div>
+                    <div class="output-stat"><div class="label">Puissance reçue</div><div class="value"><span id="receivedPower">15</span><span class="unit">MW</span></div></div>
+                    <div class="output-stat"><div class="label">Foyers alimentés</div><div class="value"><span id="homes">30 000</span></div></div>
+                    <div class="output-stat"><div class="label">Surface rectenna</div><div class="value"><span id="rectennaSize">2,5</span><span class="unit">km²</span></div></div>
+                    <div class="output-stat"><div class="label">Densité au sol</div><div class="value"><span id="density">10</span><span class="unit">W/m²</span></div></div>
                 </div>
             </div>
         </div>
@@ -752,41 +674,11 @@ footer {
             <h2 class="section-title">État des recherches en 2026</h2>
             <p class="section-subtitle">Des démonstrations concrètes, mais encore loin du déploiement.</p>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2023 — ÉTATS-UNIS</div>
-                    <div class="timeline-content">
-                        <h4>Caltech SSPD-1</h4>
-                        <p>Première transmission d'énergie sans fil depuis l'espace démontrée via le module MAPLE. Validation du concept en orbite basse.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2024 — CHINE</div>
-                    <div class="timeline-content">
-                        <h4>逐日工程 (Zhuri)</h4>
-                        <p>Test au sol : 1180 W transmis sur 100 m avec 20,8 % d'efficacité. Un drone reçoit 143 W en vol.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2024 — JAPON</div>
-                    <div class="timeline-content">
-                        <h4>Test avion → sol</h4>
-                        <p>Un avion volant à 7 000 m transmet de l'énergie vers le sol. Validation des technologies de formation de faisceau.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2025 — JAPON</div>
-                    <div class="timeline-content">
-                        <h4>OHISAMA</h4>
-                        <p>Satellite de 180 kg prévu pour transmettre 1 kW depuis l'orbite basse vers une station à Suwa.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2028 — META / OVERVIEW ENERGY</div>
-                    <div class="timeline-content">
-                        <h4>Démonstration orbitale à 1 GW</h4>
-                        <p>Contrat pour une démonstration de 1 GW via faisceau infrarouge visant des fermes solaires existantes.</p>
-                    </div>
-                </div>
+                <div class="timeline-item"><div class="timeline-year">2023 — ÉTATS-UNIS</div><div class="timeline-content"><h4>Caltech SSPD-1</h4><p>Première transmission d'énergie sans fil depuis l'espace via MAPLE.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2024 — CHINE</div><div class="timeline-content"><h4>逐日工程 (Zhuri)</h4><p>1180 W transmis sur 100 m avec 20,8 % d'efficacité.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2024 — JAPON</div><div class="timeline-content"><h4>Test avion → sol</h4><p>Un avion à 7 000 m transmet de l'énergie vers le sol.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2025 — JAPON</div><div class="timeline-content"><h4>OHISAMA</h4><p>Satellite de 180 kg pour transmettre 1 kW depuis l'orbite basse.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2028 — META / OVERVIEW ENERGY</div><div class="timeline-content"><h4>Démonstration orbitale à 1 GW</h4><p>Contrat pour un faisceau infrarouge vers des fermes solaires existantes.</p></div></div>
             </div>
         </div>
 
@@ -819,15 +711,11 @@ footer {
                     </linearGradient>
                     <filter id="droneGlow" x="-50%" y="-50%" width="200%" height="200%">
                         <feGaussianBlur stdDeviation="3" result="blur"/>
-                        <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                     </filter>
                 </defs>
 
                 <rect width="1000" height="500" fill="url(#skyGrad)"/>
-
                 <ellipse cx="150" cy="80" rx="80" ry="25" fill="url(#cloudGrad)"/>
                 <ellipse cx="220" cy="90" rx="60" ry="20" fill="url(#cloudGrad)"/>
                 <ellipse cx="800" cy="120" rx="100" ry="30" fill="url(#cloudGrad)"/>
@@ -842,7 +730,6 @@ footer {
                     <circle cx="40" cy="0" r="8" fill="#1a202c" stroke="#4fd1c5" stroke-width="1"/>
                     <rect x="-15" y="-45" width="30" height="15" rx="2" fill="#4fd1c5"/>
                     <circle cx="0" cy="-45" r="4" fill="#00e5ff" filter="url(#droneGlow)" class="beam-pulse"/>
-                    <circle cx="0" cy="-15" r="3" fill="#00ff88" opacity="0.8"/>
                     <text x="0" y="25" text-anchor="middle" fill="#8b93a8" font-size="10" font-family="Segoe UI">VÉHICULE ÉMETTEUR</text>
                 </g>
 
@@ -861,19 +748,10 @@ footer {
                     <line x1="0" y1="0" x2="45" y2="25" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
                     <ellipse cx="0" cy="0" rx="22" ry="14" fill="#2d3748" stroke="#4fd1c5" stroke-width="1.5"/>
                     <circle cx="0" cy="0" r="6" fill="#00e5ff" filter="url(#droneGlow)" class="beam-pulse"/>
-
-                    <g class="rotate-prop" style="transform-origin: -45px -25px;">
-                        <ellipse cx="-45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
-                    </g>
-                    <g class="rotate-prop" style="transform-origin: 45px -25px;">
-                        <ellipse cx="45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
-                    </g>
-                    <g class="rotate-prop" style="transform-origin: -45px 25px;">
-                        <ellipse cx="-45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
-                    </g>
-                    <g class="rotate-prop" style="transform-origin: 45px 25px;">
-                        <ellipse cx="45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
-                    </g>
+                    <g class="rotate-prop" style="transform-origin: -45px -25px;"><ellipse cx="-45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/></g>
+                    <g class="rotate-prop" style="transform-origin: 45px -25px;"><ellipse cx="45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/></g>
+                    <g class="rotate-prop" style="transform-origin: -45px 25px;"><ellipse cx="-45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/></g>
+                    <g class="rotate-prop" style="transform-origin: 45px 25px;"><ellipse cx="45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/></g>
                 </g>
 
                 <line x1="500" y1="190" x2="800" y2="140" stroke="#4fd1c5" stroke-width="1" stroke-dasharray="4 6" opacity="0.5"/>
@@ -883,12 +761,6 @@ footer {
                     <text x="500" y="120" text-anchor="middle" fill="#00e5ff" font-weight="700" font-size="12">🚁 DRONE EN VOL</text>
                     <text x="200" y="440" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="11">📡 ÉMETTEUR AU SOL</text>
                     <text x="640" y="200" fill="#00ff88" font-weight="700" font-size="11">FAISCEAU</text>
-                    <text x="640" y="213" fill="#00ff88" font-size="10">MICRO-ONDES</text>
-                </g>
-
-                <g transform="translate(20, 20)" font-family="Segoe UI, sans-serif" font-size="11" fill="#8b93a8">
-                    <text x="0" y="0" fill="#00ff88" font-weight="700">● Alimentation continue</text>
-                    <text x="0" y="18">Sans câble, sans batterie</text>
                 </g>
             </svg>
         </div>
@@ -897,26 +769,10 @@ footer {
             <h2 class="section-title">Le principe pour un drone</h2>
             <p class="section-subtitle">Une alimentation continue sans câble ni batterie.</p>
             <div class="grid">
-                <div class="card">
-                    <div class="card-number">1</div>
-                    <h3>Émetteur au sol</h3>
-                    <p>Un véhicule équipé d'une antenne réseau phasé émet un faisceau de micro-ondes à 5,8 GHz vers le drone.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">2</div>
-                    <h3>Suivi en temps réel</h3>
-                    <p>Un système de tracking (GPS + radar + vision) ajuste en permanence l'angle du faisceau pour viser le drone.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">3</div>
-                    <h3>Réception à bord</h3>
-                    <p>Une rectenna légère fixée sous le drone capte les micro-ondes et les reconvertit en électricité.</p>
-                </div>
-                <div class="card">
-                    <div class="card-number">4</div>
-                    <h3>Vol prolongé</h3>
-                    <p>Le drone vole en continu tant que le faisceau est maintenu. Fini le retour au sol pour recharger.</p>
-                </div>
+                <div class="card"><div class="card-number">1</div><h3>Émetteur au sol</h3><p>Un véhicule équipé d'une antenne réseau phasé émet un faisceau à 5,8 GHz.</p></div>
+                <div class="card"><div class="card-number">2</div><h3>Suivi en temps réel</h3><p>Un système GPS + radar + vision ajuste en permanence l'angle du faisceau.</p></div>
+                <div class="card"><div class="card-number">3</div><h3>Réception à bord</h3><p>Une rectenna légère capte les micro-ondes et les reconvertit en électricité.</p></div>
+                <div class="card"><div class="card-number">4</div><h3>Vol prolongé</h3><p>Le drone vole en continu tant que le faisceau est maintenu.</p></div>
             </div>
         </div>
 
@@ -931,7 +787,6 @@ footer {
                         <li><span>Retour au sol</span><span>Obligatoire</span></li>
                         <li><span>Recharge</span><span>30 – 90 min</span></li>
                         <li><span>Poids embarqué</span><span>Élevé</span></li>
-                        <li><span>Coût opérationnel</span><span>Élevé</span></li>
                         <li><span>Mission continue</span><span>Impossible</span></li>
                     </ul>
                 </div>
@@ -942,7 +797,6 @@ footer {
                         <li><span>Retour au sol</span><span>Inutile</span></li>
                         <li><span>Recharge</span><span>Continue</span></li>
                         <li><span>Poids embarqué</span><span>Faible</span></li>
-                        <li><span>Coût opérationnel</span><span>Faible</span></li>
                         <li><span>Mission continue</span><span>24h/24</span></li>
                     </ul>
                 </div>
@@ -956,65 +810,33 @@ footer {
                 <div class="control-group">
                     <label for="droneAltitude">Altitude du drone (m)</label>
                     <input type="range" id="droneAltitude" min="10" max="2000" value="100" step="10">
-                    <div class="control-value">
-                        <span>10 m</span>
-                        <strong id="droneAltitudeVal">100 m</strong>
-                        <span>2 000 m</span>
-                    </div>
+                    <div class="control-value"><span>10 m</span><strong id="droneAltitudeVal">100 m</strong><span>2 000 m</span></div>
                 </div>
                 <div class="control-group">
                     <label for="droneDistance">Distance horizontale (m)</label>
                     <input type="range" id="droneDistance" min="10" max="3000" value="500" step="10">
-                    <div class="control-value">
-                        <span>10 m</span>
-                        <strong id="droneDistanceVal">500 m</strong>
-                        <span>3 000 m</span>
-                    </div>
+                    <div class="control-value"><span>10 m</span><strong id="droneDistanceVal">500 m</strong><span>3 000 m</span></div>
                 </div>
                 <div class="control-group">
                     <label for="dronePower">Puissance émise (W)</label>
                     <input type="range" id="dronePower" min="10" max="5000" value="1000" step="10">
-                    <div class="control-value">
-                        <span>10 W</span>
-                        <strong id="dronePowerVal">1 000 W</strong>
-                        <span>5 000 W</span>
-                    </div>
+                    <div class="control-value"><span>10 W</span><strong id="dronePowerVal">1 000 W</strong><span>5 000 W</span></div>
                 </div>
                 <div class="control-group">
                     <label for="droneFreq">Fréquence (GHz)</label>
                     <input type="range" id="droneFreq" min="2" max="30" value="5.8" step="0.1">
-                    <div class="control-value">
-                        <span>2 GHz</span>
-                        <strong id="droneFreqVal">5,8 GHz</strong>
-                        <span>30 GHz</span>
-                    </div>
+                    <div class="control-value"><span>2 GHz</span><strong id="droneFreqVal">5,8 GHz</strong><span>30 GHz</span></div>
                 </div>
                 <div class="control-group">
                     <label for="droneConsumption">Consommation du drone (W)</label>
                     <input type="range" id="droneConsumption" min="50" max="2000" value="500" step="10">
-                    <div class="control-value">
-                        <span>50 W</span>
-                        <strong id="droneConsumptionVal">500 W</strong>
-                        <span>2 000 W</span>
-                    </div>
+                    <div class="control-value"><span>50 W</span><strong id="droneConsumptionVal">500 W</strong><span>2 000 W</span></div>
                 </div>
                 <div class="output-panel">
-                    <div class="output-stat">
-                        <div class="label">Puissance reçue</div>
-                        <div class="value"><span id="droneReceived">0</span><span class="unit">W</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Rendement global</div>
-                        <div class="value"><span id="droneEfficiency">0</span><span class="unit">%</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Marge de puissance</div>
-                        <div class="value"><span id="droneMargin">0</span><span class="unit">W</span></div>
-                    </div>
-                    <div class="output-stat">
-                        <div class="label">Statut du vol</div>
-                        <div class="value" id="droneStatus" style="font-size:1.1rem;">—</div>
-                    </div>
+                    <div class="output-stat"><div class="label">Puissance reçue</div><div class="value"><span id="droneReceived">0</span><span class="unit">W</span></div></div>
+                    <div class="output-stat"><div class="label">Rendement global</div><div class="value"><span id="droneEfficiency">0</span><span class="unit">%</span></div></div>
+                    <div class="output-stat"><div class="label">Marge de puissance</div><div class="value"><span id="droneMargin">0</span><span class="unit">W</span></div></div>
+                    <div class="output-stat"><div class="label">Statut du vol</div><div class="value" id="droneStatus" style="font-size:1.1rem;">—</div></div>
                 </div>
             </div>
         </div>
@@ -1023,49 +845,420 @@ footer {
             <h2 class="section-title">État des démonstrations</h2>
             <p class="section-subtitle">Ce qui a déjà été réalisé en conditions réelles.</p>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2021 — CHINE</div>
-                    <div class="timeline-content">
-                        <h4>Université Xidian</h4>
-                        <p>Drone maintenu en vol pendant 3,1 heures à 15 m d'altitude par un émetteur micro-ondes mobile. Le véhicule et le drone étaient tous deux en mouvement.</p>
+                <div class="timeline-item"><div class="timeline-year">2021 — CHINE</div><div class="timeline-content"><h4>Université Xidian</h4><p>Drone maintenu en vol 3,1 heures à 15 m par émetteur micro-ondes mobile.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2023 — ÉTATS-UNIS</div><div class="timeline-content"><h4>PowerLight + Kraus Hamdani</h4><p>1 kW délivré à un drone K1000ULE à 5 000 pieds par faisceau laser infrarouge.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2024 — JAPON</div><div class="timeline-content"><h4>Test avion → sol</h4><p>Un avion à 7 000 m transmet de l'énergie vers une station au sol.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">PERSPECTIVES</div><div class="timeline-content"><h4>Application opérationnelle</h4><p>Surveillance continue, livraison sans arrêt. Barrière : rendement 3–5 %.</p></div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ONGLET COMPOSANTS (BIBLIOTHÈQUE) -->
+    <!-- ============================================================ -->
+    <div class="tab-content" id="tab-composants">
+
+        <div class="section" style="margin-top: 20px;">
+            <h2 class="section-title">Bibliothèque de composants</h2>
+            <p class="section-subtitle">Fiches techniques détaillées pour chaque sous-système des deux projets.</p>
+
+            <!-- Bouton impression -->
+            <div style="text-align: center;">
+                <button class="print-btn" onclick="window.print()">
+                    📄 Exporter en PDF / Imprimer toutes les fiches
+                </button>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="satellite">🛰 Satellite</button>
+                <button class="filter-btn" data-filter="drone">🚁 Drone</button>
+            </div>
+
+            <!-- Accordéons -->
+            <div id="accordion-container">
+
+                <!-- 1. Panneaux photovoltaïques -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>1. Panneaux photovoltaïques spatiaux</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Technologie</td><td>Triple jonction InGaP/GaAs/Ge</td></tr>
+                                <tr><td>Rendement</td><td>30-32 % (labo), 28 % (production)</td></tr>
+                                <tr><td>Densité de puissance</td><td>300-350 W/m² à 1 UA</td></tr>
+                                <tr><td>Surface totale (1 GW)</td><td>~3 km²</td></tr>
+                                <tr><td>Masse surfacique</td><td>1,5-2,5 kg/m² (structures incluses)</td></tr>
+                                <tr><td>Températures</td><td>-150 °C à +120 °C</td></tr>
+                                <tr><td>Dégradation</td><td>1-2 %/an (radiation + UV)</td></tr>
+                                <tr><td>Fournisseurs</td><td>Azur Space (DE), Spectrolab (US), CESI (IT)</td></tr>
+                                <tr><td>Référence</td><td>Azur Space 3G30C</td></tr>
+                                <tr><td>Prix indicatif</td><td>300-800 €/W (50-100× le prix terrestre)</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> le refroidissement passif est obligatoire (radiateurs à panneaux), sinon le rendement s'effondre à 15 %.
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2023 — ÉTATS-UNIS</div>
-                    <div class="timeline-content">
-                        <h4>PowerLight + Kraus Hamdani</h4>
-                        <p>Près de 1 kW délivré à un drone K1000ULE en vol à 5 000 pieds (~1 500 m) par faisceau laser infrarouge.</p>
+
+                <!-- 2. Convertisseur DC-RF -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>2. Convertisseur DC → RF (émetteur micro-ondes)</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Fréquence</td><td>5,8 GHz (bande ISM)</td></tr>
+                                <tr><td>Alternative</td><td>2,45 GHz (moins de pertes) / 10 GHz (antenne compacte)</td></tr>
+                                <tr><td>Technologie</td><td>GaN HEMT (Gallium Nitride)</td></tr>
+                                <tr><td>Rendement DC→RF</td><td>60-75 % (objectif 80 % en 2030)</td></tr>
+                                <tr><td>Puissance par module</td><td>10-100 W</td></tr>
+                                <tr><td>Gain</td><td>20-25 dB par étage</td></tr>
+                                <tr><td>Composants référence</td><td>Qorvo QPA2213, Wolfspeed CGHV1J006D</td></tr>
+                                <tr><td>Refroidissement</td><td>Radiateurs + caloducs (heat pipes)</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> synchronisation de phase entre milliers de modules indispensable pour le beamforming.
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2024 — JAPON</div>
-                    <div class="timeline-content">
-                        <h4>Test avion → sol</h4>
-                        <p>Un avion volant à 7 000 m transmet de l'énergie vers une station au sol. Validation des technologies de formation de faisceau.</p>
+
+                <!-- 3. Antenne réseau phasée -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>3. Antenne réseau phasée (émetteur satellite)</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Type</td><td>Réseau phasé actif (AESA)</td></tr>
+                                <tr><td>Nombre d'éléments</td><td>10⁴ à 10⁶</td></tr>
+                                <tr><td>Diamètre</td><td>100 m à 1 km (pour 1 GW)</td></tr>
+                                <tr><td>Gain d'antenne</td><td>60-80 dBi (G = 4πA/λ²)</td></tr>
+                                <tr><td>Largeur de faisceau</td><td>0,001° à 0,01°</td></tr>
+                                <tr><td>Déphaseurs</td><td>MMIC GaAs ou SiGe (6 bits = 360°/64)</td></tr>
+                                <tr><td>Pilotage</td><td>FPGA + DSP à 100 Hz</td></tr>
+                                <tr><td>Erreur de pointage max</td><td>0,001° (~600 m à 36 000 km)</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> la dérive thermique de chaque élément doit être compensée en temps réel.
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">PERSPECTIVES</div>
-                    <div class="timeline-content">
-                        <h4>Application opérationnelle</h4>
-                        <p>Surveillance continue, livraison sans arrêt, relais de communication en zone isolée. La barrière restante : le rendement (3–5 % actuellement).</p>
+
+                <!-- 4. Structure déployable -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>4. Structure déployable et contrôle thermique</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Structure</td><td>Treillis carbone-époxy (E ~150 GPa, ρ 1,6 g/cm³)</td></tr>
+                                <tr><td>Déploiement</td><td>Charnières pyrotechniques ou à mémoire de forme</td></tr>
+                                <tr><td>Rigidité</td><td>> 10 Hz de fréquence propre</td></tr>
+                                <tr><td>Radiateurs</td><td>Graphite + revêtement OSR (émissivité ~0,85)</td></tr>
+                                <tr><td>Fluide caloporteur</td><td>Ammoniac (boucle diphasique)</td></tr>
+                                <tr><td>Contrôle d'attitude</td><td>Roues de réaction + magnéto-coupleurs (précision 0,01°)</td></tr>
+                                <tr><td>Propulsion</td><td>Propulseurs ioniques xénon (Δv ~50 m/s/an)</td></tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 5. Rectenna sol -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>5. Rectenna au sol (antenne de réception)</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Type</td><td>Réseau de dipôles + diodes Schottky</td></tr>
+                                <tr><td>Fréquence</td><td>5,8 GHz (λ = 5,2 cm)</td></tr>
+                                <tr><td>Dimension élément</td><td>λ/2 ≈ 2,6 cm (dipôle demi-onde)</td></tr>
+                                <tr><td>Rendement RF→DC</td><td>70-85 % (record : 85 % à 5,8 GHz)</td></tr>
+                                <tr><td>Densité incidente</td><td>100-1000 W/m²</td></tr>
+                                <tr><td>Densité au sol (sécurité)</td><td>< 10 W/m² (exposition humaine continue)</td></tr>
+                                <tr><td>Surface totale (1 GW)</td><td>50-100 km² répartis</td></tr>
+                                <tr><td>Maille</td><td>Treillis métallique espacé (transparent à la lumière)</td></tr>
+                                <tr><td>Diode</td><td>Schottky Si ou GaAs (V_seuil 0,15-0,3 V)</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> la rectenna doit être <strong>transparente</strong> (maille) pour ne pas faire d'ombre au sol.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Électronique de puissance satellite -->
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>6. Électronique de puissance et injection réseau</span>
+                            <span class="accordion-tag tag-satellite">Satellite</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Sortie rectenna</td><td>DC 100-1000 V</td></tr>
+                                <tr><td>Convertisseur DC-DC</td><td>Élévateur + régulateur (rendement 97-98 %)</td></tr>
+                                <tr><td>Onduleur</td><td>DC → AC 50 Hz, topologie multiniveau</td></tr>
+                                <tr><td>Synchronisation réseau</td><td>PLL + protection anti-îlotage (EN 50549)</td></tr>
+                                <tr><td>Stockage tampon</td><td>LiFePO₄ ou supercondensateurs</td></tr>
+                                <tr><td>SCADA</td><td>Supervision temps réel (mesure, alarme, télémétrie)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Émetteur sol drone -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>7. Émetteur au sol (drone)</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Puissance RF</td><td>100 W à 5 kW</td></tr>
+                                <tr><td>Fréquence</td><td>5,8 GHz (ISM)</td></tr>
+                                <tr><td>Technologie ampli</td><td>GaN HEMT (Qorvo, Wolfspeed, MACOM)</td></tr>
+                                <tr><td>Antenne</td><td>Réseau phasé 16×16 à 64×64 (gain 30-40 dBi)</td></tr>
+                                <tr><td>Portée utile</td><td>100 m à 5 km</td></tr>
+                                <tr><td>Suivi</td><td>Radar + caméra + GPS RTK</td></tr>
+                                <tr><td>Latence tracking</td><td>< 10 ms</td></tr>
+                                <tr><td>Précision pointage</td><td>< 0,1°</td></tr>
+                                <tr><td>Refroidissement</td><td>Ventilation forcée ou liquide</td></tr>
+                                <tr><td>Coût indicatif</td><td>20 000 à 200 000 €</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>Exemple :</strong> système Xidian (Chine) — véhicule avec antenne mobile et tracking temps réel.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Rectenna drone -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>8. Rectenna embarquée sur drone</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Type</td><td>Réseau planaire imprimé (léger, aérodynamique)</td></tr>
+                                <tr><td>Fréquence</td><td>5,8 GHz</td></tr>
+                                <tr><td>Dimension</td><td>20×20 cm à 50×50 cm</td></tr>
+                                <tr><td>Masse</td><td>100-500 g</td></tr>
+                                <tr><td>Rendement RF→DC</td><td>60-75 %</td></tr>
+                                <tr><td>Puissance reçue cible</td><td>500 W à 2 kW</td></tr>
+                                <tr><td>Substrat</td><td>Rogers RO4003C ou PTFE (faibles pertes)</td></tr>
+                                <tr><td>Diodes</td><td>Schottky GaAs (faible capacité parasite)</td></tr>
+                                <tr><td>Tension sortie</td><td>24-48 V DC (compatible ESC)</td></tr>
+                                <tr><td>Poids cible</td><td>< 200 g pour 1 kW</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> la masse de la rectenna doit être <strong>&lt; 200 g pour 1 kW</strong> pour que le drone reste manœuvrable.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Système de suivi drone -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>9. Système de suivi du drone</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Capteurs primaires</td><td>GPS RTK (centimétrique)</td></tr>
+                                <tr><td>Capteurs secondaires</td><td>Radar 60 GHz + caméra IR (redondance anti-brouillage)</td></tr>
+                                <tr><td>Fréquence de mesure</td><td>100 Hz</td></tr>
+                                <tr><td>Temps de réaction</td><td>< 20 ms (boucle fermée)</td></tr>
+                                <tr><td>Précision angulaire</td><td>< 0,1°</td></tr>
+                                <tr><td>Algorithme</td><td>Kalman + PID (prédiction de trajectoire)</td></tr>
+                                <tr><td>Coût</td><td>5 000 à 30 000 €</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>Défi :</strong> quand le drone vire ou accélère, le faisceau doit anticiper sa position future.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Drone porteur -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>10. Drone porteur</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Type</td><td>Multirotor (quad/hexa/octo), VTOL possible</td></tr>
+                                <tr><td>Masse totale</td><td>5-25 kg</td></tr>
+                                <tr><td>Charge utile</td><td>1-5 kg</td></tr>
+                                <tr><td>Consommation en vol</td><td>300-1500 W</td></tr>
+                                <tr><td>Autonomie sans faisceau</td><td>20-40 min (Li-Po)</td></tr>
+                                <tr><td>Autonomie avec faisceau</td><td>Illimitée (démo : 3,1 h)</td></tr>
+                                <tr><td>Vitesse</td><td>0-30 m/s</td></tr>
+                                <tr><td>Altitudes testées</td><td>15 m à 1 500 m</td></tr>
+                                <tr><td>Communication</td><td>2,4 / 5,8 GHz + LTE</td></tr>
+                                <tr><td>Exemples</td><td>DJI Matrice 300/350, Freefly Alta X, Kraus Hamdani K1000ULE</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Électronique de bord drone -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>11. Électronique de bord (power management)</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Régulateur DC-DC</td><td>Buck/boost 90-98 %</td></tr>
+                                <tr><td>Batterie tampon</td><td>Li-Po 6S ou Li-Ion</td></tr>
+                                <tr><td>BMS</td><td>Battery Management System (équilibrage + protection)</td></tr>
+                                <tr><td>Répartition</td><td>Power distribution board</td></tr>
+                                <tr><td>Redondance</td><td>Double alimentation (faisceau + batterie)</td></tr>
+                                <tr><td>Télémétrie énergie</td><td>Voltage/current sensing temps réel</td></tr>
+                                <tr><td>Sécurité</td><td>Coupure automatique en cas de perte</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Point critique :</strong> la transition faisceau → batterie doit être <strong>instantanée</strong> (pas de coupure moteur).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Sécurité drone -->
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>12. Système de sécurité et conformité</span>
+                            <span class="accordion-tag tag-drone">Drone</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr><td>Limite d'exposition RF</td><td>< 10 W/m² (ICNIRP), zone publique 5 W/m²</td></tr>
+                                <tr><td>Zone d'exclusion</td><td>Périmètre au sol interdit pendant le vol</td></tr>
+                                <tr><td>Fréquence</td><td>5,8 GHz ISM (licence libre en Europe)</td></tr>
+                                <tr><td>Puissance EIRP</td><td>Limite locale ~30 dBW</td></tr>
+                                <tr><td>Détection</td><td>Radar de proximité (coupure si obstacle)</td></tr>
+                                <tr><td>Redondance</td><td>Kill switch (coupure manuelle d'urgence)</td></tr>
+                                <tr><td>Certification</td><td>CE / FCC selon zone de déploiement</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>⚠️ Attention :</strong> à 5,8 GHz, une densité > 10 W/m² peut chauffer les tissus. Le faisceau doit être <strong>interrompu automatiquement</strong> si un intrus entre dans la zone.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Récapitulatif -->
+                <div class="accordion" data-cat="all">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span>📊 Récapitulatif comparatif Satellite vs Drone</span>
+                            <span class="accordion-tag tag-both">Les deux</span>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <table class="tech-table">
+                                <tr>
+                                    <td>Sous-système</td>
+                                    <td><strong>Satellite (1 GW)</strong></td>
+                                    <td><strong>Drone (1 kW)</strong></td>
+                                </tr>
+                                <tr><td>Fréquence</td><td>5,8 – 10 GHz</td><td>5,8 GHz</td></tr>
+                                <tr><td>Puissance émise</td><td>100 MW – 1 GW</td><td>100 W – 5 kW</td></tr>
+                                <tr><td>Rendement chaîne</td><td>10-20 %</td><td>3-10 %</td></tr>
+                                <tr><td>Distance</td><td>36 000 km</td><td>100 m – 5 km</td></tr>
+                                <tr><td>Antenne émettrice</td><td>100 m – 1 km, 10⁶ éléments</td><td>0,5 – 2 m, 256-4096 éléments</td></tr>
+                                <tr><td>Rectenna</td><td>50-100 km²</td><td>0,04 – 0,25 m²</td></tr>
+                                <tr><td>Coût prototype</td><td>1-10 Md€</td><td>50 000 – 500 000 €</td></tr>
+                                <tr><td>Maturité (TRL)</td><td>TRL 4-5</td><td>TRL 6-7</td></tr>
+                                <tr><td>Première démo</td><td>2023 (Caltech)</td><td>2021 (Xidian)</td></tr>
+                            </table>
+                            <div class="callout">
+                                <strong>TRL</strong> = Technology Readiness Level (1 = concept, 9 = opérationnel). Le drone est <strong>plus mature</strong> que le satellite : excellent banc d'essai pour les technologies orbitales.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </div>
 
     <footer>
-        Projet SBSP — Énergie solaire spatiale · Satellite & Drone<br>
-        Illustrations et simulateurs réalisés en SVG + JavaScript pur.
+        Projet SBSP — Énergie solaire spatiale · Satellite · Drone · Bibliothèque technique<br>
+        Illustrations SVG, simulateurs et fiches réalisés en HTML/CSS/JS pur.
     </footer>
 
 </div>
 
 <script>
 // ============================================================
-// FONCTIONS UTILITAIRES
+// UTILITAIRES
 // ============================================================
 function formatNumber(n, decimals = 0) {
     return n.toLocaleString('fr-FR', {
@@ -1080,14 +1273,11 @@ function formatNumber(n, decimals = 0) {
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const target = btn.dataset.tab;
-
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         const targetEl = document.getElementById('tab-' + target);
         if (targetEl) targetEl.classList.add('active');
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
@@ -1099,18 +1289,14 @@ const altitudeEl    = document.getElementById('altitude');
 const powerEl       = document.getElementById('power');
 const efficiencyEl  = document.getElementById('efficiency');
 const frequencyEl   = document.getElementById('frequency');
-
 const altitudeVal   = document.getElementById('altitudeVal');
 const powerVal      = document.getElementById('powerVal');
 const efficiencyVal = document.getElementById('efficiencyVal');
 const frequencyVal  = document.getElementById('frequencyVal');
-
 const receivedPowerEl = document.getElementById('receivedPower');
 const homesEl         = document.getElementById('homes');
 const rectennaSizeEl  = document.getElementById('rectennaSize');
 const densityEl       = document.getElementById('density');
-
-const CONSUMPTION_PER_HOME_KW = 500;
 
 function computeSatellite() {
     const altitude   = parseInt(altitudeEl.value);
@@ -1129,22 +1315,17 @@ function computeSatellite() {
     const lambda = c / freqHz;
     const fspl = Math.pow((4 * Math.PI * distanceM) / lambda, 2);
     const fsplDb = 10 * Math.log10(fspl);
-
     const atmosphericLossDb = altitude < 1000 ? 0 : (frequency * 0.02 + 0.5);
-    const antennaGainDb = 60;
-    const totalLossDb = fsplDb + atmosphericLossDb - antennaGainDb;
+    const totalLossDb = fsplDb + atmosphericLossDb - 60;
     const lossFactor = Math.pow(10, -totalLossDb / 10);
 
-    const conversionEfficiency = 0.35;
-
-    let receivedPower = power * lossFactor * (efficiency / 100) * conversionEfficiency;
+    let receivedPower = power * lossFactor * (efficiency / 100) * 0.35;
     receivedPower = Math.min(receivedPower, power);
 
-    const homes = (receivedPower * 1000) / CONSUMPTION_PER_HOME_KW;
+    const homes = (receivedPower * 1000) / 500;
 
-    const maxDensity = 10;
     const receivedW = receivedPower * 1e6;
-    const surfaceM2 = receivedW / maxDensity;
+    const surfaceM2 = receivedW / 10;
     const surfaceKm2 = surfaceM2 / 1e6;
     const density = surfaceM2 > 0 ? receivedW / surfaceM2 : 0;
 
@@ -1176,13 +1357,11 @@ const droneDistanceEl    = document.getElementById('droneDistance');
 const dronePowerEl       = document.getElementById('dronePower');
 const droneFreqEl        = document.getElementById('droneFreq');
 const droneConsumptionEl = document.getElementById('droneConsumption');
-
 const droneAltitudeVal    = document.getElementById('droneAltitudeVal');
 const droneDistanceVal    = document.getElementById('droneDistanceVal');
 const dronePowerVal       = document.getElementById('dronePowerVal');
 const droneFreqVal        = document.getElementById('droneFreqVal');
 const droneConsumptionVal = document.getElementById('droneConsumptionVal');
-
 const droneReceivedEl   = document.getElementById('droneReceived');
 const droneEfficiencyEl = document.getElementById('droneEfficiency');
 const droneMarginEl     = document.getElementById('droneMargin');
@@ -1202,19 +1381,15 @@ function computeDrone() {
     droneConsumptionVal.textContent = formatNumber(consumption) + ' W';
 
     const d = Math.sqrt(altitude * altitude + distance * distance);
-
     const c = 299792458;
     const lambda = c / (freq * 1e9);
     const fspl = Math.pow((4 * Math.PI * d) / lambda, 2);
     const fsplDb = 10 * Math.log10(fspl);
-
     const atmDb = altitude > 1000 ? (freq * 0.05) : 0.1;
-    const gainDb = 45;
-    const totalLossDb = fsplDb + atmDb - gainDb;
+    const totalLossDb = fsplDb + atmDb - 45;
     const lossFactor = Math.pow(10, -totalLossDb / 10);
 
-    const conversionEff = 0.35;
-    const received = power * lossFactor * conversionEff;
+    const received = power * lossFactor * 0.35;
     const efficiency = (received / power) * 100;
     const margin = received - consumption;
 
@@ -1240,7 +1415,37 @@ function computeDrone() {
 if (droneAltitudeEl) computeDrone();
 
 // ============================================================
-// PARALLAXE 3D AU SURVOL DES SCÈNES
+// ACCORDÉONS (bibliothèque de composants)
+// ============================================================
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const acc = header.parentElement;
+        acc.classList.toggle('open');
+    });
+});
+
+// ============================================================
+// FILTRES PAR CATÉGORIE
+// ============================================================
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.accordion').forEach(acc => {
+            const cat = acc.dataset.cat;
+            if (filter === 'all' || cat === filter || cat === 'all') {
+                acc.style.display = '';
+            } else {
+                acc.style.display = 'none';
+            }
+        });
+    });
+});
+
+// ============================================================
+// PARALLAXE 3D SUR LES SCÈNES
 // ============================================================
 document.querySelectorAll('.scene').forEach(scene => {
     scene.addEventListener('mousemove', (e) => {
@@ -1263,7 +1468,7 @@ document.querySelectorAll('.scene').forEach(scene => {
 });
 
 // ============================================================
-// ANIMATION D'APPARITION AU SCROLL
+// ANIMATION AU SCROLL
 // ============================================================
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1272,9 +1477,9 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.05 });
 
-document.querySelectorAll('.card, .timeline-item, .interactive-panel, .compare-col').forEach(el => {
+document.querySelectorAll('.card, .timeline-item, .interactive-panel, .compare-col, .accordion').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
