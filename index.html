@@ -114,8 +114,9 @@ a:hover{text-decoration:underline}
 .cr.dg{border-color:var(--marianne-err)}.cr.dg .ch{color:var(--marianne-err)}
 
 .gc{margin-top:28px;padding:24px;background:var(--marianne-blanc);border:1px solid var(--marianne-gris-mid);border-radius:4px}
-.chart-wrap{position:relative;width:100%;height:400px}
+.chart-wrap{position:relative;width:100%;height:500px}
 .chart-wrap canvas{display:block;width:100%!important;height:100%!important}
+
 
 .sb{margin-top:24px;padding:16px 20px;background:#EEFBF2;border-left:4px solid var(--marianne-ok);color:var(--marianne-ok);font-size:.92rem;display:flex;align-items:center;gap:12px;font-weight:500}
 .sb.wn{background:#FFF4E5;border-color:var(--marianne-warn);color:var(--marianne-warn)}
@@ -191,6 +192,11 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
   .cmp{grid-template-columns:1fr}
   .pt{flex-direction:column;align-items:flex-start}
   .chart-wrap{height:300px}
+}
+#chartPareto {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
 }
 </style>
 </head>
@@ -534,7 +540,7 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 
 <div class="gc">
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Front de Pareto : Rendement vs CAPEX</div>
-<div class="chart-wrap" style="height:480px"><canvas id="chartPareto"></canvas></div>
+<div class="chart-wrap" style="height:600px"><canvas id="chartPareto"></canvas></div>
 </div>
 
 <div class="opt-verdict" id="paretoKnee" style="margin-top:24px">
@@ -975,7 +981,7 @@ function updateChartRendement(){
     const pRx_W = Math.pow(10, pRx_dBW/10);
     const pNet_W = pRx_W * rxE;
     let eta = (pNet_W / pSolar) * 100;
-    if(!isFinite(eta) || eta <= 0) eta = 0.001;
+    if(!isFinite(eta) || eta <= 0) eta = 0.01;
     labels.push(fmtI(h));
     data.push(eta);
   });
@@ -991,7 +997,7 @@ function updateChartRendement(){
       borderWidth:3,
       tension:0.35,
       fill:true,
-      pointRadius:4,
+      pointRadius:5,
       pointBackgroundColor:'#000091',
       pointBorderColor:'#FFFFFF',
       pointBorderWidth:2
@@ -1001,17 +1007,21 @@ function updateChartRendement(){
       maintainAspectRatio:false,
       animation:{duration:400},
       interaction:{mode:'index',intersect:false},
+      layout:{padding:{top:10,bottom:10,left:10,right:20}},
       plugins:{
-        legend:{position:'top'},
+        legend:{position:'top',labels:{font:{size:13,weight:'600'},padding:15}},
         title:{
           display:true,
           text:'Rendement global vs Altitude',
-          font:{size:14,weight:'700'},
-          color:'#000091'
+          font:{size:15,weight:'700'},
+          color:'#000091',
+          padding:{top:5,bottom:15}
         },
         tooltip:{
           backgroundColor:'rgba(0,0,145,0.92)',
           padding:12,
+          titleFont:{size:13},
+          bodyFont:{size:14},
           callbacks:{
             title:items=>'Altitude : '+items[0].label+' km',
             label:ctx=>{
@@ -1025,27 +1035,27 @@ function updateChartRendement(){
       },
       scales:{
         x:{
-          title:{display:true,text:'Altitude (km)'},
-          ticks:{maxRotation:45},
-          grid:{color:'rgba(0,0,145,0.05)'}
+          title:{display:true,text:'Altitude (km)',font:{size:13,weight:'600'},padding:{top:10}},
+          ticks:{maxRotation:45,minRotation:0,font:{size:11},autoSkip:true,maxTicksLimit:12},
+          grid:{color:'rgba(0,0,145,0.06)'}
         },
         y:{
-          title:{display:true,text:'Rendement (%) — log'},
+          title:{display:true,text:'Rendement (%)',font:{size:13,weight:'600'},padding:{bottom:10}},
           type:'logarithmic',
-          min: 0.001,
-          max: 50,
+          min: 0.01,
+          max: 100,
           ticks:{
+            font:{size:11},
             callback:function(v){
-              if(v===0.001) return '0,001 %';
               if(v===0.01) return '0,01 %';
               if(v===0.1) return '0,1 %';
               if(v===1) return '1 %';
               if(v===10) return '10 %';
-              if(v===50) return '50 %';
+              if(v===100) return '100 %';
               return '';
             }
           },
-          grid:{color:'rgba(0,0,145,0.05)'}
+          grid:{color:'rgba(0,0,145,0.06)'}
         }
       }
     }
@@ -1590,41 +1600,136 @@ function paretoOptimize(){
       Surface = ${fmtF(knee.sPA,1)} km² · Tx = ${fmtF(knee.txD,0)} m · Rx = ${fmtF(knee.rxD,1)} km`;
   }
 
+  // Statistiques pour ajuster l'échelle
+  const capexValues = solutions.map(s=>s.capex);
+  const etaValues = solutions.map(s=>s.eta*100);
+  const capexMin = Math.max(Math.min(...capexValues), 0.1);
+  const capexMax = Math.max(...capexValues);
+  const etaMin = Math.max(Math.min(...etaValues), 0.001);
+  const etaMax = Math.max(...etaValues);
+
   destroyChart('chartPareto');
   createChart('chartPareto', {
     type:'scatter',
     data:{datasets:[
-      {label:'Front de Pareto',data:pareto.map(s=>({x:s.capex,y:s.eta*100})),backgroundColor:'#E1000F',pointRadius:7},
-      {label:'Solutions dominées',data:solutions.filter(s=>!pareto.includes(s)).map(s=>({x:s.capex,y:s.eta*100})),backgroundColor:'rgba(0,0,145,0.2)',pointRadius:2}
+      {
+        label:'Front de Pareto',
+        data:pareto.map(s=>({x:s.capex,y:s.eta*100})),
+        backgroundColor:'#E1000F',
+        borderColor:'#FFFFFF',
+        borderWidth:2,
+        pointRadius:10,
+        pointHoverRadius:14,
+        order:1
+      },
+      {
+        label:'Solutions dominées',
+        data:solutions.filter(s=>!pareto.includes(s)).map(s=>({x:s.capex,y:s.eta*100})),
+        backgroundColor:'rgba(0,0,145,0.25)',
+        pointRadius:3,
+        pointHoverRadius:6,
+        order:2
+      }
     ]},
     options:{
       responsive:true,
       maintainAspectRatio:false,
+      animation:{duration:600},
+      layout:{padding:{top:20,bottom:20,left:20,right:30}},
       plugins:{
-        title:{display:true,text:'Front de Pareto : Rendement vs CAPEX'},
-        tooltip:{callbacks:{label:c=>`η=${fmtF(c.parsed.y,4)}% · CAPEX=${fmtF(c.parsed.x,2)} Md€`}}
+        legend:{
+          position:'top',
+          labels:{font:{size:13,weight:'600'},padding:15,usePointStyle:true,pointStyle:'circle'}
+        },
+        title:{
+          display:true,
+          text:'Front de Pareto : Rendement vs CAPEX',
+          font:{size:16,weight:'700'},
+          color:'#000091',
+          padding:{top:5,bottom:20}
+        },
+        tooltip:{
+          backgroundColor:'rgba(0,0,145,0.95)',
+          padding:14,
+          titleFont:{size:14,weight:'700'},
+          bodyFont:{size:13},
+          callbacks:{
+            title:items=>'Solution #' + (items[0].dataIndex + 1),
+            label:c=>{
+              const eta = c.parsed.y;
+              const capex = c.parsed.x;
+              const tag = c.datasetIndex === 0 ? '⭐ OPTIMAL' : '○ Dominée';
+              return [
+                tag,
+                `η = ${eta >= 1 ? fmtF(eta,3) : eta.toExponential(2)} %`,
+                `CAPEX = ${fmtF(capex,2)} Md€`
+              ];
+            }
+          }
+        }
       },
       scales:{
         x:{
-          title:{display:true,text:'CAPEX (Md€)'},
+          type:'logarithmic',
+          min: capexMin,
+          max: capexMax * 1.5,
+          title:{
+            display:true,
+            text:'CAPEX (Md€) — échelle log',
+            font:{size:14,weight:'700'},
+            color:'#000091',
+            padding:{top:15}
+          },
           ticks:{
-            callback:function(v){ return fmtI(v) + ' Md€'; }
-          }
+            font:{size:12},
+            color:'#3a3a3a',
+            callback:function(v){
+              if(v >= 1) return fmtI(v) + ' Md€';
+              if(v >= 0.1) return fmtF(v,1) + ' Md€';
+              return fmtF(v,2) + ' Md€';
+            },
+            maxTicksLimit:10
+          },
+          grid:{color:'rgba(0,0,145,0.08)'}
         },
         y:{
-          title:{display:true,text:'Rendement (%)'},
           type:'logarithmic',
-          min:0.001,
-          max:100
+          min: etaMin * 0.8,
+          max: etaMax * 1.2,
+          title:{
+            display:true,
+            text:'Rendement (%) — échelle log',
+            font:{size:14,weight:'700'},
+            color:'#000091',
+            padding:{bottom:15}
+          },
+          ticks:{
+            font:{size:12},
+            color:'#3a3a3a',
+            callback:function(v){
+              if(v >= 10) return fmtF(v,0) + ' %';
+              if(v >= 1) return fmtF(v,1) + ' %';
+              if(v >= 0.1) return fmtF(v,2) + ' %';
+              return fmtF(v,3) + ' %';
+            }
+          },
+          grid:{color:'rgba(0,0,145,0.08)'}
         }
       }
     }
   });
 }
 
+
 /* ============================================================
    TURBULENCE — CORRIGÉ
    ============================================================ */
+function hufnagelValley(h,v,A){
+  return 0.00594*Math.pow(v/27,2)*Math.pow(h/1000,10)*Math.exp(-h/1000)
+       + 2.7e-16*Math.exp(-h/1500)
+       + A*Math.exp(-h/100);
+}
+
 function hufnagelValley(h,v,A){
   return 0.00594*Math.pow(v/27,2)*Math.pow(h/1000,10)*Math.exp(-h/1000)
        + 2.7e-16*Math.exp(-h/1500)
@@ -1657,14 +1762,20 @@ function turbulenceCalc(){
   $('turbSeeing').textContent=fmtF(seeing,2);
   $('turbScint').textContent=fmtF(aScint,2);
 
-  // Échelle log pour l'altitude + valeurs réalistes
+  // Échelle adaptée : 0 à 25 km avec valeurs réalistes
   const labels=[], data=[];
-  const hSteps = [0.01, 0.05, 0.1, 0.5, 1, 2, 5, 10, 15, 20, 25]; // km
+  const hSteps = [0, 0.5, 1, 2, 3, 5, 8, 10, 12, 15, 18, 20, 22, 25]; // km
   hSteps.forEach(h => {
-    const hMeters = h * 1000;
-    labels.push(h < 1 ? (h*1000) + ' m' : h + ' km');
+    const hMeters = Math.max(h * 1000, 10);
+    labels.push(h === 0 ? '0 km' : h + ' km');
     data.push(hufnagelValley(hMeters, vWind, A_ground));
   });
+
+  // Détection min/max pour échelle auto
+  const dataMin = Math.min(...data);
+  const dataMax = Math.max(...data);
+  const yMin = Math.pow(10, Math.floor(Math.log10(dataMin)));
+  const yMax = Math.pow(10, Math.ceil(Math.log10(dataMax)));
 
   destroyChart('chartTurb');
   createChart('chartTurb', {
@@ -1673,11 +1784,11 @@ function turbulenceCalc(){
       label:'Cn²(h) (m⁻²ᐟ³)',
       data:data,
       borderColor:'#000091',
-      backgroundColor:'rgba(0,0,145,0.08)',
+      backgroundColor:'rgba(0,0,145,0.10)',
       borderWidth:3,
       tension:0.3,
       fill:true,
-      pointRadius:4,
+      pointRadius:5,
       pointBackgroundColor:'#000091',
       pointBorderColor:'#FFFFFF',
       pointBorderWidth:2
@@ -1685,17 +1796,21 @@ function turbulenceCalc(){
     options:{
       responsive:true,
       maintainAspectRatio:false,
+      layout:{padding:{top:10,bottom:10,left:10,right:20}},
       plugins:{
-        legend:{position:'top'},
+        legend:{position:'top',labels:{font:{size:13,weight:'600'},padding:15}},
         title:{
           display:true,
           text:'Profil Cn²(h) — Hufnagel-Valley',
-          font:{size:14,weight:'700'},
-          color:'#000091'
+          font:{size:15,weight:'700'},
+          color:'#000091',
+          padding:{top:5,bottom:15}
         },
         tooltip:{
           backgroundColor:'rgba(0,0,145,0.92)',
           padding:12,
+          titleFont:{size:13},
+          bodyFont:{size:14},
           callbacks:{
             title:items=>'Altitude : '+items[0].label,
             label:ctx=>{
@@ -1707,15 +1822,17 @@ function turbulenceCalc(){
       },
       scales:{
         x:{
-          title:{display:true,text:'Altitude'},
-          ticks:{maxRotation:45}
+          title:{display:true,text:'Altitude',font:{size:13,weight:'600'},padding:{top:10}},
+          ticks:{font:{size:11},maxRotation:45},
+          grid:{color:'rgba(0,0,145,0.06)'}
         },
         y:{
-          title:{display:true,text:'Cn²(h) (m⁻²ᐟ³)'},
+          title:{display:true,text:'Cn²(h) (m⁻²ᐟ³)',font:{size:13,weight:'600'},padding:{bottom:10}},
           type:'logarithmic',
-          min: 1e-18,
-          max: 1e-11,
+          min: yMin,
+          max: yMax,
           ticks:{
+            font:{size:11},
             callback:function(v){
               const exp = Math.log10(v);
               if(Number.isInteger(exp)){
@@ -1724,7 +1841,8 @@ function turbulenceCalc(){
               return '';
             },
             maxTicksLimit: 10
-          }
+          },
+          grid:{color:'rgba(0,0,145,0.06)'}
         }
       }
     }
