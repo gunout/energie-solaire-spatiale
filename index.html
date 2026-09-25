@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Énergie Solaire Spatiale — Satellite & Drone</title>
+<style>
+:root {
+    --space-dark: #05060f;
+    --space-mid: #0a0e27;
+    --space-light: #141a3a;
+    --solar-gold: #ffb800;
+    --solar-orange: #ff6b00;
+    --beam-cyan: #00e5ff;
+    --beam-glow: #00b4d8;
+    --beam-green: #00ff88;
+    --earth-blue: #2b6cb0;
+    --earth-green: #38a169;
+    --text-primary: #e8ecf5;
+    --text-dim: #8b93a8;
+    --accent: #4fd1c5;
+    --panel-border: rgba(79, 209, 197, 0.2);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: var(--space-dark);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ============ FOND ÉTOILÉ ============ */
+.starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 10%, rgba(79, 209, 197, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(255, 184, 0, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, var(--space-dark) 0%, var(--space-mid) 50%, var(--space-dark) 100%);
+}
+.starfield::before,
+.starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 40% 70%, white, transparent),
+        radial-gradient(1px 1px at 60% 20%, white, transparent),
+        radial-gradient(1px 1px at 80% 50%, white, transparent),
+        radial-gradient(1px 1px at 10% 90%, white, transparent),
+        radial-gradient(1px 1px at 90% 10%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 30% 60%, white, transparent),
+        radial-gradient(1px 1px at 70% 80%, white, transparent);
+    background-size: 200px 200px, 300px 300px, 250px 250px, 400px 400px, 350px 350px, 280px 280px, 320px 320px, 380px 380px, 220px 220px;
+    opacity: 0.6;
+    animation: twinkle 8s infinite alternate;
+}
+.starfield::after { background-position: 100px 100px; animation-delay: -4s; opacity: 0.3; }
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to   { opacity: 0.8; }
+}
+
+/* ============ STRUCTURE ============ */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ============ HERO ============ */
+.hero {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+.hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(79, 209, 197, 0.1);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--solar-gold) 0%, var(--solar-orange) 50%, var(--beam-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+}
+.hero p {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ============ ONGLETS ============ */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    padding: 12px 28px;
+    background: rgba(20, 26, 58, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    color: var(--text-dim);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+}
+.tab-btn:hover {
+    border-color: rgba(79, 209, 197, 0.5);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, rgba(79, 209, 197, 0.2), rgba(0, 229, 255, 0.1));
+    border-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: 0 0 20px rgba(79, 209, 197, 0.3);
+}
+.tab-icon { font-size: 1.2rem; }
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ SCÈNE SVG ============ */
+.scene {
+    width: 100%;
+    height: auto;
+    margin: 20px 0 40px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #05060f 0%, #0a0e27 60%, #0f1a3a 100%);
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(79, 209, 197, 0.08);
+    position: relative;
+}
+.scene svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.1s ease-out;
+}
+
+/* ============ SECTIONS ============ */
+.section { margin: 60px 0; }
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--solar-gold), var(--solar-orange));
+    border-radius: 2px;
+}
+.section-subtitle {
+    color: var(--text-dim);
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+/* ============ CARTES ============ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: linear-gradient(135deg, rgba(20, 26, 58, 0.8), rgba(10, 14, 39, 0.8));
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--solar-gold), var(--beam-cyan));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79, 209, 197, 0.5);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(79, 209, 197, 0.15);
+}
+.card:hover::before { opacity: 1; }
+.card-number {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: rgba(255, 184, 0, 0.15);
+    color: var(--solar-gold);
+    border-radius: 8px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+.card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+.card p { color: var(--text-dim); font-size: 0.95rem; }
+
+/* ============ COMPARATIF ============ */
+.compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+.compare-col {
+    background: rgba(10, 14, 39, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 24px;
+}
+.compare-col.microwave { border-color: rgba(0, 229, 255, 0.4); }
+.compare-col.laser      { border-color: rgba(255, 107, 0, 0.4); }
+.compare-col.green      { border-color: rgba(0, 255, 136, 0.4); }
+.compare-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.microwave h3 { color: var(--beam-cyan); }
+.laser h3      { color: var(--solar-orange); }
+.green h3      { color: var(--beam-green); }
+.compare-col ul { list-style: none; padding: 0; }
+.compare-col li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+}
+.compare-col li:last-child { border-bottom: none; }
+.compare-col li span:last-child { color: var(--text-primary); font-weight: 600; }
+
+/* ============ INTERACTIF ============ */
+.interactive-panel {
+    background: linear-gradient(135deg, rgba(20, 26, 58, 0.9), rgba(10, 14, 39, 0.9));
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 20px;
+}
+.control-group { margin-bottom: 24px; }
+.control-group label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--solar-gold), var(--solar-orange));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 184, 0, 0.6);
+}
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--solar-gold), var(--solar-orange));
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 15px rgba(255, 184, 0, 0.6);
+}
+.control-value {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+}
+.control-value strong { color: var(--solar-gold); font-size: 1.1rem; }
+.output-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+.output-stat {
+    background: rgba(5, 6, 15, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+.output-stat .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+.output-stat .value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--solar-gold), var(--beam-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.output-stat .unit { font-size: 0.85rem; color: var(--text-dim); margin-left: 4px; }
+
+/* ============ TIMELINE ============ */
+.timeline { position: relative; padding-left: 30px; margin-top: 20px; }
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--solar-gold), var(--beam-cyan), transparent);
+}
+.timeline-item { position: relative; margin-bottom: 28px; }
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -30px; top: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--space-dark);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+}
+.timeline-year {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.timeline-content {
+    background: rgba(20, 26, 58, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+.timeline-content h4 { font-size: 1rem; margin-bottom: 6px; color: var(--text-primary); }
+.timeline-content p { font-size: 0.9rem; color: var(--text-dim); }
+
+/* ============ FOOTER ============ */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 60px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 700px) {
+    .compare { grid-template-columns: 1fr; }
+    .container { padding: 20px 14px; }
+    .hero { padding: 20px 10px; }
+}
+
+/* ============ ANIMATIONS SVG ============ */
+.beam-pulse { animation: beamPulse 2.5s ease-in-out infinite; }
+@keyframes beamPulse {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+}
+.satellite-float { animation: satelliteFloat 6s ease-in-out infinite; }
+@keyframes satelliteFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(0, -8px); }
+}
+.rotate-panel { animation: rotatePanel 20s linear infinite; transform-origin: center; }
+@keyframes rotatePanel {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.rotate-prop { animation: rotateProp 0.15s linear infinite; transform-origin: center; }
+@keyframes rotateProp {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.drone-hover { animation: droneHover 3s ease-in-out infinite; }
+@keyframes droneHover {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(0, -6px); }
+}
+.sun-rays { animation: sunRays 4s ease-in-out infinite; }
+@keyframes sunRays {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.05); }
+}
+.energy-particle { animation: energyFlow 2s linear infinite; }
+@keyframes energyFlow {
+    0%   { opacity: 0; transform: translateY(-50px); }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(50px); }
+}
+.energy-particle-up { animation: energyFlowUp 1.6s linear infinite; }
+@keyframes energyFlowUp {
+    0%   { opacity: 0; transform: translate(0, 30px); }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(0, -30px); }
+}
+.earth-glow { animation: earthGlow 4s ease-in-out infinite; }
+@keyframes earthGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(43, 108, 176, 0.5)); }
+    50%      { filter: drop-shadow(0 0 25px rgba(43, 108, 176, 0.9)); }
+}
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-badge">Projet SBSP · 2026</div>
+        <h1>Énergie Solaire Spatiale</h1>
+        <p>Capoter la puissance du soleil 24h/24, la transmettre sans fil vers la Terre ou vers un drone, et alimenter l'humanité depuis l'orbite.</p>
+    </div>
+
+    <!-- ONGLETS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="satellite">
+            <span class="tab-icon">🛰</span> Satellite
+        </button>
+        <button class="tab-btn" data-tab="drone">
+            <span class="tab-icon">🚁</span> Drone en vol
+        </button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ONGLET SATELLITE -->
+    <!-- ============================================================ -->
+    <div class="tab-content active" id="tab-satellite">
+
+        <div class="scene">
+            <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="spaceGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#05060f"/>
+                        <stop offset="50%" stop-color="#0a0e27"/>
+                        <stop offset="100%" stop-color="#141a3a"/>
+                    </linearGradient>
+                    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fff8d0"/>
+                        <stop offset="40%" stop-color="#ffd54a"/>
+                        <stop offset="100%" stop-color="#ff6b00"/>
+                    </radialGradient>
+                    <radialGradient id="earthGrad" cx="40%" cy="40%" r="70%">
+                        <stop offset="0%" stop-color="#4a90d9"/>
+                        <stop offset="60%" stop-color="#2b6cb0"/>
+                        <stop offset="100%" stop-color="#1a3a5c"/>
+                    </radialGradient>
+                    <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.05"/>
+                    </linearGradient>
+                    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#1a3a5c"/>
+                        <stop offset="100%" stop-color="#0a1a2c"/>
+                    </linearGradient>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <rect width="1000" height="500" fill="url(#spaceGrad)"/>
+
+                <g opacity="0.7">
+                    <circle cx="80" cy="60" r="1" fill="white"/>
+                    <circle cx="200" cy="120" r="1" fill="white"/>
+                    <circle cx="350" cy="40" r="1.2" fill="white"/>
+                    <circle cx="500" cy="100" r="1" fill="white"/>
+                    <circle cx="650" cy="70" r="1.1" fill="white"/>
+                    <circle cx="800" cy="50" r="1" fill="white"/>
+                    <circle cx="920" cy="130" r="1.2" fill="white"/>
+                    <circle cx="150" cy="200" r="0.8" fill="white"/>
+                    <circle cx="700" cy="180" r="0.9" fill="white"/>
+                    <circle cx="880" cy="220" r="1" fill="white"/>
+                    <circle cx="420" cy="150" r="0.8" fill="white"/>
+                </g>
+
+                <g transform="translate(850, 80)" class="sun-rays" filter="url(#glowStrong)">
+                    <circle r="55" fill="url(#sunGrad)"/>
+                    <circle r="40" fill="#fff8d0" opacity="0.4"/>
+                    <g stroke="#ffd54a" stroke-width="2" opacity="0.6">
+                        <line x1="0" y1="-70" x2="0" y2="-90"/>
+                        <line x1="0" y1="70"  x2="0" y2="90"/>
+                        <line x1="-70" y1="0" x2="-90" y2="0"/>
+                        <line x1="70" y1="0"  x2="90" y2="0"/>
+                        <line x1="-50" y1="-50" x2="-65" y2="-65"/>
+                        <line x1="50" y1="50"   x2="65" y2="65"/>
+                        <line x1="-50" y1="50"  x2="-65" y2="65"/>
+                        <line x1="50" y1="-50"  x2="65" y2="-65"/>
+                    </g>
+                </g>
+
+                <g stroke="#ffd54a" stroke-width="1.5" opacity="0.4">
+                    <line x1="800" y1="100" x2="620" y2="180" stroke-dasharray="4 4"/>
+                    <line x1="800" y1="110" x2="620" y2="190" stroke-dasharray="4 4"/>
+                    <line x1="800" y1="120" x2="620" y2="200" stroke-dasharray="4 4"/>
+                </g>
+
+                <g transform="translate(600, 180)" class="satellite-float">
+                    <rect x="-40" y="-15" width="80" height="30" rx="4" fill="#2d3748" stroke="#4fd1c5" stroke-width="1.5"/>
+                    <g transform="translate(-100, -20)">
+                        <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#4fd1c5" stroke-width="1"/>
+                        <line x1="0" y1="13" x2="55" y2="13" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="0" y1="26" x2="55" y2="26" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="18" y1="0" x2="18" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="37" y1="0" x2="37" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                    </g>
+                    <g transform="translate(45, -20)">
+                        <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#4fd1c5" stroke-width="1"/>
+                        <line x1="0" y1="13" x2="55" y2="13" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="0" y1="26" x2="55" y2="26" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="18" y1="0" x2="18" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="37" y1="0" x2="37" y2="40" stroke="#4fd1c5" stroke-width="0.5" opacity="0.6"/>
+                    </g>
+                    <rect x="-15" y="15" width="30" height="10" rx="2" fill="#4fd1c5" opacity="0.8"/>
+                    <circle cx="0" cy="25" r="3" fill="#00e5ff" filter="url(#glow)"/>
+                </g>
+
+                <g>
+                    <path d="M 600 210 L 570 420 L 630 420 Z" fill="url(#beamGrad)" class="beam-pulse"/>
+                    <circle cx="600" cy="250" r="3" fill="#00e5ff" filter="url(#glow)" class="energy-particle"/>
+                    <circle cx="595" cy="300" r="3" fill="#00e5ff" filter="url(#glow)" class="energy-particle" style="animation-delay: 0.3s"/>
+                    <circle cx="605" cy="350" r="3" fill="#00e5ff" filter="url(#glow)" class="energy-particle" style="animation-delay: 0.6s"/>
+                    <circle cx="598" cy="390" r="3" fill="#00e5ff" filter="url(#glow)" class="energy-particle" style="animation-delay: 0.9s"/>
+                </g>
+
+                <g transform="translate(500, 480)" class="earth-glow">
+                    <ellipse cx="0" cy="0" rx="400" ry="180" fill="url(#earthGrad)"/>
+                    <path d="M -200 -60 Q -150 -90 -100 -70 Q -70 -50 -100 -20 Q -140 0 -180 -10 Z" fill="#38a169" opacity="0.7"/>
+                    <path d="M 100 -80 Q 160 -100 220 -70 Q 260 -40 240 10 Q 200 30 160 10 Q 120 -10 100 -50 Z" fill="#38a169" opacity="0.7"/>
+                    <path d="M -50 20 Q 0 0 60 20 Q 100 40 80 70 Q 20 80 -20 60 Z" fill="#38a169" opacity="0.6"/>
+                    <ellipse cx="0" cy="0" rx="400" ry="180" fill="none" stroke="#4fd1c5" stroke-width="1.5" opacity="0.3"/>
+                </g>
+
+                <g transform="translate(600, 430)">
+                    <ellipse cx="0" cy="0" rx="60" ry="12" fill="#2d3748" stroke="#ffb800" stroke-width="2"/>
+                    <ellipse cx="0" cy="0" rx="40" ry="8" fill="none" stroke="#ffb800" stroke-width="1" opacity="0.6"/>
+                    <ellipse cx="0" cy="0" rx="20" ry="4" fill="none" stroke="#ffb800" stroke-width="1" opacity="0.6"/>
+                    <circle cx="0" cy="0" r="5" fill="#00e5ff" filter="url(#glow)" class="beam-pulse"/>
+                    <line x1="0" y1="12" x2="0" y2="40" stroke="#ffb800" stroke-width="2"/>
+                </g>
+
+                <g font-family="Segoe UI, sans-serif" font-size="11" fill="#8b93a8">
+                    <text x="850" y="30" text-anchor="middle" fill="#ffd54a" font-weight="700" font-size="12">☀ SOLEIL</text>
+                    <text x="600" y="140" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="12">🛰 SATELLITE</text>
+                    <text x="600" y="470" text-anchor="middle" fill="#ffb800" font-weight="700" font-size="12">📡 RECTENNA</text>
+                    <text x="500" y="490" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="12">🌍 TERRE</text>
+                    <text x="640" y="320" fill="#00e5ff" font-weight="700" font-size="11">FAISCEAU</text>
+                    <text x="640" y="333" fill="#00e5ff" font-size="10">MICRO-ONDES</text>
+                </g>
+            </svg>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Le principe en 4 étapes</h2>
+            <p class="section-subtitle">De la lumière solaire à votre prise électrique.</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-number">1</div>
+                    <h3>Captation solaire</h3>
+                    <p>Des panneaux photovoltaïques en orbite géostationnaire captent le rayonnement solaire 24h/24, sans nuages ni atmosphère.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">2</div>
+                    <h3>Conversion en micro-ondes</h3>
+                    <p>L'électricité produite est convertie en ondes électromagnétiques à 5,8 GHz ou 10 GHz, capables de traverser l'atmosphère.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">3</div>
+                    <h3>Transmission sans fil</h3>
+                    <p>Le faisceau est dirigé avec une précision extrême vers une antenne de réception au sol, sur Terre.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">4</div>
+                    <h3>Reconversion en électricité</h3>
+                    <p>La rectenna reconvertit les micro-ondes en courant continu, injecté dans le réseau électrique.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Micro-ondes vs Laser</h2>
+            <p class="section-subtitle">Deux technologies, deux philosophies.</p>
+            <div class="compare">
+                <div class="compare-col microwave">
+                    <h3>📡 Micro-ondes</h3>
+                    <ul>
+                        <li><span>Fréquence</span><span>5,8 – 10 GHz</span></li>
+                        <li><span>Résistance météo</span><span>Excellente</span></li>
+                        <li><span>Précision</span><span>Moyenne</span></li>
+                        <li><span>Portée</span><span>Longue</span></li>
+                        <li><span>Multi-cibles</span><span>Oui</span></li>
+                        <li><span>Discrétion</span><span>Élevée</span></li>
+                        <li><span>Rendement</span><span>~10-20 %</span></li>
+                    </ul>
+                </div>
+                <div class="compare-col laser">
+                    <h3>🔴 Laser</h3>
+                    <ul>
+                        <li><span>Longueur d'onde</span><span>800 – 1550 nm</span></li>
+                        <li><span>Résistance météo</span><span>Faible</span></li>
+                        <li><span>Précision</span><span>Très élevée</span></li>
+                        <li><span>Portée</span><span>Très longue</span></li>
+                        <li><span>Multi-cibles</span><span>Difficile</span></li>
+                        <li><span>Discrétion</span><span>Faible</span></li>
+                        <li><span>Rendement</span><span>~20-30 %</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Simulateur satellite</h2>
+            <p class="section-subtitle">Ajustez les paramètres et observez l'impact sur la puissance reçue au sol.</p>
+            <div class="interactive-panel">
+                <div class="control-group">
+                    <label for="altitude">Altitude du satellite (km)</label>
+                    <input type="range" id="altitude" min="400" max="40000" value="35786" step="100">
+                    <div class="control-value">
+                        <span>Orbite basse</span>
+                        <strong id="altitudeVal">35 786 km</strong>
+                        <span>Géostationnaire</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="power">Puissance émise (MW)</label>
+                    <input type="range" id="power" min="1" max="1000" value="100" step="1">
+                    <div class="control-value">
+                        <span>1 MW</span>
+                        <strong id="powerVal">100 MW</strong>
+                        <span>1 000 MW</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="efficiency">Rendement de la chaîne (%)</label>
+                    <input type="range" id="efficiency" min="5" max="50" value="15" step="1">
+                    <div class="control-value">
+                        <span>5 %</span>
+                        <strong id="efficiencyVal">15 %</strong>
+                        <span>50 %</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="frequency">Fréquence du faisceau (GHz)</label>
+                    <input type="range" id="frequency" min="2" max="100" value="5.8" step="0.1">
+                    <div class="control-value">
+                        <span>2 GHz</span>
+                        <strong id="frequencyVal">5,8 GHz</strong>
+                        <span>100 GHz</span>
+                    </div>
+                </div>
+                <div class="output-panel">
+                    <div class="output-stat">
+                        <div class="label">Puissance reçue</div>
+                        <div class="value"><span id="receivedPower">15</span><span class="unit">MW</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Foyers alimentés</div>
+                        <div class="value"><span id="homes">30 000</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Surface rectenna</div>
+                        <div class="value"><span id="rectennaSize">2,5</span><span class="unit">km²</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Densité au sol</div>
+                        <div class="value"><span id="density">10</span><span class="unit">W/m²</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">État des recherches en 2026</h2>
+            <p class="section-subtitle">Des démonstrations concrètes, mais encore loin du déploiement.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2023 — ÉTATS-UNIS</div>
+                    <div class="timeline-content">
+                        <h4>Caltech SSPD-1</h4>
+                        <p>Première transmission d'énergie sans fil depuis l'espace démontrée via le module MAPLE. Validation du concept en orbite basse.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 — CHINE</div>
+                    <div class="timeline-content">
+                        <h4>逐日工程 (Zhuri)</h4>
+                        <p>Test au sol : 1180 W transmis sur 100 m avec 20,8 % d'efficacité. Un drone reçoit 143 W en vol.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 — JAPON</div>
+                    <div class="timeline-content">
+                        <h4>Test avion → sol</h4>
+                        <p>Un avion volant à 7 000 m transmet de l'énergie vers le sol. Validation des technologies de formation de faisceau.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025 — JAPON</div>
+                    <div class="timeline-content">
+                        <h4>OHISAMA</h4>
+                        <p>Satellite de 180 kg prévu pour transmettre 1 kW depuis l'orbite basse vers une station à Suwa.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2028 — META / OVERVIEW ENERGY</div>
+                    <div class="timeline-content">
+                        <h4>Démonstration orbitale à 1 GW</h4>
+                        <p>Contrat pour une démonstration de 1 GW via faisceau infrarouge visant des fermes solaires existantes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ONGLET DRONE -->
+    <!-- ============================================================ -->
+    <div class="tab-content" id="tab-drone">
+
+        <div class="scene">
+            <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#1a2a5c"/>
+                        <stop offset="40%" stop-color="#2d4a8a"/>
+                        <stop offset="100%" stop-color="#4a7ab8"/>
+                    </linearGradient>
+                    <radialGradient id="cloudGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="emitterGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2d3748"/>
+                        <stop offset="100%" stop-color="#1a202c"/>
+                    </linearGradient>
+                    <linearGradient id="beamGreen" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#00ff88" stop-opacity="0.85"/>
+                        <stop offset="100%" stop-color="#00ff88" stop-opacity="0.05"/>
+                    </linearGradient>
+                    <filter id="droneGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <rect width="1000" height="500" fill="url(#skyGrad)"/>
+
+                <ellipse cx="150" cy="80" rx="80" ry="25" fill="url(#cloudGrad)"/>
+                <ellipse cx="220" cy="90" rx="60" ry="20" fill="url(#cloudGrad)"/>
+                <ellipse cx="800" cy="120" rx="100" ry="30" fill="url(#cloudGrad)"/>
+                <ellipse cx="880" cy="130" rx="70" ry="22" fill="url(#cloudGrad)"/>
+
+                <rect x="0" y="420" width="1000" height="80" fill="#1a3a2c"/>
+                <rect x="0" y="420" width="1000" height="3" fill="#38a169" opacity="0.6"/>
+
+                <g transform="translate(200, 400)">
+                    <rect x="-60" y="-30" width="120" height="30" rx="4" fill="url(#emitterGrad)" stroke="#4fd1c5" stroke-width="1.5"/>
+                    <circle cx="-40" cy="0" r="8" fill="#1a202c" stroke="#4fd1c5" stroke-width="1"/>
+                    <circle cx="40" cy="0" r="8" fill="#1a202c" stroke="#4fd1c5" stroke-width="1"/>
+                    <rect x="-15" y="-45" width="30" height="15" rx="2" fill="#4fd1c5"/>
+                    <circle cx="0" cy="-45" r="4" fill="#00e5ff" filter="url(#droneGlow)" class="beam-pulse"/>
+                    <circle cx="0" cy="-15" r="3" fill="#00ff88" opacity="0.8"/>
+                    <text x="0" y="25" text-anchor="middle" fill="#8b93a8" font-size="10" font-family="Segoe UI">VÉHICULE ÉMETTEUR</text>
+                </g>
+
+                <g>
+                    <path d="M 200 355 L 480 180 L 520 200 L 200 375 Z" fill="url(#beamGreen)" class="beam-pulse"/>
+                    <circle cx="260" cy="330" r="3" fill="#00ff88" filter="url(#droneGlow)" class="energy-particle-up"/>
+                    <circle cx="320" cy="295" r="3" fill="#00ff88" filter="url(#droneGlow)" class="energy-particle-up" style="animation-delay: 0.4s"/>
+                    <circle cx="380" cy="260" r="3" fill="#00ff88" filter="url(#droneGlow)" class="energy-particle-up" style="animation-delay: 0.8s"/>
+                    <circle cx="440" cy="220" r="3" fill="#00ff88" filter="url(#droneGlow)" class="energy-particle-up" style="animation-delay: 1.2s"/>
+                </g>
+
+                <g transform="translate(500, 190)" class="drone-hover">
+                    <line x1="0" y1="0" x2="-45" y2="-25" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="45" y2="-25" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="-45" y2="25" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="45" y2="25" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
+                    <ellipse cx="0" cy="0" rx="22" ry="14" fill="#2d3748" stroke="#4fd1c5" stroke-width="1.5"/>
+                    <circle cx="0" cy="0" r="6" fill="#00e5ff" filter="url(#droneGlow)" class="beam-pulse"/>
+
+                    <g class="rotate-prop" style="transform-origin: -45px -25px;">
+                        <ellipse cx="-45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
+                    </g>
+                    <g class="rotate-prop" style="transform-origin: 45px -25px;">
+                        <ellipse cx="45" cy="-25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
+                    </g>
+                    <g class="rotate-prop" style="transform-origin: -45px 25px;">
+                        <ellipse cx="-45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
+                    </g>
+                    <g class="rotate-prop" style="transform-origin: 45px 25px;">
+                        <ellipse cx="45" cy="25" rx="18" ry="3" fill="#4fd1c5" opacity="0.5"/>
+                    </g>
+                </g>
+
+                <line x1="500" y1="190" x2="800" y2="140" stroke="#4fd1c5" stroke-width="1" stroke-dasharray="4 6" opacity="0.5"/>
+                <circle cx="800" cy="140" r="4" fill="none" stroke="#4fd1c5" stroke-width="1.5" opacity="0.6"/>
+
+                <g font-family="Segoe UI, sans-serif" font-size="11" fill="#8b93a8">
+                    <text x="500" y="120" text-anchor="middle" fill="#00e5ff" font-weight="700" font-size="12">🚁 DRONE EN VOL</text>
+                    <text x="200" y="440" text-anchor="middle" fill="#4fd1c5" font-weight="700" font-size="11">📡 ÉMETTEUR AU SOL</text>
+                    <text x="640" y="200" fill="#00ff88" font-weight="700" font-size="11">FAISCEAU</text>
+                    <text x="640" y="213" fill="#00ff88" font-size="10">MICRO-ONDES</text>
+                </g>
+
+                <g transform="translate(20, 20)" font-family="Segoe UI, sans-serif" font-size="11" fill="#8b93a8">
+                    <text x="0" y="0" fill="#00ff88" font-weight="700">● Alimentation continue</text>
+                    <text x="0" y="18">Sans câble, sans batterie</text>
+                </g>
+            </svg>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Le principe pour un drone</h2>
+            <p class="section-subtitle">Une alimentation continue sans câble ni batterie.</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-number">1</div>
+                    <h3>Émetteur au sol</h3>
+                    <p>Un véhicule équipé d'une antenne réseau phasé émet un faisceau de micro-ondes à 5,8 GHz vers le drone.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">2</div>
+                    <h3>Suivi en temps réel</h3>
+                    <p>Un système de tracking (GPS + radar + vision) ajuste en permanence l'angle du faisceau pour viser le drone.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">3</div>
+                    <h3>Réception à bord</h3>
+                    <p>Une rectenna légère fixée sous le drone capte les micro-ondes et les reconvertit en électricité.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number">4</div>
+                    <h3>Vol prolongé</h3>
+                    <p>Le drone vole en continu tant que le faisceau est maintenu. Fini le retour au sol pour recharger.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Batterie vs Faisceau d'énergie</h2>
+            <p class="section-subtitle">Ce que change l'alimentation sans fil.</p>
+            <div class="compare">
+                <div class="compare-col laser">
+                    <h3>🔋 Batterie classique</h3>
+                    <ul>
+                        <li><span>Autonomie</span><span>20 – 40 min</span></li>
+                        <li><span>Retour au sol</span><span>Obligatoire</span></li>
+                        <li><span>Recharge</span><span>30 – 90 min</span></li>
+                        <li><span>Poids embarqué</span><span>Élevé</span></li>
+                        <li><span>Coût opérationnel</span><span>Élevé</span></li>
+                        <li><span>Mission continue</span><span>Impossible</span></li>
+                    </ul>
+                </div>
+                <div class="compare-col green">
+                    <h3>📡 Faisceau d'énergie</h3>
+                    <ul>
+                        <li><span>Autonomie</span><span>Illimitée</span></li>
+                        <li><span>Retour au sol</span><span>Inutile</span></li>
+                        <li><span>Recharge</span><span>Continue</span></li>
+                        <li><span>Poids embarqué</span><span>Faible</span></li>
+                        <li><span>Coût opérationnel</span><span>Faible</span></li>
+                        <li><span>Mission continue</span><span>24h/24</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Simulateur drone</h2>
+            <p class="section-subtitle">Ajustez les paramètres et voyez si le drone peut voler.</p>
+            <div class="interactive-panel">
+                <div class="control-group">
+                    <label for="droneAltitude">Altitude du drone (m)</label>
+                    <input type="range" id="droneAltitude" min="10" max="2000" value="100" step="10">
+                    <div class="control-value">
+                        <span>10 m</span>
+                        <strong id="droneAltitudeVal">100 m</strong>
+                        <span>2 000 m</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="droneDistance">Distance horizontale (m)</label>
+                    <input type="range" id="droneDistance" min="10" max="3000" value="500" step="10">
+                    <div class="control-value">
+                        <span>10 m</span>
+                        <strong id="droneDistanceVal">500 m</strong>
+                        <span>3 000 m</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="dronePower">Puissance émise (W)</label>
+                    <input type="range" id="dronePower" min="10" max="5000" value="1000" step="10">
+                    <div class="control-value">
+                        <span>10 W</span>
+                        <strong id="dronePowerVal">1 000 W</strong>
+                        <span>5 000 W</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="droneFreq">Fréquence (GHz)</label>
+                    <input type="range" id="droneFreq" min="2" max="30" value="5.8" step="0.1">
+                    <div class="control-value">
+                        <span>2 GHz</span>
+                        <strong id="droneFreqVal">5,8 GHz</strong>
+                        <span>30 GHz</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="droneConsumption">Consommation du drone (W)</label>
+                    <input type="range" id="droneConsumption" min="50" max="2000" value="500" step="10">
+                    <div class="control-value">
+                        <span>50 W</span>
+                        <strong id="droneConsumptionVal">500 W</strong>
+                        <span>2 000 W</span>
+                    </div>
+                </div>
+                <div class="output-panel">
+                    <div class="output-stat">
+                        <div class="label">Puissance reçue</div>
+                        <div class="value"><span id="droneReceived">0</span><span class="unit">W</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Rendement global</div>
+                        <div class="value"><span id="droneEfficiency">0</span><span class="unit">%</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Marge de puissance</div>
+                        <div class="value"><span id="droneMargin">0</span><span class="unit">W</span></div>
+                    </div>
+                    <div class="output-stat">
+                        <div class="label">Statut du vol</div>
+                        <div class="value" id="droneStatus" style="font-size:1.1rem;">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">État des démonstrations</h2>
+            <p class="section-subtitle">Ce qui a déjà été réalisé en conditions réelles.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2021 — CHINE</div>
+                    <div class="timeline-content">
+                        <h4>Université Xidian</h4>
+                        <p>Drone maintenu en vol pendant 3,1 heures à 15 m d'altitude par un émetteur micro-ondes mobile. Le véhicule et le drone étaient tous deux en mouvement.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023 — ÉTATS-UNIS</div>
+                    <div class="timeline-content">
+                        <h4>PowerLight + Kraus Hamdani</h4>
+                        <p>Près de 1 kW délivré à un drone K1000ULE en vol à 5 000 pieds (~1 500 m) par faisceau laser infrarouge.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 — JAPON</div>
+                    <div class="timeline-content">
+                        <h4>Test avion → sol</h4>
+                        <p>Un avion volant à 7 000 m transmet de l'énergie vers une station au sol. Validation des technologies de formation de faisceau.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">PERSPECTIVES</div>
+                    <div class="timeline-content">
+                        <h4>Application opérationnelle</h4>
+                        <p>Surveillance continue, livraison sans arrêt, relais de communication en zone isolée. La barrière restante : le rendement (3–5 % actuellement).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Projet SBSP — Énergie solaire spatiale · Satellite & Drone<br>
+        Illustrations et simulateurs réalisés en SVG + JavaScript pur.
+    </footer>
+
+</div>
+
+<script>
+// ============================================================
+// FONCTIONS UTILITAIRES
+// ============================================================
+function formatNumber(n, decimals = 0) {
+    return n.toLocaleString('fr-FR', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
+}
+
+// ============================================================
+// GESTION DES ONGLETS
+// ============================================================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        const targetEl = document.getElementById('tab-' + target);
+        if (targetEl) targetEl.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
+// ============================================================
+// SIMULATEUR SATELLITE
+// ============================================================
+const altitudeEl    = document.getElementById('altitude');
+const powerEl       = document.getElementById('power');
+const efficiencyEl  = document.getElementById('efficiency');
+const frequencyEl   = document.getElementById('frequency');
+
+const altitudeVal   = document.getElementById('altitudeVal');
+const powerVal      = document.getElementById('powerVal');
+const efficiencyVal = document.getElementById('efficiencyVal');
+const frequencyVal  = document.getElementById('frequencyVal');
+
+const receivedPowerEl = document.getElementById('receivedPower');
+const homesEl         = document.getElementById('homes');
+const rectennaSizeEl  = document.getElementById('rectennaSize');
+const densityEl       = document.getElementById('density');
+
+const CONSUMPTION_PER_HOME_KW = 500;
+
+function computeSatellite() {
+    const altitude   = parseInt(altitudeEl.value);
+    const power      = parseFloat(powerEl.value);
+    const efficiency = parseFloat(efficiencyEl.value);
+    const frequency  = parseFloat(frequencyEl.value);
+
+    altitudeVal.textContent   = formatNumber(altitude) + ' km';
+    powerVal.textContent      = formatNumber(power) + ' MW';
+    efficiencyVal.textContent = efficiency + ' %';
+    frequencyVal.textContent  = formatNumber(frequency, 1) + ' GHz';
+
+    const distanceM = altitude * 1000;
+    const freqHz = frequency * 1e9;
+    const c = 299792458;
+    const lambda = c / freqHz;
+    const fspl = Math.pow((4 * Math.PI * distanceM) / lambda, 2);
+    const fsplDb = 10 * Math.log10(fspl);
+
+    const atmosphericLossDb = altitude < 1000 ? 0 : (frequency * 0.02 + 0.5);
+    const antennaGainDb = 60;
+    const totalLossDb = fsplDb + atmosphericLossDb - antennaGainDb;
+    const lossFactor = Math.pow(10, -totalLossDb / 10);
+
+    const conversionEfficiency = 0.35;
+
+    let receivedPower = power * lossFactor * (efficiency / 100) * conversionEfficiency;
+    receivedPower = Math.min(receivedPower, power);
+
+    const homes = (receivedPower * 1000) / CONSUMPTION_PER_HOME_KW;
+
+    const maxDensity = 10;
+    const receivedW = receivedPower * 1e6;
+    const surfaceM2 = receivedW / maxDensity;
+    const surfaceKm2 = surfaceM2 / 1e6;
+    const density = surfaceM2 > 0 ? receivedW / surfaceM2 : 0;
+
+    receivedPowerEl.textContent = receivedPower >= 1000
+        ? formatNumber(receivedPower / 1000, 2)
+        : formatNumber(receivedPower, 2);
+    receivedPowerEl.nextElementSibling.textContent = receivedPower >= 1000 ? 'GW' : 'MW';
+
+    homesEl.textContent = formatNumber(homes);
+
+    rectennaSizeEl.textContent = surfaceKm2 >= 1
+        ? formatNumber(surfaceKm2, 1)
+        : formatNumber(surfaceKm2 * 100, 0);
+    rectennaSizeEl.nextElementSibling.textContent = surfaceKm2 >= 1 ? 'km²' : 'ha';
+
+    densityEl.textContent = formatNumber(density, 1);
+}
+
+[altitudeEl, powerEl, efficiencyEl, frequencyEl].forEach(el => {
+    if (el) el.addEventListener('input', computeSatellite);
+});
+if (altitudeEl) computeSatellite();
+
+// ============================================================
+// SIMULATEUR DRONE
+// ============================================================
+const droneAltitudeEl    = document.getElementById('droneAltitude');
+const droneDistanceEl    = document.getElementById('droneDistance');
+const dronePowerEl       = document.getElementById('dronePower');
+const droneFreqEl        = document.getElementById('droneFreq');
+const droneConsumptionEl = document.getElementById('droneConsumption');
+
+const droneAltitudeVal    = document.getElementById('droneAltitudeVal');
+const droneDistanceVal    = document.getElementById('droneDistanceVal');
+const dronePowerVal       = document.getElementById('dronePowerVal');
+const droneFreqVal        = document.getElementById('droneFreqVal');
+const droneConsumptionVal = document.getElementById('droneConsumptionVal');
+
+const droneReceivedEl   = document.getElementById('droneReceived');
+const droneEfficiencyEl = document.getElementById('droneEfficiency');
+const droneMarginEl     = document.getElementById('droneMargin');
+const droneStatusEl     = document.getElementById('droneStatus');
+
+function computeDrone() {
+    const altitude    = parseFloat(droneAltitudeEl.value);
+    const distance    = parseFloat(droneDistanceEl.value);
+    const power       = parseFloat(dronePowerEl.value);
+    const freq        = parseFloat(droneFreqEl.value);
+    const consumption = parseFloat(droneConsumptionEl.value);
+
+    droneAltitudeVal.textContent    = formatNumber(altitude) + ' m';
+    droneDistanceVal.textContent    = formatNumber(distance) + ' m';
+    dronePowerVal.textContent       = formatNumber(power) + ' W';
+    droneFreqVal.textContent        = formatNumber(freq, 1) + ' GHz';
+    droneConsumptionVal.textContent = formatNumber(consumption) + ' W';
+
+    const d = Math.sqrt(altitude * altitude + distance * distance);
+
+    const c = 299792458;
+    const lambda = c / (freq * 1e9);
+    const fspl = Math.pow((4 * Math.PI * d) / lambda, 2);
+    const fsplDb = 10 * Math.log10(fspl);
+
+    const atmDb = altitude > 1000 ? (freq * 0.05) : 0.1;
+    const gainDb = 45;
+    const totalLossDb = fsplDb + atmDb - gainDb;
+    const lossFactor = Math.pow(10, -totalLossDb / 10);
+
+    const conversionEff = 0.35;
+    const received = power * lossFactor * conversionEff;
+    const efficiency = (received / power) * 100;
+    const margin = received - consumption;
+
+    droneReceivedEl.textContent   = formatNumber(Math.max(received, 0), 1);
+    droneEfficiencyEl.textContent = formatNumber(Math.max(efficiency, 0), 2);
+    droneMarginEl.textContent     = formatNumber(margin, 1);
+
+    if (margin > consumption * 0.5) {
+        droneStatusEl.textContent = '✅ Vol stable';
+        droneStatusEl.style.color = '#00ff88';
+    } else if (margin > 0) {
+        droneStatusEl.textContent = '⚠️ Vol limite';
+        droneStatusEl.style.color = '#ffb800';
+    } else {
+        droneStatusEl.textContent = '❌ Chute';
+        droneStatusEl.style.color = '#ff3355';
+    }
+}
+
+[droneAltitudeEl, droneDistanceEl, dronePowerEl, droneFreqEl, droneConsumptionEl].forEach(el => {
+    if (el) el.addEventListener('input', computeDrone);
+});
+if (droneAltitudeEl) computeDrone();
+
+// ============================================================
+// PARALLAXE 3D AU SURVOL DES SCÈNES
+// ============================================================
+document.querySelectorAll('.scene').forEach(scene => {
+    scene.addEventListener('mousemove', (e) => {
+        const rect = scene.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const svg = scene.querySelector('svg');
+        if (svg) {
+            svg.style.transform = `perspective(1000px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+        }
+    });
+    scene.addEventListener('mouseleave', () => {
+        const svg = scene.querySelector('svg');
+        if (svg) {
+            svg.style.transition = 'transform 0.5s ease-out';
+            svg.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+            setTimeout(() => svg.style.transition = 'transform 0.1s ease-out', 500);
+        }
+    });
+});
+
+// ============================================================
+// ANIMATION D'APPARITION AU SCROLL
+// ============================================================
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .timeline-item, .interactive-panel, .compare-col').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
