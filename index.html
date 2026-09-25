@@ -189,13 +189,48 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 @keyframes sr{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 .ep{animation:ef 2s linear infinite}
 @keyframes ef{0%{opacity:0;transform:translateY(-50px)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(50px)}}
+
+/* PRINT */
+.rapport-header{display:none}
+@media print{
+  .bt,.op,.ba,.sop,.btn-pdf{display:none!important}
+  body{background:white!important;color:black!important;padding:0}
+  .pn,.levier,.concept-hero,.concept-sim,.opt-block{background:white!important;color:black!important;border:1px solid #999!important;page-break-inside:avoid;box-shadow:none!important}
+  .rapport-header{display:block!important;text-align:center;padding:30px 0;border-bottom:3px double #000;margin-bottom:30px}
+  .rapport-header h1{color:black!important;-webkit-text-fill-color:black!important;background:none!important;font-size:24pt}
+  .rapport-header p{color:#333!important;font-size:12pt;margin-top:8px}
+  h1,h2,h3,h4{color:black!important;-webkit-text-fill-color:black!important;background:none!important}
+  p,span,td,th,label,.step-formula,.formule-block{color:#333!important}
+  .opt-table th{background:#eee!important;color:black!important}
+  .opt-table td{color:#333!important}
+  .opt-table td:first-child{color:black!important}
+  .opt-step{background:#f5f5f5!important;border-left-color:#000!important}
+  .formule-block{background:#f5f5f5!important;color:#000!important;border-left-color:#000!important}
+  .cr,.mri{border:1px solid #999!important;background:white!important}
+  .cr .ch,.mri .va{color:black!important;-webkit-text-fill-color:black!important;background:none!important}
+  .opt-chain .node{background:#eee!important;color:black!important;border-color:#666!important}
+  .opt-chain .eff{background:#e8f5e9!important;color:#1b5e20!important;border-color:#2e7d32!important}
+  .concept-verdict{background:#e8f5e9!important;color:black!important;border-color:#2e7d32!important}
+  .concept-verdict h4{color:#1b5e20!important}
+  .csv-section{background:#f5f5f5!important;border-color:#666!important}
+  .csv-section h3{color:#1b5e20!important}
+}
+.btn-pdf{padding:12px 24px;background:linear-gradient(135deg,rgba(0,200,83,.3),rgba(0,85,164,.3));border:2px solid var(--ok);border-radius:999px;color:var(--bl);font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:10px;transition:all .3s ease}
+.btn-pdf:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(0,200,83,.5)}
+
 @media(max-width:700px){.ctn{padding:30px 14px}.pn{padding:20px}.sp{flex-direction:column;text-align:center}.sg{flex-direction:column}.ba{justify-content:center}.res{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}.cmp{grid-template-columns:1fr}.opt-grid{grid-template-columns:1fr}.opt-chain{font-size:.75rem}}
-@media print{.bt,.op,.ba,.sop{display:none}.pn{break-inside:avoid}body{background:#fff;color:#000}}
 </style>
 </head>
 <body>
 <div class="bt"><div class="bl"></div><div class="wh"></div><div class="rd"></div></div>
 <div class="ctn">
+
+<div class="rapport-header">
+<h1>Rapport — Conception optimale SBSP</h1>
+<p>Énergie solaire spatiale — Drone & Satellite</p>
+<p id="rapportDate"></p>
+</div>
+
 <header>
 <div class="emb"><span class="dr"><div class="bl"></div><div class="wh"></div><div class="rd"></div></span>Projet SBSP &middot; Énergie solaire spatiale</div>
 <h1>Énergie Solaire Spatiale</h1>
@@ -226,12 +261,10 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <rect width="1000" height="500" fill="url(#spG)"/>
 <g opacity=".7"><circle cx="80" cy="60" r="1" fill="white"/><circle cx="200" cy="120" r="1" fill="white"/><circle cx="350" cy="40" r="1.2" fill="white"/><circle cx="500" cy="100" r="1" fill="white"/><circle cx="650" cy="70" r="1.1" fill="white"/><circle cx="800" cy="50" r="1" fill="white"/><circle cx="920" cy="130" r="1.2" fill="white"/></g>
 <g transform="translate(850,80)" class="srays" filter="url(#glS)"><circle r="55" fill="url(#snG)"/><circle r="40" fill="#fff8d0" opacity=".4"/><g stroke="#ffd54a" stroke-width="2" opacity=".6"><line x1="0" y1="-70" x2="0" y2="-90"/><line x1="0" y1="70" x2="0" y2="90"/><line x1="-70" y1="0" x2="-90" y2="0"/><line x1="70" y1="0" x2="90" y2="0"/></g></g>
-<g stroke="#ffd54a" stroke-width="1.5" opacity=".4"><line x1="800" y1="100" x2="620" y2="180" stroke-dasharray="4 4"/><line x1="800" y1="110" x2="620" y2="190" stroke-dasharray="4 4"/></g>
-<g transform="translate(600,180)" class="sfloat"><rect x="-40" y="-15" width="80" height="30" rx="4" fill="#FFFFFF" stroke="#0055A4" stroke-width="2"/><g transform="translate(-100,-20)"><rect width="55" height="40" rx="2" fill="url(#plG)" stroke="#FFFFFF" stroke-width="1"/><line x1="0" y1="13" x2="55" y2="13" stroke="#FFFFFF" stroke-width=".5" opacity=".6"/><line x1="0" y1="26" x2="55" y2="26" stroke="#FFFFFF" stroke-width=".5" opacity=".6"/></g><g transform="translate(45,-20)"><rect width="55" height="40" rx="2" fill="url(#plG)" stroke="#FFFFFF" stroke-width="1"/><line x1="0" y1="13" x2="55" y2="13" stroke="#FFFFFF" stroke-width=".5" opacity=".6"/><line x1="0" y1="26" x2="55" y2="26" stroke="#FFFFFF" stroke-width=".5" opacity=".6"/></g><rect x="-15" y="15" width="30" height="10" rx="2" fill="#EF4135" opacity=".9"/><circle cx="0" cy="25" r="3" fill="#FFFFFF" filter="url(#gl)"/></g>
-<g><path d="M600 210 L570 420 L630 420 Z" fill="url(#bmG)" class="bpulse"/><circle cx="600" cy="250" r="3" fill="#FFFFFF" filter="url(#gl)" class="ep"/><circle cx="595" cy="300" r="3" fill="#FFFFFF" filter="url(#gl)" class="ep" style="animation-delay:.3s"/><circle cx="605" cy="350" r="3" fill="#FFFFFF" filter="url(#gl)" class="ep" style="animation-delay:.6s"/></g>
-<g transform="translate(500,480)"><ellipse cx="0" cy="0" rx="400" ry="180" fill="url(#eaG)"/><path d="M-200-60Q-150-90-100-70Q-70-50-100-20Q-140 0-180-10Z" fill="#38a169" opacity=".7"/><path d="M100-80Q160-100 220-70Q260-40 240 10Q200 30 160 10Q120-10 100-50Z" fill="#38a169" opacity=".7"/></g>
-<g transform="translate(600,430)"><ellipse cx="0" cy="0" rx="60" ry="12" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/><ellipse cx="0" cy="0" rx="40" ry="8" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".6"/><circle cx="0" cy="0" r="5" fill="#FFFFFF" filter="url(#gl)" class="bpulse"/></g>
-<g font-family="Segoe UI,sans-serif" font-size="11"><text x="850" y="30" text-anchor="middle" fill="#ffd54a" font-weight="700" font-size="12">SOLEIL</text><text x="600" y="140" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="12">SATELLITE</text><text x="600" y="470" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="12">RECTENNA</text></g>
+<g transform="translate(600,180)" class="sfloat"><rect x="-40" y="-15" width="80" height="30" rx="4" fill="#FFFFFF" stroke="#0055A4" stroke-width="2"/><g transform="translate(-100,-20)"><rect width="55" height="40" rx="2" fill="url(#plG)" stroke="#FFFFFF" stroke-width="1"/></g><g transform="translate(45,-20)"><rect width="55" height="40" rx="2" fill="url(#plG)" stroke="#FFFFFF" stroke-width="1"/></g><rect x="-15" y="15" width="30" height="10" rx="2" fill="#EF4135" opacity=".9"/><circle cx="0" cy="25" r="3" fill="#FFFFFF" filter="url(#gl)"/></g>
+<g><path d="M600 210 L570 420 L630 420 Z" fill="url(#bmG)" class="bpulse"/></g>
+<g transform="translate(500,480)"><ellipse cx="0" cy="0" rx="400" ry="180" fill="url(#eaG)"/></g>
+<g transform="translate(600,430)"><ellipse cx="0" cy="0" rx="60" ry="12" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/><circle cx="0" cy="0" r="5" fill="#FFFFFF" filter="url(#gl)" class="bpulse"/></g>
 </svg>
 </div>
 
@@ -312,7 +345,7 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 
 <div class="opt-steps">
 <div class="opt-step"><div class="step-title">Étape 1 — Longueur d'onde</div><div class="step-formula">λ = c / f = 3×10⁸ / 5,8×10⁹ = 0,05172 m</div><div class="step-result ok">λ = 5,172 cm</div></div>
-<div class="opt-step"><div class="step-title">Étape 2 — Distance effective (slant range)</div><div class="step-formula">d = h / sin(θ) = 35 786 / sin(90°) = 35 786 km</div><div class="step-result ok">d = 35 786 000 m</div></div>
+<div class="opt-step"><div class="step-title">Étape 2 — Distance effective</div><div class="step-formula">d = h / sin(θ) = 35 786 / sin(90°) = 35 786 km</div><div class="step-result ok">d = 35 786 000 m</div></div>
 <div class="opt-step"><div class="step-title">Étape 3 — Puissance solaire captée</div><div class="step-formula">P_solar = 1 361 × 20 000 000 × 0,40 = 10 888 MW</div><div class="step-result ok">P_solar = 10 888 MW</div></div>
 <div class="opt-step"><div class="step-title">Étape 4 — Puissance RF émise</div><div class="step-formula">P_RF = 10 888 × 0,85 = 9 255 MW</div><div class="step-result ok">P_RF = 9 255 MW</div></div>
 <div class="opt-step"><div class="step-title">Étape 5 — FSPL</div><div class="step-formula">FSPL = 20·log₁₀(35 786) + 20·log₁₀(5,8) + 92,45 = 198,79 dB</div><div class="step-result wn">FSPL = 198,79 dB</div></div>
@@ -320,11 +353,11 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <div class="opt-step"><div class="step-title">Étape 7 — Gain antenne Tx</div><div class="step-formula">G_Tx = 10·log₁₀[0,55 × (π × 1000 / 0,05172)²] = 93,07 dBi</div><div class="step-result ok">G_Tx = 93,07 dBi</div></div>
 <div class="opt-step"><div class="step-title">Étape 8 — Gain rectenna</div><div class="step-formula">G_Rx = 10·log₁₀[0,55 × (π × 20 000 / 0,05172)²] = 119,09 dBi</div><div class="step-result ok">G_Rx = 119,09 dBi</div></div>
 <div class="opt-step"><div class="step-title">Étape 9 — Bilan de liaison</div><div class="step-formula">Marge = 93,07 + 119,09 − 198,79 − 0,346 = +13,02 dB</div><div class="step-result ok">Faisceau ENTÈREMENT capté</div></div>
-<div class="opt-step"><div class="step-title">Étape 10 — Vérification capture (Airy)</div><div class="step-formula">θ_Airy = 1,22 × 0,05172 / 1000 = 6,31×10⁻⁵ rad → D_faisceau = 2 258 m</div><div class="step-result ok">D_faisceau (2,3 km) ≪ D_rectenna (20 km) → captage ~100 %</div></div>
-<div class="opt-step"><div class="step-title">Étape 11 — Rendement de transmission</div><div class="step-formula">η_transmission = 10^(−0,0346) = 0,921</div><div class="step-result ok">η_transmission = 92,1 %</div></div>
-<div class="opt-step"><div class="step-title">Étape 12 — Puissance nette reçue</div><div class="step-formula">P_net = 9 255 × 0,921 × 0,90 = 7 672 MW → 1,39 million de foyers</div><div class="step-result ok">P_net = 7 672 MW</div></div>
+<div class="opt-step"><div class="step-title">Étape 10 — Tache d'Airy</div><div class="step-formula">θ = 1,22 × 0,05172 / 1000 = 6,31×10⁻⁵ rad → D = 2 258 m</div><div class="step-result ok">D (2,3 km) ≪ D_rectenna (20 km)</div></div>
+<div class="opt-step"><div class="step-title">Étape 11 — Rendement transmission</div><div class="step-formula">η_transmission = 10^(−0,0346) = 0,921</div><div class="step-result ok">η_transmission = 92,1 %</div></div>
+<div class="opt-step"><div class="step-title">Étape 12 — Puissance nette</div><div class="step-formula">P_net = 9 255 × 0,921 × 0,90 = 7 672 MW</div><div class="step-result ok">P_net = 7 672 MW → 1,39 M foyers</div></div>
 <div class="opt-step"><div class="step-title">Étape 13 — RENDEMENT GLOBAL</div><div class="step-formula">η_global = 0,40 × 0,85 × 0,921 × 0,90 = 28,1 %</div><div class="step-result ok">η_global = 28,1 %</div></div>
-<div class="opt-step"><div class="step-title">Étape 14 — Limite théorique absolue</div><div class="step-formula">η_max = 0,40 × 0,85 × 0,90 = 30,6 % (sans pertes atmosphériques)</div><div class="step-result wn">Goulot : convertisseur DC→RF à 85 %</div></div>
+<div class="opt-step"><div class="step-title">Étape 14 — Limite théorique</div><div class="step-formula">η_max = 0,40 × 0,85 × 0,90 = 30,6 % (sans pertes atmosphériques)</div><div class="step-result wn">Goulot : DC→RF à 85 %</div></div>
 </div>
 
 <div class="opt-chain">
@@ -333,7 +366,7 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 
 <div class="opt-verdict">
 <h4>🏆 Rendement satellite optimal : 28,1 %</h4>
-<p>Limite théorique 30,6 % — L'atmosphère coûte 2,5 points. Le progrès décisif : un convertisseur DC→RF à 95 % porterait η à 34 %.</p>
+<p>Limite théorique 30,6 % — L'atmosphère coûte 2,5 points. Un convertisseur DC→RF à 95 % porterait η à 34 %.</p>
 </div>
 </div>
 </div>
@@ -350,12 +383,11 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <filter id="luF" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 <rect width="1000" height="500" fill="url(#cG)"/>
-<ellipse cx="140" cy="80" rx="90" ry="25" fill="white" opacity=".5"/><ellipse cx="210" cy="90" rx="60" ry="20" fill="white" opacity=".4"/><ellipse cx="820" cy="110" rx="100" ry="28" fill="white" opacity=".4"/>
-<rect x="0" y="420" width="1000" height="80" fill="#0a1228"/><rect x="0" y="420" width="333" height="4" fill="#0055A4"/><rect x="333" y="420" width="334" height="4" fill="#FFFFFF"/><rect x="667" y="420" width="333" height="4" fill="#EF4135"/>
-<g transform="translate(180,400)"><rect x="-70" y="-35" width="140" height="35" rx="5" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/><circle cx="-45" cy="2" r="10" fill="#0a1228" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="45" cy="2" r="10" fill="#0a1228" stroke="#FFFFFF" stroke-width="1.5"/><rect x="-18" y="-55" width="36" height="20" rx="3" fill="#1e78d1" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="0" cy="-55" r="5" fill="#FFFFFF" filter="url(#luF)" class="bpulse"/><text x="0" y="30" text-anchor="middle" fill="#FFFFFF" font-size="11" font-family="Segoe UI" font-weight="700">EMETTEUR</text></g>
-<g id="gF"><path d="M180 345 L460 170 L500 195 L180 365 Z" fill="url(#fG)" class="bpulse"/><g><circle cx="230" cy="325" r="3" fill="#FFFFFF" filter="url(#lu)" class="epu"/><circle cx="290" cy="290" r="3" fill="#FFFFFF" filter="url(#lu)" class="epu" style="animation-delay:.4s"/><circle cx="350" cy="255" r="3" fill="#FFFFFF" filter="url(#lu)" class="epu" style="animation-delay:.8s"/><circle cx="410" cy="220" r="3" fill="#FFFFFF" filter="url(#lu)" class="epu" style="animation-delay:1.2s"/></g></g>
+<rect x="0" y="420" width="1000" height="80" fill="#0a1228"/>
+<rect x="0" y="420" width="333" height="4" fill="#0055A4"/><rect x="333" y="420" width="334" height="4" fill="#FFFFFF"/><rect x="667" y="420" width="333" height="4" fill="#EF4135"/>
+<g transform="translate(180,400)"><rect x="-70" y="-35" width="140" height="35" rx="5" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/><circle cx="-45" cy="2" r="10" fill="#0a1228" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="45" cy="2" r="10" fill="#0a1228" stroke="#FFFFFF" stroke-width="1.5"/><rect x="-18" y="-55" width="36" height="20" rx="3" fill="#1e78d1" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="0" cy="-55" r="5" fill="#FFFFFF" filter="url(#luF)" class="bpulse"/></g>
+<g id="gF"><path d="M180 345 L460 170 L500 195 L180 365 Z" fill="url(#fG)" class="bpulse"/></g>
 <g id="gD" transform="translate(480,185)" class="dstable"><circle cx="0" cy="0" r="60" fill="url(#hB)" opacity=".6"/><line x1="0" y1="0" x2="-45" y2="-25" stroke="#0055A4" stroke-width="5" stroke-linecap="round"/><line x1="0" y1="0" x2="45" y2="-25" stroke="#0055A4" stroke-width="5" stroke-linecap="round"/><line x1="0" y1="0" x2="-45" y2="25" stroke="#0055A4" stroke-width="5" stroke-linecap="round"/><line x1="0" y1="0" x2="45" y2="25" stroke="#0055A4" stroke-width="5" stroke-linecap="round"/><ellipse cx="0" cy="0" rx="24" ry="15" fill="#FFFFFF" stroke="#0055A4" stroke-width="2.5"/><circle cx="0" cy="0" r="7" fill="#1e78d1" filter="url(#luF)" class="bpulse"/><g class="rprop" style="transform-origin:-45px -25px"><ellipse cx="-45" cy="-25" rx="20" ry="3" fill="#FFFFFF" opacity=".7"/></g><g class="rprop" style="transform-origin:45px -25px"><ellipse cx="45" cy="-25" rx="20" ry="3" fill="#EF4135" opacity=".7"/></g><g class="rprop" style="transform-origin:-45px 25px"><ellipse cx="-45" cy="25" rx="20" ry="3" fill="#EF4135" opacity=".7"/></g><g class="rprop" style="transform-origin:45px 25px"><ellipse cx="45" cy="25" rx="20" ry="3" fill="#FFFFFF" opacity=".7"/></g></g>
-<text x="480" y="115" text-anchor="middle" fill="#FFFFFF" font-weight="800" font-size="13" font-family="Segoe UI">DRONE EN VOL</text>
 </svg>
 </div>
 
@@ -398,7 +430,7 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <div class="cr imp"><div class="eq">Marge de liaison</div><div class="ch"><span id="rDMG">0</span><span class="un">dB</span></div></div>
 <div class="cr"><div class="eq">EIRP</div><div class="ch"><span id="rDEI">0</span><span class="un">dBm</span></div></div>
 <div class="cr"><div class="eq">Densité reçue</div><div class="ch"><span id="rDDN">0</span><span class="un">μW/cm²</span></div></div>
-<div class="cr"><div class="eq">Durée vol (batterie)</div><div class="ch"><span id="rDVB">0</span><span class="un">min</span></div></div>
+<div class="cr"><div class="eq">Durée vol</div><div class="ch"><span id="rDVB">0</span><span class="un">min</span></div></div>
 <div class="cr"><div class="eq">Pertes vent</div><div class="ch"><span id="rDWL">0</span><span class="un">dB</span></div></div>
 <div class="cr"><div class="eq">Eff. Doppler</div><div class="ch"><span id="rDDP">0</span><span class="un">Hz</span></div></div>
 </div>
@@ -432,23 +464,23 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 </div>
 
 <div class="opt-steps">
-<div class="opt-step"><div class="step-title">Étape 1 — Longueur d'onde</div><div class="step-formula">λ = 0,3 / 24 = 0,0125 m = 12,5 mm</div><div class="step-result ok">λ = 12,5 mm (bande K)</div></div>
+<div class="opt-step"><div class="step-title">Étape 1 — Longueur d'onde</div><div class="step-formula">λ = 0,3 / 24 = 0,0125 m = 12,5 mm</div><div class="step-result ok">λ = 12,5 mm</div></div>
 <div class="opt-step"><div class="step-title">Étape 2 — Distance slant</div><div class="step-formula">d = √(50² + 100²) = 111,8 m</div><div class="step-result ok">d = 111,8 m</div></div>
 <div class="opt-step"><div class="step-title">Étape 3 — FSPL</div><div class="step-formula">FSPL = 20·log₁₀(0,1118) + 20·log₁₀(24) + 92,45 = 101,01 dB</div><div class="step-result wn">FSPL = 101,01 dB</div></div>
 <div class="opt-step"><div class="step-title">Étape 4 — Gain antenne Tx</div><div class="step-formula">G_Tx = 10·log₁₀[0,55 × (π × 3 / 0,0125)²] = 54,95 dBi</div><div class="step-result ok">G_Tx = 54,95 dBi</div></div>
 <div class="opt-step"><div class="step-title">Étape 5 — Gain rectenna drone</div><div class="step-formula">G_Rx = 10·log₁₀[0,55 × (π × 1 / 0,0125)²] = 45,41 dBi</div><div class="step-result ok">G_Rx = 45,41 dBi</div></div>
-<div class="opt-step"><div class="step-title">Étape 6 — EIRP et bilan de liaison</div><div class="step-formula">EIRP = 66,99 + 54,95 = 121,94 dBm<br>P_rx = 66,99 + 54,95 + 45,41 − 101,01 = 66,34 dBm → 4 309 W</div><div class="step-result ok">P_rx = 4 309 W</div></div>
-<div class="opt-step"><div class="step-title">Étape 7 — Vérification physique</div><div class="step-formula">P_rx (4 309 W) &lt; P_tx (5 000 W) ✓ → résultat physique valide</div><div class="step-result ok">η_transmission = 86,2 %</div></div>
+<div class="opt-step"><div class="step-title">Étape 6 — EIRP et bilan</div><div class="step-formula">EIRP = 66,99 + 54,95 = 121,94 dBm<br>P_rx = 66,34 dBm → 4 309 W</div><div class="step-result ok">P_rx = 4 309 W</div></div>
+<div class="opt-step"><div class="step-title">Étape 7 — Vérification physique</div><div class="step-formula">P_rx (4 309 W) &lt; P_tx (5 000 W) ✓</div><div class="step-result ok">η_transmission = 86,2 %</div></div>
 <div class="opt-step"><div class="step-title">Étape 8 — Puissance utile</div><div class="step-formula">P_utile = 4 309 × 0,95 = 4 093 W</div><div class="step-result ok">P_utile = 4 093 W</div></div>
 <div class="opt-step"><div class="step-title">Étape 9 — Marge de liaison</div><div class="step-formula">Marge (dB) = 10·log₁₀(4 093 / 50) = +19,1 dB</div><div class="step-result ok">VOL TRÈS STABLE</div></div>
-<div class="opt-step"><div class="step-title">Étape 10 — Rendement WPT end-to-end</div><div class="step-formula">η_WPT = 0,862 × 0,95 = 81,9 %</div><div class="step-result ok">η_WPT = 81,9 %</div></div>
+<div class="opt-step"><div class="step-title">Étape 10 — Rendement WPT</div><div class="step-formula">η_WPT = 0,862 × 0,95 = 81,9 %</div><div class="step-result ok">η_WPT = 81,9 %</div></div>
 </div>
 
 <div class="opt-chain">
 <span class="node">RF émise</span><span class="arr">→</span><span class="eff ok">86 %</span><span class="arr">→</span><span class="node">FSPL+gain</span><span class="arr">→</span><span class="eff ok">95 %</span><span class="arr">→</span><span class="node">Rectenna</span><span class="arr">→</span><span class="eff ok">81,9 %</span>
 </div>
 
-<h4 style="margin-top:24px;color:var(--bl);font-size:1rem">📊 Comparaison fréquences — Portée maximale (marge = 0 dB)</h4>
+<h4 style="margin-top:24px;color:var(--bl);font-size:1rem">📊 Comparaison fréquences — Portée maximale</h4>
 <table class="opt-table">
 <thead><tr><th>Fréquence</th><th>η_trans @ 100 m</th><th>Marge @ 100 m</th><th>Portée max</th></tr></thead>
 <tbody>
@@ -461,8 +493,8 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 </table>
 
 <div class="opt-verdict">
-<h4>🏆 Rendement drone optimal : η_WPT = 81,9 % — Marge +19,1 dB</h4>
-<p>Fréquence optimale : 24 GHz (bande K). À 30 GHz le gain est marginal et les pertes pluie explosent. Portée max : 560 m pour 50 W de consommation.</p>
+<h4>🏆 Rendement drone optimal : η_WPT = 81,9 %</h4>
+<p>Fréquence optimale : 24 GHz (bande K). Portée max : 560 m pour 50 W de consommation.</p>
 </div>
 </div>
 </div>
@@ -486,14 +518,14 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 </div></div>
 
 <div class="gr"><div class="gt">⚡ Puissance et disponibilité</div>
-<div class="ctrl"><label for="pPwr">Puissance électrique nette <span class="vl" id="pPwrV">100 MW</span></label><input type="range" id="pPwr" min="1" max="5000" value="100" step="1"></div>
-<div class="ctrl"><label for="pDisp">Disponibilité annuelle <span class="vl" id="pDispV">92 %</span></label><input type="range" id="pDisp" min="60" max="99" value="92" step="1"></div>
+<div class="ctrl"><label for="pPwr">Puissance nette <span class="vl" id="pPwrV">100 MW</span></label><input type="range" id="pPwr" min="1" max="5000" value="100" step="1"></div>
+<div class="ctrl"><label for="pDisp">Disponibilité <span class="vl" id="pDispV">92 %</span></label><input type="range" id="pDisp" min="60" max="99" value="92" step="1"></div>
 </div>
 <div class="gr"><div class="gt">💰 Économie</div>
-<div class="ctrl"><label for="pPrix">Prix de vente <span class="vl" id="pPrixV">80 €/MWh</span></label><input type="range" id="pPrix" min="20" max="300" value="80" step="1"></div>
+<div class="ctrl"><label for="pPrix">Prix <span class="vl" id="pPrixV">80 €/MWh</span></label><input type="range" id="pPrix" min="20" max="300" value="80" step="1"></div>
 <div class="ctrl"><label for="pDur">Durée de vie <span class="vl" id="pDurV">25 ans</span></label><input type="range" id="pDur" min="10" max="40" value="25" step="1"></div>
-<div class="ctrl"><label for="pCapex">Coût d'investissement <span class="vl" id="pCapexV">10 000 M€</span></label><input type="range" id="pCapex" min="1000" max="50000" value="10000" step="500"></div>
-<div class="ctrl"><label for="pOpexR">Coût exploitation <span class="vl" id="pOpexRV">2 % du CAPEX</span></label><input type="range" id="pOpexR" min="0.5" max="5" value="2" step="0.1"></div>
+<div class="ctrl"><label for="pCapex">Investissement <span class="vl" id="pCapexV">10 000 M€</span></label><input type="range" id="pCapex" min="1000" max="50000" value="10000" step="500"></div>
+<div class="ctrl"><label for="pOpexR">OPEX <span class="vl" id="pOpexRV">2 % du CAPEX</span></label><input type="range" id="pOpexR" min="0.5" max="5" value="2" step="0.1"></div>
 </div>
 
 <div class="res">
@@ -506,16 +538,16 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <div class="cr ok"><div class="eq">Voitures retirées</div><div class="ch"><span id="rVO">0</span></div></div>
 <div class="cr"><div class="eq">Revenu annuel</div><div class="ch"><span id="rRA">0</span><span class="un">M€</span></div></div>
 <div class="cr"><div class="eq">OPEX annuel</div><div class="ch"><span id="rOP">0</span><span class="un">M€</span></div></div>
-<div class="cr"><div class="eq">Profit net annuel</div><div class="ch"><span id="rPR">0</span><span class="un">M€</span></div></div>
+<div class="cr"><div class="eq">Profit net</div><div class="ch"><span id="rPR">0</span><span class="un">M€</span></div></div>
 <div class="cr"><div class="eq">ROI</div><div class="ch"><span id="rROI">0</span><span class="un">%</span></div></div>
 <div class="cr"><div class="eq">Revenu durée de vie</div><div class="ch"><span id="rRV">0</span><span class="un">Md€</span></div></div>
 <div class="cr imp"><div class="eq">LCOE</div><div class="ch"><span id="rLCOE">0</span><span class="un">€/MWh</span></div></div>
-<div class="cr"><div class="eq">gCO₂/kWh cycle vie</div><div class="ch"><span id="rGCO">0</span><span class="un">g</span></div></div>
+<div class="cr"><div class="eq">gCO₂/kWh</div><div class="ch"><span id="rGCO">0</span><span class="un">g</span></div></div>
 <div class="cr"><div class="eq">Surface rectenna</div><div class="ch"><span id="rSR">0</span><span class="un">km²</span></div></div>
 <div class="cr"><div class="eq">Surface panneaux</div><div class="ch"><span id="rSP">0</span><span class="un">km²</span></div></div>
 </div>
 
-<div class="gc"><div style="font-size:1rem;font-weight:700;color:var(--bl);margin-bottom:16px">📈 Production cumulée et profit cumulé — 30 ans</div><canvas id="cProd" width="800" height="300"></canvas></div>
+<div class="gc"><div style="font-size:1rem;font-weight:700;color:var(--bl);margin-bottom:16px">📈 Production et profit cumulés — 30 ans</div><canvas id="cProd" width="800" height="300"></canvas></div>
 
 <details class="dc"><summary>🧮 Détail des calculs production</summary>
 <div class="ct">
@@ -557,16 +589,20 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 </div>
 </div>
 
-<!-- ===================== CONCEPTION OPTIMALE (NOUVEAU) ===================== -->
+<!-- ===================== CONCEPTION OPTIMALE ===================== -->
 <div class="vp" id="v-concept">
 
 <div class="concept-hero">
 <h2>🔬 Conception optimale — Rendement record 35,6 %</h2>
 <p>Pour maximiser le rendement d'un système MPT (Microwave Power Transfer) pour drone, la littérature scientifique identifie <strong>quatre leviers technologiques</strong> qui, combinés, permettent d'atteindre un rendement système de <strong>35,6 %</strong> (vs 3-5 % pour une configuration classique).</p>
 <p>Ce record a été validé en laboratoire à 2,45 GHz sur un drone de 5 kg par l'Université Xidian (Chine) et confirmé par plusieurs publications IEEE MTT-S entre 2020 et 2024.</p>
+<div class="ba" style="margin-top:20px">
+<button class="btn-pdf" onclick="conceptRecord()">🎯 Configuration record</button>
+<button class="btn-pdf" onclick="exporterConceptPDF()">📄 Exporter en PDF</button>
+</div>
 </div>
 
-<!-- Décomposition du rendement -->
+<!-- Décomposition -->
 <div class="pn">
 <div class="pt"><h2>📊 Décomposition du rendement record (35,6 %)</h2></div>
 <table class="opt-table">
@@ -578,10 +614,10 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <tr style="background:rgba(0,200,83,.1)"><td><strong>Rendement global système</strong></td><td class="hl" style="font-size:1.15rem">35,6 %</td><td>Combinaison des 4 leviers</td></tr>
 </tbody>
 </table>
-<p style="color:var(--td);font-size:.85rem;margin-top:15px">⚠️ À titre de comparaison, un système classique gaussien + rectenna standard atteint seulement <strong style="color:var(--wn)">3 à 5 %</strong> (démonstration Xidian, 2021).</p>
+<p style="color:var(--td);font-size:.85rem;margin-top:15px">⚠️ Comparaison : un système classique gaussien + rectenna standard atteint seulement <strong style="color:var(--wn)">3 à 5 %</strong> (Xidian, 2021).</p>
 </div>
 
-<!-- Levier 1 : Flat-Top Beam -->
+<!-- Levier 1 -->
 <div class="levier">
 <div class="levier-num">1</div>
 <h3>📡 Faisceau Flat-Top (au lieu de gaussien)</h3>
@@ -605,9 +641,12 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <p style="margin-top:20px"><strong>🧮 Méthode de synthèse — Woodward-Lawson</strong></p>
 <div class="formule-block">F(θ) = Σₙ aₙ · sinc(π · N · d/λ · (sin θ − sin θₙ))</div>
 <p style="font-size:.9rem">où N = nombre d'éléments, d = espacement, λ = longueur d'onde, aₙ = pondérations. Une antenne de <strong>32 éléments</strong> à 2,45 GHz suffit à générer un Flat-Top.</p>
+<p style="margin-top:16px"><strong>🧮 Rendement de transmission Flat-Top</strong></p>
+<div class="formule-block">η_FB = 1 − (1 − η_gauss) · (D_tache / D_rectenna)²</div>
+<p style="font-size:.9rem">Pour une tache de 0,8× la rectenna : η_FB = 1 − 0,45 × 0,64 = <strong style="color:#6effa8">0,712 (71,2 %)</strong></p>
 </div>
 
-<!-- Levier 2 : Rectenna métasurface -->
+<!-- Levier 2 -->
 <div class="levier">
 <div class="levier-num">2</div>
 <h3>📶 Rectenna à métasurface + GaAs Schottky</h3>
@@ -616,20 +655,22 @@ footer{text-align:center;padding:40px 20px 20px;color:var(--td);font-size:.85rem
 <thead><tr><th>Paramètre</th><th>Rectenna classique</th><th>Rectenna métasurface</th></tr></thead>
 <tbody>
 <tr><td>Rendement RF→DC à 5,8 GHz</td><td>~55 %</td><td class="hl">&gt; 75,6 %</td></tr>
-<tr><td>Suppression harmoniques</td><td>Filtre externe (pertes)</td><td>Intégrée à la métasurface</td></tr>
+<tr><td>Suppression harmoniques</td><td>Filtre externe</td><td>Intégrée à la métasurface</td></tr>
 <tr><td>Adaptation d'impédance</td><td>Réseau LC externe</td><td>Directe avec la diode</td></tr>
-<tr><td>Angle d'incidence</td><td>Sensible au désalignement</td><td>Large (jusqu'à 60°)</td></tr>
-<tr><td>Polarisation</td><td>Linéaire</td><td>Circulaire possible (CP)</td></tr>
+<tr><td>Angle d'incidence</td><td>Sensible</td><td>Large (jusqu'à 60°)</td></tr>
 <tr><td>Masse</td><td>~500 g pour 20 W</td><td class="hl">~200 g pour 20 W</td></tr>
 </tbody>
 </table>
 <div class="co" style="margin-top:16px">
 <strong style="color:#6effa8">💡 Composants clés :</strong>
-Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V) · Substrat <strong style="color:var(--bl)">aramide nid d'abeille</strong> (léger) · Métasurface <strong style="color:var(--bl)">double couche</strong> à suppression harmonique.
+Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V) · Substrat <strong style="color:var(--bl)">aramide nid d'abeille</strong> · Métasurface <strong style="color:var(--bl)">double couche</strong> à suppression harmonique.
 </div>
+<p style="margin-top:16px"><strong>🧮 Impédance optimale de la diode Schottky</strong></p>
+<div class="formule-block">Z_opt = (V_dc / (2·P_dc)) · (1 + j·(ω·C_j·V_dc / I_s))⁻¹</div>
+<p style="font-size:.9rem">Pour une diode GaAs Schottky (V_seuil = 0,15 V, C_j = 0,1 pF, I_s = 1 nA) à 5,8 GHz :<br>R_opt ≈ <strong style="color:#6effa8">150 Ω</strong> · X_opt ≈ <strong style="color:#6effa8">−80 Ω</strong> (adaptation conjuguée).</p>
 </div>
 
-<!-- Levier 3 : Signal pulsé -->
+<!-- Levier 3 -->
 <div class="levier">
 <div class="levier-num">3</div>
 <h3>⚡ Signal pulsé à haut PAPR</h3>
@@ -651,10 +692,14 @@ Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V
 <div class="cr imp"><div class="eq">Gain vs CW</div><div class="ch"><span id="gainCW">0</span><span class="un">%</span></div></div>
 </div>
 
-<p style="color:var(--td);font-size:.85rem;margin-top:15px">📌 L'optimum est atteint autour de <strong>30 % de duty cycle</strong> et <strong>9 dB de PAPR</strong> (validé en laboratoire).</p>
+<p style="color:var(--td);font-size:.85rem;margin-top:15px">📌 L'optimum est atteint autour de <strong>30 % de duty cycle</strong> et <strong>9 dB de PAPR</strong>.</p>
+
+<p style="margin-top:16px"><strong>🧮 PAPR optimal pour une diode Schottky</strong></p>
+<div class="formule-block">PAPR_opt = 10·log₁₀(V_br / V_seuil) − 3</div>
+<p style="font-size:.9rem">Pour V_br = 10 V et V_seuil = 0,15 V :<br>PAPR_opt = 10·log₁₀(66,7) − 3 = <strong style="color:#6effa8">15,2 dB</strong> (théorique)<br>En pratique : <strong style="color:#6effa8">9 dB</strong> (limité par le duty cycle).</p>
 </div>
 
-<!-- Levier 4 : Ampli GaN classe F-1 -->
+<!-- Levier 4 -->
 <div class="levier">
 <div class="levier-num">4</div>
 <h3>🔋 Amplificateur GaN classe F⁻¹</h3>
@@ -668,10 +713,12 @@ Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V
 <tr style="background:rgba(0,200,83,.1)"><td><strong>Classe F⁻¹ (GaN)</strong></td><td><strong>100 %</strong></td><td class="hl">76 %</td><td><strong>MPT haute puissance</strong></td></tr>
 </tbody>
 </table>
-<p style="color:var(--td);font-size:.9rem;margin-top:15px"><strong style="color:var(--bl)">Composants recommandés :</strong> Qorvo QPA2213 · Wolfspeed CGHV1J006D · MACOM MAGX-000912-500L00.</p>
+<p style="margin-top:16px"><strong>🧮 Rendement classe F⁻¹</strong></p>
+<div class="formule-block">η_F⁻¹ = 1 / (1 + (V_sat / V_dd) · (π/2))</div>
+<p style="font-size:.9rem">Pour GaN (V_sat = 2 V, V_dd = 28 V) :<br>η_F⁻¹ = 1 / (1 + 0,0714 × 1,571) = <strong style="color:#6effa8">0,899 (89,9 %)</strong><br>En pratique (pertes commutation) : <strong style="color:#6effa8">76 %</strong>.</p>
 </div>
 
-<!-- Simulateur conception -->
+<!-- Simulateur -->
 <div class="concept-sim">
 <div class="pt" style="margin-bottom:20px"><h2>🧮 Simulateur de conception optimale</h2></div>
 <p style="color:var(--td);margin-bottom:20px">Ajustez les paramètres pour atteindre le rendement cible de 35,6 %.</p>
@@ -679,33 +726,25 @@ Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V
 <div class="ctrl">
 <label>Type de faisceau <span class="vl" id="beamTypeVal">Flat-Top</span></label>
 <input type="range" id="beamType" min="0" max="1" value="1" step="1" style="background:linear-gradient(90deg,rgba(239,65,53,.4),rgba(255,255,255,.15),rgba(0,200,83,.4))">
-<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px">
-<span>Gaussien</span><span>Flat-Top</span>
-</div>
+<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px"><span>Gaussien</span><span>Flat-Top</span></div>
 </div>
 
 <div class="ctrl">
 <label>Type de rectenna <span class="vl" id="rectTypeVal">Métasurface</span></label>
 <input type="range" id="rectType" min="0" max="1" value="1" step="1" style="background:linear-gradient(90deg,rgba(239,65,53,.4),rgba(255,255,255,.15),rgba(0,200,83,.4))">
-<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px">
-<span>Classique</span><span>Métasurface</span>
-</div>
+<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px"><span>Classique</span><span>Métasurface</span></div>
 </div>
 
 <div class="ctrl">
 <label>Type de signal <span class="vl" id="signalTypeVal">Pulsé (PAPR élevé)</span></label>
 <input type="range" id="signalType" min="0" max="1" value="1" step="1" style="background:linear-gradient(90deg,rgba(239,65,53,.4),rgba(255,255,255,.15),rgba(0,200,83,.4))">
-<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px">
-<span>CW</span><span>Pulsé</span>
-</div>
+<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px"><span>CW</span><span>Pulsé</span></div>
 </div>
 
 <div class="ctrl">
 <label>Classe ampli GaN <span class="vl" id="ampClassVal">F⁻¹</span></label>
 <input type="range" id="ampClass" min="0" max="3" value="3" step="1">
-<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px">
-<span>AB</span><span>E</span><span>F</span><span>F⁻¹</span>
-</div>
+<div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--td);margin-top:5px"><span>AB</span><span>E</span><span>F</span><span>F⁻¹</span></div>
 </div>
 
 <div class="ctrl">
@@ -780,7 +819,7 @@ Diode <strong style="color:var(--bl)">GaAs Schottky</strong> (V_seuil ≈ 0,15 V
 </div>
 </div>
 
-<!-- SYNTHÈSE GÉNÉRALE -->
+<!-- SYNTHÈSE -->
 <div class="opt-block" style="margin-top:10px">
 <h3>📊 Synthèse — Rendements optimaux comparés</h3>
 <table class="opt-table">
@@ -807,7 +846,7 @@ Projet SBSP — <span class="bp"><div class="bl"></div><div class="wh"></div><di
 const $=id=>document.getElementById(id);
 const fmtI=n=>Math.round(n).toLocaleString('fr-FR');
 
-/* ONGLETS PRINCIPAUX */
+/* ONGLETS */
 document.querySelectorAll('.ob').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('.ob').forEach(x=>x.classList.remove('act'));
@@ -816,8 +855,6 @@ document.querySelectorAll('.ob').forEach(b=>{
     $('v-'+b.dataset.v).classList.add('act');
   });
 });
-
-/* SOUS-ONGLETS */
 document.querySelectorAll('.sob').forEach(b=>{
   b.addEventListener('click',()=>{
     const parent=b.closest('.vp');
@@ -827,8 +864,6 @@ document.querySelectorAll('.sob').forEach(b=>{
     $('sv-'+b.dataset.sv).classList.add('act');
   });
 });
-
-/* FILTRES COMPOSANTS */
 document.querySelectorAll('.fb').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('.fb').forEach(x=>x.classList.remove('act'));
@@ -837,132 +872,90 @@ document.querySelectorAll('.fb').forEach(b=>{
   });
 });
 
-/* ====== SATELLITE ====== */
+/* SATELLITE */
 const sIds=['sAlt','sElev','sFreq','sTxD','sRxD','sPA','sPE','sRR','sTxE','sRxE'];
 function satCalc(){
   const h=+$('sAlt').value,elev=+$('sElev').value,f=+$('sFreq').value;
   const txD=+$('sTxD').value,rxD=+$('sRxD').value*1000;
   const sA=+$('sPA').value,pE=+$('sPE').value/100;
   const rain=+$('sRR').value,txE=+$('sTxE').value/100,rxE=+$('sRxE').value/100;
-
-  $('sAltV').textContent=fmtI(h)+' km';
-  $('sElevV').textContent=elev+'°';
-  $('sFreqV').textContent=f.toFixed(1)+' GHz';
-  $('sTxDV').textContent=fmtI(txD)+' m';
-  $('sRxDV').textContent=(rxD/1000).toFixed(1)+' km';
-  $('sPAV').textContent=sA.toFixed(1)+' km²';
-  $('sPEV').textContent=(pE*100).toFixed(0)+' %';
-  $('sRRV').textContent=rain+' mm/h';
-  $('sTxEV').textContent=(txE*100).toFixed(0)+' %';
-  $('sRxEV').textContent=(rxE*100).toFixed(0)+' %';
-
+  $('sAltV').textContent=fmtI(h)+' km';$('sElevV').textContent=elev+'°';
+  $('sFreqV').textContent=f.toFixed(1)+' GHz';$('sTxDV').textContent=fmtI(txD)+' m';
+  $('sRxDV').textContent=(rxD/1000).toFixed(1)+' km';$('sPAV').textContent=sA.toFixed(1)+' km²';
+  $('sPEV').textContent=(pE*100).toFixed(0)+' %';$('sRRV').textContent=rain+' mm/h';
+  $('sTxEV').textContent=(txE*100).toFixed(0)+' %';$('sRxEV').textContent=(rxE*100).toFixed(0)+' %';
   const sinE=Math.max(Math.sin(elev*Math.PI/180),0.01);
-  const d=h/sinE;
-  const lambda=0.3/f;
-  const pSolar=1361*sA*1e6*pE/1e6;
-  const pRF=pSolar*txE;
+  const d=h/sinE,lambda=0.3/f;
+  const pSolar=1361*sA*1e6*pE/1e6,pRF=pSolar*txE;
   const fspl=20*Math.log10(d/1000)+20*Math.log10(f)+92.45;
   const aGas=0.005*Math.pow(f,1.1)*10/sinE;
   const kR=0.00012*Math.pow(f,1.2),alphaR=1.09;
   const gammaR=kR*Math.pow(rain,alphaR);
-  const aRain=gammaR*d/1000/sinE;
-  const aAtm=aGas+aRain;
+  const aRain=gammaR*d/1000/sinE,aAtm=aGas+aRain;
   const etaA=0.55;
   const gTx=10*Math.log10(etaA*Math.pow(Math.PI*txD/lambda,2));
   const gRx=10*Math.log10(etaA*Math.pow(Math.PI*rxD/lambda,2));
   const ptxdBm=10*Math.log10(pRF*1e6);
   const prxdBm=ptxdBm+gTx+gRx-fspl-aAtm;
-  const pRx=Math.pow(10,prxdBm/10)/1e6;
-  const pNet=pRx*rxE;
+  const pRx=Math.pow(10,prxdBm/10)/1e6,pNet=pRx*rxE;
   const rendGlob=pNet>0&&pSolar>0?(pNet/pSolar*100):0;
-  const thetaAiry=1.22*lambda/txD;
-  const tache=thetaAiry*d/1000;
+  const thetaAiry=1.22*lambda/txD,tache=thetaAiry*d/1000;
   const densite=pNet*1e6/(Math.PI*Math.pow(Math.max(thetaAiry*d/2,1),2));
   const foyers=Math.round(pNet*1000/0.0055);
-
-  $('rSS').textContent=pSolar.toFixed(1);
-  $('rRF').textContent=pRF.toFixed(1);
-  $('rFL').textContent=fspl.toFixed(1);
-  $('rAt').textContent=aAtm.toFixed(2);
-  $('rGT').textContent=gTx.toFixed(1);
-  $('rGR').textContent=gRx.toFixed(1);
-  $('rBL').textContent=prxdBm.toFixed(1);
-  $('rDN').textContent=densite.toFixed(4);
-  $('rPN').textContent=pNet.toFixed(2);
-  $('rRG').textContent=rendGlob.toFixed(2);
-  $('rFY').textContent=fmtI(foyers);
-  $('rTF').textContent=tache.toFixed(2);
-
+  $('rSS').textContent=pSolar.toFixed(1);$('rRF').textContent=pRF.toFixed(1);
+  $('rFL').textContent=fspl.toFixed(1);$('rAt').textContent=aAtm.toFixed(2);
+  $('rGT').textContent=gTx.toFixed(1);$('rGR').textContent=gRx.toFixed(1);
+  $('rBL').textContent=prxdBm.toFixed(1);$('rDN').textContent=densite.toFixed(4);
+  $('rPN').textContent=pNet.toFixed(2);$('rRG').textContent=rendGlob.toFixed(2);
+  $('rFY').textContent=fmtI(foyers);$('rTF').textContent=tache.toFixed(2);
   const el=$('sS'),sf=$('sSafe');
   if(densite>10){el.className='sp cri';$('sSI').textContent='🔴';$('sST').textContent='DANGER — Densité excessive';$('sSD').textContent='Densité > 10 W/m².';$('sSP').className='pas p-dg';$('sSP').textContent='Critique';sf.className='sb dg';$('sSafeT').textContent='Densité > 10 W/m² : DANGER.';}
   else if(densite>1){el.className='sp deg';$('sSI').textContent='⚠️';$('sST').textContent='Attention — Densité élevée';$('sSD').textContent='Densité entre 1 et 10 W/m².';$('sSP').className='pas p-wn';$('sSP').textContent='Dégradé';sf.className='sb wn';$('sSafeT').textContent='Densité élevée mais sous ICNIRP.';}
   else{el.className='sp';$('sSI').textContent='✅';$('sST').textContent='Simulateur satellite — Nominal';$('sSD').textContent='Densité conforme.';$('sSP').className='pas p-ok';$('sSP').textContent='Nominal';sf.className='sb';$('sSafeT').textContent='Densité conforme aux limites ICNIRP.';}
 }
-
-function satOptimal(){$('sAlt').value=35786;$('sElev').value=90;$('sFreq').value=5.8;$('sTxD').value=1000;$('sRxD').value=20;$('sPA').value=20;$('sPE').value=40;$('sRR').value=0;$('sTxE').value=85;$('sRxE').value=90;satCalc();$('satOptBlock').style.boxShadow='0 0 60px rgba(0,200,83,.4)';setTimeout(()=>$('satOptBlock').style.boxShadow='',2000);}
+function satOptimal(){$('sAlt').value=35786;$('sElev').value=90;$('sFreq').value=5.8;$('sTxD').value=1000;$('sRxD').value=20;$('sPA').value=20;$('sPE').value=40;$('sRR').value=0;$('sTxE').value=85;$('sRxE').value=90;satCalc();}
 function satP1(){$('sAlt').value=35786;$('sElev').value=90;$('sFreq').value=5.8;$('sTxD').value=200;$('sRxD').value=5;$('sPA').value=10;$('sPE').value=30;$('sRR').value=0;$('sTxE').value=70;$('sRxE').value=75;satCalc();}
 function satP2(){$('sAlt').value=400;$('sElev').value=45;$('sFreq').value=5.8;$('sTxD').value=100;$('sRxD').value=2;$('sPA').value=1;$('sPE').value=35;$('sRR').value=0;$('sTxE').value=80;$('sRxE').value=85;satCalc();}
 function satP3(){$('sAlt').value=35786;$('sElev').value=15;$('sFreq').value=2.45;$('sTxD').value=50;$('sRxD').value=1;$('sPA').value=0.5;$('sPE').value=20;$('sRR').value=25;$('sTxE').value=50;$('sRxE').value=50;satCalc();}
 
-/* ====== DRONE ====== */
+/* DRONE */
 const dIds=['dAlt','dDist','dPwr','dFrq','dDia','dCsm','dEff','dWnd','dRrx'];
 function droneCalc(){
   const alt=+$('dAlt').value,dist=+$('dDist').value,pwr=+$('dPwr').value;
   const frq=+$('dFrq').value,dia=+$('dDia').value,csm=+$('dCsm').value;
   const eff=+$('dEff').value/100,wnd=+$('dWnd').value,rrx=+$('dRrx').value;
-
-  $('dAltV').textContent=fmtI(alt)+' m';
-  $('dDistV').textContent=fmtI(dist)+' m';
-  $('dPwrV').textContent=fmtI(pwr)+' W';
-  $('dFrqV').textContent=frq.toFixed(1)+' GHz';
-  $('dDiaV').textContent=dia.toFixed(1)+' m';
-  $('dCsmV').textContent=csm+' W';
-  $('dEffV').textContent=(eff*100).toFixed(0)+' %';
-  $('dWndV').textContent=wnd+' m/s';
+  $('dAltV').textContent=fmtI(alt)+' m';$('dDistV').textContent=fmtI(dist)+' m';
+  $('dPwrV').textContent=fmtI(pwr)+' W';$('dFrqV').textContent=frq.toFixed(1)+' GHz';
+  $('dDiaV').textContent=dia.toFixed(1)+' m';$('dCsmV').textContent=csm+' W';
+  $('dEffV').textContent=(eff*100).toFixed(0)+' %';$('dWndV').textContent=wnd+' m/s';
   $('dRrxV').textContent=rrx.toFixed(2)+' m';
-
-  const dSlant=Math.sqrt(alt*alt+dist*dist);
-  const dKm=dSlant/1000;
+  const dSlant=Math.sqrt(alt*alt+dist*dist),dKm=dSlant/1000;
   const fspl=20*Math.log10(Math.max(dKm,0.001))+20*Math.log10(frq)+92.45;
-  const lambda=0.3/frq;
-  const etaA=0.55;
+  const lambda=0.3/frq,etaA=0.55;
   const gTx=10*Math.log10(etaA*Math.pow(Math.PI*dia/lambda,2));
   const gRx=10*Math.log10(etaA*Math.pow(Math.PI*rrx/lambda,2));
-  const ptxdBm=10*Math.log10(pwr*1000);
-  const eirp=ptxdBm+gTx;
+  const ptxdBm=10*Math.log10(pwr*1000),eirp=ptxdBm+gTx;
   const windLoss=0.1*wnd;
   const prxdBm=ptxdBm+gTx+gRx-fspl-windLoss;
-  const pRxW=Math.pow(10,prxdBm/10)/1000;
-  const pUtile=pRxW*eff;
+  const pRxW=Math.pow(10,prxdBm/10)/1000,pUtile=pRxW*eff;
   const marge=prxdBm-10*Math.log10(csm*1000);
   const densite=pRxW/(Math.PI*Math.pow(Math.max(rrx/2,0.01),2))*10000;
-  const batCap=500;
-  const durVol=csm>0?(batCap/csm*60):9999;
+  const batCap=500,durVol=csm>0?(batCap/csm*60):9999;
   const doppler=frq*1e9*wnd/3e8;
-
-  $('rDS').textContent=fmtI(Math.round(dSlant));
-  $('rDF').textContent=fspl.toFixed(1);
-  $('rDGT').textContent=gTx.toFixed(1);
-  $('rDGR').textContent=gRx.toFixed(1);
-  $('rDPW').textContent=pRxW.toFixed(2);
-  $('rDPU').textContent=pUtile.toFixed(2);
-  $('rDMG').textContent=marge.toFixed(1);
-  $('rDEI').textContent=eirp.toFixed(1);
-  $('rDDN').textContent=densite.toFixed(3);
-  $('rDVB').textContent=durVol.toFixed(0);
-  $('rDWL').textContent=windLoss.toFixed(2);
-  $('rDDP').textContent=doppler.toFixed(1);
-
+  $('rDS').textContent=fmtI(Math.round(dSlant));$('rDF').textContent=fspl.toFixed(1);
+  $('rDGT').textContent=gTx.toFixed(1);$('rDGR').textContent=gRx.toFixed(1);
+  $('rDPW').textContent=pRxW.toFixed(2);$('rDPU').textContent=pUtile.toFixed(2);
+  $('rDMG').textContent=marge.toFixed(1);$('rDEI').textContent=eirp.toFixed(1);
+  $('rDDN').textContent=densite.toFixed(3);$('rDVB').textContent=durVol.toFixed(0);
+  $('rDWL').textContent=windLoss.toFixed(2);$('rDDP').textContent=doppler.toFixed(1);
   const el=$('sD'),sf=$('dSafe'),gd=$('gD');
   gd.className='dstable';
   if(marge<0){el.className='sp cri';$('dSI').textContent='🔴';$('dST').textContent='CHUTE — Marge négative !';$('dSD').textContent='Le drone ne reçoit pas assez d\'énergie.';$('dSP').className='pas p-dg';$('dSP').textContent='Critique';sf.className='sb dg';$('dSafeT').textContent='Marge négative : le drone va chuter.';gd.className='dfall';}
   else if(marge<10){el.className='sp deg';$('dSI').textContent='⚠️';$('dST').textContent='Vol dégradé — Marge faible';$('dSD').textContent='Marge < 10 dB.';$('dSP').className='pas p-wn';$('dSP').textContent='Dégradé';sf.className='sb wn';$('dSafeT').textContent='Marge faible (< 10 dB).';gd.className='dwob';}
   else{el.className='sp';$('dSI').textContent='✅';$('dST').textContent='Vol stable — Systèmes nominaux';$('dSD').textContent='Le drone reçoit suffisamment d\'énergie.';$('dSP').className='pas p-ok';$('dSP').textContent='Systèmes nominaux';sf.className='sb';$('dSafeT').textContent='Marge suffisante pour un vol stable.';}
-
   drawDroneGraph();
 }
-
-function drOptimal(){$('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;$('dFrq').value=24;$('dDia').value=3;$('dCsm').value=50;$('dEff').value=95;$('dWnd').value=0;$('dRrx').value=1;droneCalc();$('drOptBlock').style.boxShadow='0 0 60px rgba(0,200,83,.4)';setTimeout(()=>$('drOptBlock').style.boxShadow='',2000);}
+function drOptimal(){$('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;$('dFrq').value=24;$('dDia').value=3;$('dCsm').value=50;$('dEff').value=95;$('dWnd').value=0;$('dRrx').value=1;droneCalc();}
 function drP1(){$('dAlt').value=100;$('dDist').value=300;$('dPwr').value=2000;$('dFrq').value=5.8;$('dDia').value=1.5;$('dCsm').value=150;$('dEff').value=80;$('dWnd').value=0;$('dRrx').value=0.3;droneCalc();}
 function drP2(){$('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;$('dFrq').value=5.8;$('dDia').value=3;$('dCsm').value=100;$('dEff').value=90;$('dWnd').value=0;$('dRrx').value=0.5;droneCalc();}
 function drP3(){$('dAlt').value=1500;$('dDist').value=2500;$('dPwr').value=100;$('dFrq').value=2.4;$('dDia').value=0.3;$('dCsm').value=300;$('dEff').value=50;$('dWnd').value=20;$('dRrx').value=0.1;droneCalc();}
@@ -976,8 +969,7 @@ function drawDroneGraph(){
   const lambda=0.3/frq,etaA=0.55;
   const gTx=10*Math.log10(etaA*Math.pow(Math.PI*dia/lambda,2));
   const gRx=10*Math.log10(etaA*Math.pow(Math.PI*rrx/lambda,2));
-  const ptxdBm=10*Math.log10(pwr*1000);
-  const windLoss=0.1*wnd;
+  const ptxdBm=10*Math.log10(pwr*1000),windLoss=0.1*wnd;
   const maxDist=3000,pts=[];
   for(let d=10;d<=maxDist;d+=30){
     const sl=Math.sqrt(alt*alt+d*d);
@@ -991,84 +983,47 @@ function drawDroneGraph(){
   const gW=W-padL-padR,gH=H-padT-padB;
   const sx=x=>padL+(x/maxDist)*gW;
   const sy=y=>padT+gH-(y-mnY)/(mxY-mnY)*gH;
-
   ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;
   for(let i=0;i<=5;i++){const y=padT+gH*i/5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();}
-
   ctx.beginPath();ctx.strokeStyle='#EF4135';ctx.lineWidth=2;ctx.setLineDash([8,4]);
   const y0=sy(0);ctx.moveTo(padL,y0);ctx.lineTo(W-padR,y0);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#EF4135';ctx.font='11px Segoe UI';ctx.fillText('Marge = 0 dB',W-padR-90,y0-6);
-
   ctx.beginPath();ctx.strokeStyle='#0055A4';ctx.lineWidth=2.5;
   pts.forEach((p,i)=>{i===0?ctx.moveTo(sx(p.x),sy(p.y)):ctx.lineTo(sx(p.x),sy(p.y));});ctx.stroke();
-
-  const grad=ctx.createLinearGradient(0,padT,0,padT+gH);
-  grad.addColorStop(0,'rgba(0,200,83,0.15)');grad.addColorStop(1,'rgba(239,65,53,0.15)');
-  ctx.beginPath();ctx.moveTo(sx(pts[0].x),sy(pts[0].y));
-  pts.forEach(p=>ctx.lineTo(sx(p.x),sy(p.y)));
-  ctx.lineTo(sx(pts[pts.length-1].x),sy(mnY));ctx.lineTo(sx(pts[0].x),sy(mnY));ctx.closePath();
-  ctx.fillStyle=grad;ctx.fill();
-
   ctx.fillStyle='#a8b2c8';ctx.font='11px Segoe UI';
   ctx.fillText('Distance (m)',W/2,H-8);
-  ctx.save();ctx.translate(14,H/2);ctx.rotate(-Math.PI/2);ctx.fillText('Marge (dB)',0,0);ctx.restore();
   for(let i=0;i<=5;i++){const v=mnY+(mxY-mnY)*(1-i/5);ctx.fillText(v.toFixed(0)+'',4,padT+gH*i/5+4);}
   for(let i=0;i<=5;i++){const v=maxDist*i/5;ctx.fillText(fmtI(v),padL+gW*i/5-10,H-padB+16);}
 }
 
-/* ====== PRODUCTION ====== */
+/* PRODUCTION */
 const pIds=['pPwr','pDisp','pPrix','pDur','pCapex','pOpexR'];
 function proCalc(){
   const pwr=+$('pPwr').value,disp=+$('pDisp').value/100;
   const prix=+$('pPrix').value,dur=+$('pDur').value;
   const capex=+$('pCapex').value,opexR=+$('pOpexR').value/100;
-
-  $('pPwrV').textContent=fmtI(pwr)+' MW';
-  $('pDispV').textContent=(disp*100).toFixed(0)+' %';
-  $('pPrixV').textContent=prix+' €/MWh';
-  $('pDurV').textContent=dur+' ans';
-  $('pCapexV').textContent=fmtI(capex)+' M€';
-  $('pOpexRV').textContent=(opexR*100).toFixed(1)+' % du CAPEX';
-
-  const eAnn=pwr*8.76*disp;
-  const eJour=eAnn*1000/365;
-  const fc=disp*100;
+  $('pPwrV').textContent=fmtI(pwr)+' MW';$('pDispV').textContent=(disp*100).toFixed(0)+' %';
+  $('pPrixV').textContent=prix+' €/MWh';$('pDurV').textContent=dur+' ans';
+  $('pCapexV').textContent=fmtI(capex)+' M€';$('pOpexRV').textContent=(opexR*100).toFixed(1)+' % du CAPEX';
+  const eAnn=pwr*8.76*disp,eJour=eAnn*1000/365,fc=disp*100;
   const foyers=Math.round(eAnn*1000/5.5);
-  const co2=eAnn*1000*0.446/1000;
-  const arbres=Math.round(co2*1000/0.021);
-  const voitures=Math.round(co2/4.6);
-  const rev=eAnn*1000*prix/1e6;
-  const opex=capex*opexR;
-  const profit=rev-opex;
-  const roi=((profit*dur-capex)/capex*100);
-  const revVie=rev*dur/1000;
+  const co2=eAnn*1000*0.446/1000,arbres=Math.round(co2*1000/0.021),voitures=Math.round(co2/4.6);
+  const rev=eAnn*1000*prix/1e6,opex=capex*opexR,profit=rev-opex;
+  const roi=((profit*dur-capex)/capex*100),revVie=rev*dur/1000;
   const lcoe=(capex+opex*dur)/(eAnn*dur)*1e6;
-  const gco=20;
-  const sRect=pwr/23;
-  const sPan=pwr/0.3/1361*1e6/1e6;
-
-  $('rPA').textContent=eAnn.toFixed(1);
-  $('rPJ').textContent=eJour.toFixed(0);
-  $('rFC').textContent=fc.toFixed(0);
-  $('rPF').textContent=fmtI(foyers);
-  $('rCO2').textContent=co2.toFixed(1);
-  $('rAR').textContent=fmtI(arbres);
-  $('rVO').textContent=fmtI(voitures);
-  $('rRA').textContent=rev.toFixed(1);
-  $('rOP').textContent=opex.toFixed(0);
-  $('rPR').textContent=profit.toFixed(1);
-  $('rROI').textContent=roi.toFixed(1);
-  $('rRV').textContent=revVie.toFixed(2);
-  $('rLCOE').textContent=lcoe.toFixed(1);
-  $('rGCO').textContent=gco.toFixed(0);
-  $('rSR').textContent=sRect.toFixed(2);
-  $('rSP').textContent=sPan.toFixed(2);
-
+  const sRect=pwr/23,sPan=pwr/0.3/1361;
+  $('rPA').textContent=eAnn.toFixed(1);$('rPJ').textContent=eJour.toFixed(0);
+  $('rFC').textContent=fc.toFixed(0);$('rPF').textContent=fmtI(foyers);
+  $('rCO2').textContent=co2.toFixed(1);$('rAR').textContent=fmtI(arbres);
+  $('rVO').textContent=fmtI(voitures);$('rRA').textContent=rev.toFixed(1);
+  $('rOP').textContent=opex.toFixed(0);$('rPR').textContent=profit.toFixed(1);
+  $('rROI').textContent=roi.toFixed(1);$('rRV').textContent=revVie.toFixed(2);
+  $('rLCOE').textContent=lcoe.toFixed(1);$('rGCO').textContent='20';
+  $('rSR').textContent=sRect.toFixed(2);$('rSP').textContent=sPan.toFixed(2);
   const el=$('sP');
-  if(roi<0){el.className='sp cri';$('pSI').textContent='🔴';$('pST').textContent='Non rentable — ROI négatif';$('pSD').textContent='Investissement non rentabilisé.';$('pSP').className='pas p-dg';$('pSP').textContent='Non rentable';}
-  else if(roi<50){el.className='sp deg';$('pSI').textContent='⚠️';$('pST').textContent='ROI modéré — '+roi.toFixed(0)+' %';$('pSD').textContent='Rentabilité faible.';$('pSP').className='pas p-wn';$('pSP').textContent='ROI modéré';}
-  else{el.className='sp';$('pSI').textContent='✅';$('pST').textContent='Production — ROI '+roi.toFixed(0)+' %';$('pSD').textContent='Projet rentable sur '+dur+' ans.';$('pSP').className='pas p-ok';$('pSP').textContent='Rentable';}
-
+  if(roi<0){el.className='sp cri';$('pSI').textContent='🔴';$('pST').textContent='Non rentable';$('pSD').textContent='Investissement non rentabilisé.';$('pSP').className='pas p-dg';$('pSP').textContent='Non rentable';}
+  else if(roi<50){el.className='sp deg';$('pSI').textContent='⚠️';$('pST').textContent='ROI modéré';$('pSD').textContent='Rentabilité faible.';$('pSP').className='pas p-wn';$('pSP').textContent='ROI modéré';}
+  else{el.className='sp';$('pSI').textContent='✅';$('pST').textContent='Production rentable';$('pSD').textContent='Projet rentable.';$('pSP').className='pas p-ok';$('pSP').textContent='Rentable';}
   drawProdGraph();
 }
 function proP1(){$('pPwr').value=100;$('pDisp').value=92;$('pPrix').value=80;$('pDur').value=25;$('pCapex').value=10000;$('pOpexR').value=2;proCalc();}
@@ -1079,45 +1034,27 @@ function drawProdGraph(){
   const c=$('cProd'),ctx=c.getContext('2d');
   const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
   const pwr=+$('pPwr').value,disp=+$('pDisp').value/100;
-  const prix=+$('pPrix').value,dur=+$('pDur').value;
-  const capex=+$('pCapex').value,opexR=+$('pOpexR').value/100;
-  const eAnn=pwr*8.76*disp;
-  const rev=eAnn*1000*prix/1e6;
-  const opex=capex*opexR;
-  const profit=rev-opex;
-  const years=30;
-  const padL=70,padR=20,padT=20,padB=40;
+  const prix=+$('pPrix').value,capex=+$('pCapex').value,opexR=+$('pOpexR').value/100;
+  const eAnn=pwr*8.76*disp,rev=eAnn*1000*prix/1e6,opex=capex*opexR,profit=rev-opex;
+  const years=30,padL=70,padR=20,padT=20,padB=40;
   const gW=W-padL-padR,gH=H-padT-padB;
   const ptsE=[],ptsP=[];
   for(let y=0;y<=years;y++){ptsE.push({x:y,y:eAnn*y});ptsP.push({x:y,y:profit*y-capex});}
   const allV=ptsE.concat(ptsP).map(p=>p.y);
-  const mnY=Math.min(...allV),mxY=Math.max(...allV);
-  const rng=mxY-mnY||1;
-  const sx=x=>padL+(x/years)*gW;
-  const sy=y=>padT+gH-(y-mnY)/rng*gH;
-
+  const mnY=Math.min(...allV),mxY=Math.max(...allV),rng=mxY-mnY||1;
+  const sx=x=>padL+(x/years)*gW,sy=y=>padT+gH-(y-mnY)/rng*gH;
   ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;
   for(let i=0;i<=5;i++){const y=padT+gH*i/5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();}
-
-  ctx.beginPath();ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
-  const y0=sy(0);ctx.moveTo(padL,y0);ctx.lineTo(W-padR,y0);ctx.stroke();ctx.setLineDash([]);
-
   ctx.beginPath();ctx.strokeStyle='#1e78d1';ctx.lineWidth=2.5;
   ptsE.forEach((p,i)=>{i===0?ctx.moveTo(sx(p.x),sy(p.y)):ctx.lineTo(sx(p.x),sy(p.y));});ctx.stroke();
-
   ctx.beginPath();ctx.strokeStyle=profit>=0?'#00c853':'#EF4135';ctx.lineWidth=2.5;
   ptsP.forEach((p,i)=>{i===0?ctx.moveTo(sx(p.x),sy(p.y)):ctx.lineTo(sx(p.x),sy(p.y));});ctx.stroke();
-
   ctx.fillStyle='#a8b2c8';ctx.font='11px Segoe UI';ctx.fillText('Années',W/2,H-8);
   for(let i=0;i<=5;i++){const v=mnY+rng*(1-i/5);ctx.fillText((v>=1e9?(v/1e9).toFixed(1)+'G':v>=1e6?(v/1e6).toFixed(0)+'M':v.toFixed(0))+'',4,padT+gH*i/5+4);}
   for(let i=0;i<=6;i++){ctx.fillText(i*5+'',padL+gW*i/6-8,H-padB+16);}
-
-  ctx.font='12px Segoe UI';
-  ctx.fillStyle='#1e78d1';ctx.fillRect(padL+10,padT+8,14,3);ctx.fillText('Production cumulée (GWh)',padL+30,padT+14);
-  ctx.fillStyle=profit>=0?'#00c853':'#EF4135';ctx.fillRect(padL+220,padT+8,14,3);ctx.fillText('Profit cumulé (M€)',padL+240,padT+14);
 }
 
-/* ====== COMPARAISON ====== */
+/* COMPARAISON */
 function calcConfig(p,d,pr,du,ca,opR){
   const e=p*8.76*(d/100),rev=e*1000*pr/1e6,opex=ca*opR/100,profit=rev-opex;
   const roi=((profit*du-ca)/ca*100);
@@ -1126,15 +1063,11 @@ function calcConfig(p,d,pr,du,ca,opR){
   return{e,rev,opex,profit,roi,lcoe,co2};
 }
 function updateCmpLabels(){
-  $('cAV1').textContent=fmtI(+$('cAP').value)+' MW';
-  $('cAV2').textContent=+$('cAD').value+' %';
-  $('cAV3').textContent=+$('cAPr').value+' €/MWh';
-  $('cAV4').textContent=+$('cADu').value+' ans';
+  $('cAV1').textContent=fmtI(+$('cAP').value)+' MW';$('cAV2').textContent=+$('cAD').value+' %';
+  $('cAV3').textContent=+$('cAPr').value+' €/MWh';$('cAV4').textContent=+$('cADu').value+' ans';
   $('cAV5').textContent=fmtI(+$('cAC').value)+' M€';
-  $('cBV1').textContent=fmtI(+$('cBP').value)+' MW';
-  $('cBV2').textContent=+$('cBD').value+' %';
-  $('cBV3').textContent=+$('cBPr').value+' €/MWh';
-  $('cBV4').textContent=+$('cBDu').value+' ans';
+  $('cBV1').textContent=fmtI(+$('cBP').value)+' MW';$('cBV2').textContent=+$('cBD').value+' %';
+  $('cBV3').textContent=+$('cBPr').value+' €/MWh';$('cBV4').textContent=+$('cBDu').value+' ans';
   $('cBV5').textContent=fmtI(+$('cBC').value)+' M€';
 }
 function runCmp(){
@@ -1142,8 +1075,7 @@ function runCmp(){
   const a=calcConfig(+$('cAP').value,+$('cAD').value,+$('cAPr').value,+$('cADu').value,+$('cAC').value,2);
   const b=calcConfig(+$('cBP').value,+$('cBD').value,+$('cBPr').value,+$('cBDu').value,+$('cBC').value,2);
   function mkRes(r){return `<div class="mr"><div class="mri"><div class="lb">Production (GWh)</div><div class="va">${r.e.toFixed(1)}</div></div><div class="mri"><div class="lb">Revenu (M€)</div><div class="va">${r.rev.toFixed(1)}</div></div><div class="mri"><div class="lb">Profit (M€)</div><div class="va" style="color:${r.profit>=0?'#6effa8':'#ff9a90'}">${r.profit.toFixed(1)}</div></div><div class="mri"><div class="lb">ROI (%)</div><div class="va" style="color:${r.roi>=50?'#6effa8':r.roi>=0?'#ffd97a':'#ff9a90'}">${r.roi.toFixed(1)}</div></div><div class="mri"><div class="lb">LCOE (€/MWh)</div><div class="va">${r.lcoe.toFixed(1)}</div></div><div class="mri"><div class="lb">CO₂ (kt)</div><div class="va" style="color:#6effa8">${r.co2.toFixed(1)}</div></div></div>`;}
-  $('cARes').innerHTML=mkRes(a);
-  $('cBRes').innerHTML=mkRes(b);
+  $('cARes').innerHTML=mkRes(a);$('cBRes').innerHTML=mkRes(b);
   let html='';
   if(a.roi>b.roi+10)html=`<div class="vd ok">🔵 Config A plus rentable (ROI +${(a.roi-b.roi).toFixed(0)} %)</div>`;
   else if(b.roi>a.roi+10)html=`<div class="vd ok">🔴 Config B plus rentable (ROI +${(b.roi-a.roi).toFixed(0)} %)</div>`;
@@ -1153,7 +1085,7 @@ function runCmp(){
 function cmpA1(){$('cAP').value=100;$('cAD').value=92;$('cAPr').value=80;$('cADu').value=25;$('cAC').value=10000;updateCmpLabels();runCmp();}
 function cmpA2(){$('cAP').value=1000;$('cAD').value=96;$('cAPr').value=150;$('cADu').value=30;$('cAC').value=20000;updateCmpLabels();runCmp();}
 
-/* ====== CONCEPTION OPTIMALE ====== */
+/* CONCEPTION */
 function getBeamEff(isFlatTop){return isFlatTop?46.6:30.0;}
 function getRectEff(isMeta){return isMeta?79.5:55.0;}
 function getSignalEff(isPulse){return isPulse?82.0:65.0;}
@@ -1162,14 +1094,12 @@ function getAmpEff(classe){const t=[45,70,72,76];return t[classe]||45;}
 function conceptCalc(){
   const beamType=$('beamType');
   if(!beamType)return;
-
   const isFlatTop=+beamType.value===1;
   const isMeta=+$('rectType').value===1;
   const isPulse=+$('signalType').value===1;
   const classe=+$('ampClass').value;
   const freq=+$('conceptFreq').value;
   const pui=+$('conceptPui').value;
-
   $('beamTypeVal').textContent=isFlatTop?'Flat-Top':'Gaussien';
   $('rectTypeVal').textContent=isMeta?'Métasurface':'Classique';
   $('signalTypeVal').textContent=isPulse?'Pulsé (PAPR élevé)':'CW';
@@ -1177,39 +1107,23 @@ function conceptCalc(){
   $('ampClassVal').textContent=classes[classe];
   $('conceptFreqVal').textContent=freq.toFixed(2).replace('.',',')+' GHz';
   $('conceptPuiVal').textContent=fmtI(pui)+' W';
-
   const ampEff=getAmpEff(classe);
   const txEff=getBeamEff(isFlatTop);
   let rxEff=getRectEff(isMeta)*(isPulse?getSignalEff(true)/100:getSignalEff(false)/100)*(100/65);
-
   const freqFactor=freq===2.45?1.0:(freq<3?0.98:(freq<6?0.95:0.85));
   const txEffFinal=txEff*freqFactor;
   const rxEffFinal=Math.min(rxEff*freqFactor,isMeta?79.5:60);
-
   const globalRend=(ampEff/100)*(txEffFinal/100)*(rxEffFinal/100)*100;
   const nette=pui*(globalRend/100);
-
   $('conceptAmpRend').textContent=ampEff.toFixed(1);
   $('conceptTxRend').textContent=txEffFinal.toFixed(1);
   $('conceptRxRend').textContent=rxEffFinal.toFixed(1);
   $('conceptGlobalRend').textContent=globalRend.toFixed(1);
   $('conceptNette').textContent=fmtI(nette);
-
   const verdict=$('conceptVerdict');
-  if(globalRend>=30){
-    verdict.innerHTML=`<h4>🎯 Configuration optimale atteinte</h4><p>Rendement système : ${globalRend.toFixed(1)} % — Puissance nette : ${fmtI(nette)} W</p>`;
-    verdict.style.background='rgba(0,200,83,.15)';
-    verdict.style.borderColor='var(--ok)';
-  }else if(globalRend>=15){
-    verdict.innerHTML=`<h4>⚠️ Configuration intermédiaire</h4><p>Rendement : ${globalRend.toFixed(1)} % — Peut être améliorée</p>`;
-    verdict.style.background='rgba(255,184,0,.15)';
-    verdict.style.borderColor='var(--wn)';
-  }else{
-    verdict.innerHTML=`<h4>⛔ Configuration sous-optimale</h4><p>Rendement : ${globalRend.toFixed(1)} % — Activer les 4 leviers</p>`;
-    verdict.style.background='rgba(239,65,53,.15)';
-    verdict.style.borderColor='var(--dg)';
-  }
-
+  if(globalRend>=30){verdict.innerHTML=`<h4>🎯 Configuration optimale atteinte</h4><p>Rendement système : ${globalRend.toFixed(1)} % — Puissance nette : ${fmtI(nette)} W</p>`;verdict.style.background='rgba(0,200,83,.15)';verdict.style.borderColor='var(--ok)';}
+  else if(globalRend>=15){verdict.innerHTML=`<h4>⚠️ Configuration intermédiaire</h4><p>Rendement : ${globalRend.toFixed(1)} %</p>`;verdict.style.background='rgba(255,184,0,.15)';verdict.style.borderColor='var(--wn)';}
+  else{verdict.innerHTML=`<h4>⛔ Configuration sous-optimale</h4><p>Rendement : ${globalRend.toFixed(1)} % — Activer les 4 leviers</p>`;verdict.style.background='rgba(239,65,53,.15)';verdict.style.borderColor='var(--dg)';}
   drawConceptGraph(ampEff,txEffFinal,rxEffFinal,globalRend);
   dutyCycleCalc();
 }
@@ -1217,73 +1131,76 @@ function conceptCalc(){
 function dutyCycleCalc(){
   const dc=$('dutyCycle');
   if(!dc)return;
-  const dcVal=+dc.value;
-  const p=+$('papr').value;
-
-  $('dutyCycleVal').textContent=dcVal+' %';
-  $('paprVal').textContent=p+' dB';
-
+  const dcVal=+dc.value,p=+$('papr').value;
+  $('dutyCycleVal').textContent=dcVal+' %';$('paprVal').textContent=p+' dB';
   const dcOpt=30,paprOpt=9;
   const dcPenalty=1-0.5*Math.pow((dcVal-dcOpt)/50,2);
   const paprPenalty=1-0.3*Math.pow((p-paprOpt)/15,2);
-  const baseRend=79.5;
-  const rendPulse=baseRend*dcPenalty*paprPenalty;
-  const pMoy=100;
-  const pCrest=pMoy/(dcVal/100)*Math.pow(10,p/20);
-  const cwRend=65;
-  const gain=((rendPulse-cwRend)/cwRend)*100;
-
+  const baseRend=79.5,rendPulse=baseRend*dcPenalty*paprPenalty;
+  const pMoy=100,pCrest=pMoy/(dcVal/100)*Math.pow(10,p/20);
+  const cwRend=65,gain=((rendPulse-cwRend)/cwRend)*100;
   $('rendPulse').textContent=Math.max(rendPulse,0).toFixed(1);
   $('pCrest').textContent=fmtI(Math.max(pCrest,0));
   $('gainCW').textContent=(gain>0?'+':'')+gain.toFixed(1);
 }
 
 function drawConceptGraph(ampEff,txEff,rxEff,globalRend){
-  const c=$('cConcept');
-  if(!c)return;
+  const c=$('cConcept');if(!c)return;
   const ctx=c.getContext('2d');
   const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
-
   const labels=['DC→RF','Transmission','RF→DC','GLOBAL'];
   const valeurs=[ampEff,txEff,rxEff,globalRend];
   const couleurs=['#1e78d1','#00e5ff','#00c853','#FFFFFF'];
-
   const padL=60,padR=30,padT=20,padB=50;
   const gW=W-padL-padR,gH=H-padT-padB;
   const maxVal=100;
-  const barW=gW/labels.length*0.55;
-  const gap=gW/labels.length*0.45;
-
+  const barW=gW/labels.length*0.55,gap=gW/labels.length*0.45;
   ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;
   for(let i=0;i<=5;i++){const y=padT+gH*i/5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();}
-
   ctx.fillStyle='#a8b2c8';ctx.font='10px Segoe UI';
   for(let i=0;i<=5;i++){const v=maxVal*(1-i/5);ctx.fillText(v.toFixed(0)+'%',4,padT+gH*i/5+4);}
-
   ctx.beginPath();ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;
   ctx.moveTo(padL,padT+gH);ctx.lineTo(W-padR,padT+gH);ctx.stroke();
-
   for(let i=0;i<labels.length;i++){
     const x=padL+i*(barW+gap)+gap/2;
-    const h=(valeurs[i]/maxVal)*gH;
-    const y=padT+gH-h;
-
-    ctx.fillStyle=couleurs[i];
-    ctx.globalAlpha=0.75;
-    ctx.fillRect(x,y,barW,h);
-    ctx.globalAlpha=1;
-
+    const h=(valeurs[i]/maxVal)*gH,y=padT+gH-h;
+    ctx.fillStyle=couleurs[i];ctx.globalAlpha=0.75;
+    ctx.fillRect(x,y,barW,h);ctx.globalAlpha=1;
     ctx.fillStyle='#FFFFFF';ctx.font='bold 13px Segoe UI';
     ctx.textAlign='center';
     ctx.fillText(valeurs[i].toFixed(1)+'%',x+barW/2,y-8);
-
     ctx.fillStyle='#a8b2c8';ctx.font='11px Segoe UI';
     ctx.fillText(labels[i],x+barW/2,padT+gH+20);
   }
   ctx.textAlign='left';
 }
 
-/* ====== COMPOSANTS ====== */
+function conceptRecord(){
+  $('beamType').value=1;
+  $('rectType').value=1;
+  $('signalType').value=1;
+  $('ampClass').value=3;
+  $('conceptFreq').value=2.45;
+  $('conceptPui').value=1000;
+  $('dutyCycle').value=30;
+  $('papr').value=9;
+  conceptCalc();
+  $('conceptVerdict').style.animation='pd 1s ease-in-out 3';
+  setTimeout(()=>$('conceptVerdict').style.animation='',3000);
+}
+
+function exporterConceptPDF(){
+  const dateEl=$('rapportDate');
+  if(dateEl)dateEl.textContent='Généré le '+new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  // Afficher uniquement la vue conception
+  document.querySelectorAll('.ob').forEach(b=>b.classList.remove('act'));
+  document.querySelectorAll('.vp').forEach(v=>v.classList.remove('act'));
+  document.querySelector('[data-v="concept"]').classList.add('act');
+  $('v-concept').classList.add('act');
+  setTimeout(()=>{window.print();},150);
+}
+
+/* COMPOSANTS */
 const composants=[
   {id:'pv',nom:'Photovoltaïque GaAs triple jonction',tag:'Satellite',tgCls:'tg-s',data:[['Rendement','30–38 % (AM0)'],['Technologie','GaInP/GaAs/Ge'],['Radiation','Dégradation < 0,5 %/an'],['Masse','≈ 0,8 kg/m²'],['Coût','≈ 5 000 $/W (spatial)'],['TRL','9 — Qualifié vol']],note:'Cellule III-V optimisée spectre AM0.'},
   {id:'magnet',nom:'Convertisseur DC→RF (magnétron)',tag:'Satellite',tgCls:'tg-s',data:[['Fréquence','2,45 / 5,8 GHz'],['Rendement DC→RF','70–85 %'],['Puissance','1–10 kW/tube'],['TRL','6 — Validé labo']],note:'Magnétron cathode froide, contrôle phase précis.'},
@@ -1300,7 +1217,7 @@ function renderAcc(filter='all'){
 }
 function toggleAcc(id){$('acc-'+id).classList.toggle('open');}
 
-/* ====== INITIALISATION ====== */
+/* INIT */
 function init(){
   sIds.forEach(id=>$(id).addEventListener('input',satCalc));
   dIds.forEach(id=>$(id).addEventListener('input',droneCalc));
@@ -1308,14 +1225,12 @@ function init(){
   ['cAP','cAD','cAPr','cADu','cAC','cBP','cBD','cBPr','cBDu','cBC'].forEach(id=>{
     const el=$(id);if(el)el.addEventListener('input',()=>{updateCmpLabels();runCmp();});
   });
-  // Concept listeners
   ['beamType','rectType','signalType','ampClass','conceptFreq','conceptPui'].forEach(id=>{
     const el=$(id);if(el)el.addEventListener('input',conceptCalc);
   });
   ['dutyCycle','papr'].forEach(id=>{
     const el=$(id);if(el)el.addEventListener('input',dutyCycleCalc);
   });
-
   satCalc();droneCalc();proCalc();renderAcc('all');updateCmpLabels();runCmp();conceptCalc();dutyCycleCalc();
 }
 init();
