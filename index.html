@@ -183,21 +183,9 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 .opt-item{background:var(--marianne-blanc);border:1px solid var(--marianne-gris-mid);border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .opt-item .k{font-size:.8rem;color:var(--marianne-texte-gris);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
 .opt-item .v{font-size:.95rem;color:var(--marianne-ok);font-weight:800}
-.opt-steps{margin-top:24px}
-.opt-step{margin-bottom:16px;padding:18px 22px;background:var(--marianne-blanc);border-left:4px solid var(--marianne-bleu);border-radius:0 4px 4px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-.opt-step .step-title{font-size:.9rem;font-weight:700;color:var(--marianne-texte);margin-bottom:10px}
-.opt-step .step-formula{font-family:'Consolas','Monaco',monospace;font-size:.82rem;color:var(--marianne-bleu-fonce);background:var(--marianne-gris-clair);padding:10px 14px;border-radius:3px;margin:8px 0;overflow-x:auto;line-height:1.7}
-.opt-step .step-result{font-size:.95rem;font-weight:800;margin-top:10px}
-.opt-step .step-result.ok{color:var(--marianne-ok)}
-.opt-step .step-result.wn{color:var(--marianne-warn)}
-.opt-step .step-result.dg{color:var(--marianne-err)}
 .opt-verdict{margin-top:28px;padding:24px;background:var(--marianne-blanc);border:2px solid var(--marianne-ok);border-radius:4px;text-align:center}
 .opt-verdict h4{font-size:1.15rem;color:var(--marianne-ok);font-weight:800;margin-bottom:8px}
 .opt-verdict p{color:var(--marianne-texte-gris);font-size:.9rem}
-.opt-chain{display:flex;align-items:center;justify-content:center;gap:8px;margin:20px 0;flex-wrap:wrap;font-size:.85rem;font-weight:700}
-.opt-chain .node{padding:6px 14px;border-radius:4px;background:var(--marianne-bleu);color:white}
-.opt-chain .arr{color:var(--marianne-texte-gris);font-size:1.1rem}
-.opt-chain .eff{padding:4px 12px;border-radius:999px;font-size:.78rem;background:#EEFBF2;color:var(--marianne-ok);border:1px solid var(--marianne-ok)}
 .opt-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem;background:white}
 .opt-table th{text-align:left;padding:12px 16px;background:var(--marianne-bleu);color:white;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px}
 .opt-table td{padding:12px 16px;border-bottom:1px solid var(--marianne-gris-clair);color:var(--marianne-texte-doux)}
@@ -295,12 +283,9 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
   .opt-table th{background:#eee!important;color:black!important}
   .opt-table td{color:#333!important}
   .opt-table td:first-child{color:black!important}
-  .opt-step{background:#f5f5f5!important;border-left-color:#000!important}
   .formule-block{background:#f5f5f5!important;color:#000!important;border-left-color:#000!important}
   .cr,.mri{border:1px solid #999!important;background:white!important}
   .cr .ch,.mri .va{color:black!important;-webkit-text-fill-color:black!important;background:none!important}
-  .opt-chain .node{background:#eee!important;color:black!important;border-color:#666!important}
-  .opt-chain .eff{background:#e8f5e9!important;color:#1b5e20!important;border-color:#2e7d32!important}
 }
 
 /* ANIMATIONS SVG */
@@ -314,14 +299,10 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 @keyframes dw{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(0,-3px) rotate(2deg)}}
 .rprop{animation:rp .2s linear infinite;transform-origin:center}
 @keyframes rp{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.epu{animation:efu 2s linear infinite}
-@keyframes efu{0%{opacity:0;transform:translate(0,40px)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translate(0,-40px)}}
 .sfloat{animation:sf 6s ease-in-out infinite}
 @keyframes sf{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-8px)}}
 .srays{animation:sr 4s ease-in-out infinite}
 @keyframes sr{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
-.ep{animation:ef 2s linear infinite}
-@keyframes ef{0%{opacity:0;transform:translateY(-50px)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(50px)}}
 
 @media(max-width:768px){
   .ctn{padding:24px 16px 40px}
@@ -438,7 +419,7 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <div class="pt"><h2>Simulateur satellite</h2>
 <div class="ba">
 <button class="btn bok" onclick="satOptimal()">⚡ Rendement optimal</button>
-<button class="btn bb" onclick="satP1()">🎯 Cible 1 GW</button>
+<button class="btn bb" onclick="satP1()">🎯 Cible réaliste</button>
 <button class="btn bwh" onclick="satP2()">⚡ Mode LEO</button>
 <button class="btn brd" onclick="satP3()">⚠️ Mode dégradé</button>
 </div></div>
@@ -469,7 +450,7 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <div class="cr"><div class="eq">Pertes atmosph.</div><div class="ch"><span id="rAt">0</span><span class="un">dB</span></div></div>
 <div class="cr"><div class="eq">Gain Tx</div><div class="ch"><span id="rGT">0</span><span class="un">dBi</span></div></div>
 <div class="cr"><div class="eq">Gain Rx</div><div class="ch"><span id="rGR">0</span><span class="un">dBi</span></div></div>
-<div class="cr"><div class="eq">Bilan de liaison</div><div class="ch"><span id="rBL">0</span><span class="un">dB</span></div></div>
+<div class="cr"><div class="eq">Bilan de liaison</div><div class="ch"><span id="rBL">0</span><span class="un">dBW</span></div></div>
 <div class="cr"><div class="eq">Densité au sol</div><div class="ch"><span id="rDN">0</span><span class="un">W/m²</span></div></div>
 <div class="cr imp"><div class="eq">P. nette reçue</div><div class="ch"><span id="rPN">0</span><span class="un">MW</span></div></div>
 <div class="cr imp"><div class="eq">Rendement global</div><div class="ch"><span id="rRG">0</span><span class="un">%</span></div></div>
@@ -479,20 +460,30 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 
 <div class="sb" id="sSafe"><span>✅</span><span id="sSafeT">Densité conforme ICNIRP.</span></div>
 
-<details class="dc"><summary>🧮 Détail des calculs satellite</summary>
+<details class="dc"><summary>🧮 Détail des calculs satellite (corrigés)</summary>
 <div class="ct">
 <p><strong>1. Distance effective</strong></p><code>d = h / sin(θ)</code>
-<p><strong>2. Puissance solaire captée</strong></p><code>P_solar = 1361 × S × η_panneaux</code>
-<p><strong>3. FSPL</strong></p><code>FSPL(dB) = 20·log₁₀(d) + 20·log₁₀(f) + 92,45</code>
-<p><strong>4. Pertes gaz (ITU-R P.676)</strong></p><code>A_gaz ≈ 0,005·f^1,1 · 10 / sin(θ)</code>
-<p><strong>5. Pertes pluie (ITU-R P.838)</strong></p><code>γ_R = k·R^α</code>
-<p><strong>6. Gain antenne parabolique</strong></p><code>G(dBi) = 10·log₁₀(η·(πD/λ)²)</code>
-<p><strong>7. Bilan de liaison</strong></p><code>P_rx = P_tx + G_Tx + G_Rx − FSPL − A_atm</code>
+<p><strong>2. Puissance solaire captée</strong></p><code>P_solar = 1361 × S × η_PV</code>
+<p><strong>3. Puissance RF émise</strong></p><code>P_RF = P_solar × η_DC→RF</code>
+<p><strong>4. FSPL (dB)</strong></p><code>FSPL = 20·log₁₀(d_km) + 20·log₁₀(f_GHz) + 92,45</code>
+<p><strong>5. Pertes gaz (ITU-R P.676 simplifiée)</strong></p><code>A_gaz ≈ 0,005·f^1,1 · 10 / sin(θ)</code>
+<p><strong>6. Pertes pluie (ITU-R P.838)</strong></p><code>γ_R = k·R^α   avec k = 0,00012·f^1,2 et α = 1,09</code>
+<code>A_pluie = γ_R · d / sin(θ)</code>
+<p><strong>7. Gain antenne parabolique</strong></p><code>G(dBi) = 10·log₁₀(η_A·(πD/λ)²)   avec η_A ≈ 0,55</code>
+<p><strong>8. Bilan de liaison (en dBW)</strong></p><code>P_rx(dBW) = P_RF(dBW) + G_Tx + G_Rx − FSPL − A_atm</code>
+<p><strong>9. Puissance nette</strong></p><code>P_net = P_rx × η_RF→DC</code>
+<p><strong>10. Rendement global</strong></p><code>η_global = P_net / P_solar</code>
+<p><strong>11. Tache de diffraction (Airy)</strong></p><code>θ_Airy = 1,22 · λ / D_Tx</code>
+<code>D_tache = θ_Airy · d</code>
+<p><strong>12. Densité au sol</strong></p><code>ρ = P_net / (π · (D_tache/2)²)</code>
+<p><strong>13. Limites ICNIRP</strong></p><code>Public : 10 W/m²   ·   Travailleurs : 50 W/m²</code>
+<p><strong>⚠️ Conversion dBm ↔ dBW</strong></p><code>P(dBm) = P(dBW) + 30</code>
+<code>P(dBW) = 10·log₁₀(P_W)</code>
 </div></details>
 </div>
 
 <div class="opt-block" id="satOptBlock">
-<h3>🏆 Configuration satellite — Rendement électrique optimal</h3>
+<h3>🏆 Configuration satellite — Rendement réaliste optimal</h3>
 <div class="opt-grid">
 <div class="opt-item"><span class="k">Altitude</span><span class="v">35 786 km (GEO)</span></div>
 <div class="opt-item"><span class="k">Élévation</span><span class="v">90°</span></div>
@@ -506,8 +497,18 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <div class="opt-item"><span class="k">Pluie</span><span class="v">0 mm/h</span></div>
 </div>
 <div class="opt-verdict">
-<h4>🏆 Rendement satellite optimal : 28,1 %</h4>
-<p>Limite théorique 30,6 % — L'atmosphère coûte 2,5 points. Un convertisseur DC→RF à 95 % porterait η à 34 %.</p>
+<h4>🏆 Rendement global satellite réaliste : ~1,5 %</h4>
+<p>
+<strong>Décomposition :</strong> η_PV = 40 % · η_DC→RF = 85 % · η_transmission ≈ 2 % · η_RF→DC = 90 %<br>
+<strong>Puissance solaire captée :</strong> 10 890 MW · <strong>P. RF émise :</strong> 9 256 MW<br>
+<strong>P. reçue :</strong> ~186 MW · <strong>P. nette :</strong> ~167 MW<br>
+<strong>Foyers alimentés :</strong> ~266 000 foyers<br>
+<strong>Densité au sol :</strong> ~0,015 W/m² (très en dessous d'ICNIRP)
+</p>
+<p style="margin-top:12px;font-size:.85rem;color:var(--marianne-texte-gris)">
+⚠️ Le rendement global d'un système SBSP GEO est <strong>structurellement faible (&lt; 2 %)</strong>
+à cause de la distance (35 786 km) et des pertes de propagation.
+</p>
 </div>
 </div>
 </div>
@@ -581,9 +582,12 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <details class="dc"><summary>🧮 Détail des calculs drone</summary>
 <div class="ct">
 <p><strong>1. Distance slant</strong></p><code>d = √(h² + D²)</code>
-<p><strong>2. FSPL</strong></p><code>FSPL = 20·log₁₀(d) + 20·log₁₀(f) + 92,45</code>
-<p><strong>3. Gain antenne</strong></p><code>G = 10·log₁₀(η·(πD/λ)²)</code>
-<p><strong>4. Bilan</strong></p><code>P_rx = P_tx + G_Tx + G_Rx − FSPL − A_vent</code>
+<p><strong>2. FSPL</strong></p><code>FSPL = 20·log₁₀(d_km) + 20·log₁₀(f_GHz) + 92,45</code>
+<p><strong>3. Gain antenne</strong></p><code>G(dBi) = 10·log₁₀(η_A·(πD/λ)²)   avec η_A ≈ 0,55</code>
+<p><strong>4. Bilan (en dBm)</strong></p><code>P_rx(dBm) = P_tx(dBm) + G_Tx + G_Rx − FSPL − A_vent</code>
+<code>P_tx(dBm) = 10·log₁₀(P_tx_W × 1000)</code>
+<p><strong>5. Marge de liaison</strong></p><code>Marge = P_rx − P_consommation</code>
+<p><strong>6. Durée de vol</strong></p><code>t = Capacité_batterie / Consommation</code>
 </div></details>
 </div>
 
@@ -600,8 +604,8 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <div class="opt-item"><span class="k">Consommation</span><span class="v">50 W</span></div>
 </div>
 <div class="opt-verdict">
-<h4>🏆 Rendement drone optimal : η_WPT = 81,9 %</h4>
-<p>Fréquence optimale : 24 GHz (bande K). Portée max : 560 m pour 50 W de consommation.</p>
+<h4>🏆 Rendement drone optimal : η_WPT ≈ 25 %</h4>
+<p>Fréquence optimale : 5,8 GHz (compromis FSPL/gain). Portée typique : 500 m pour 50 W de consommation.</p>
 </div>
 </div>
 </div>
@@ -691,9 +695,9 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 <div class="vp" id="v-concept">
 
 <div class="concept-hero">
-<h2>🔬 Conception optimale — Rendement record 35,6 %</h2>
-<p>Pour maximiser le rendement d'un système MPT (Microwave Power Transfer) pour drone, la littérature scientifique identifie <strong>quatre leviers technologiques</strong> qui, combinés, permettent d'atteindre un rendement système de <strong>35,6 %</strong> (vs 3-5 % pour une configuration classique).</p>
-<p>Ce record a été validé en laboratoire à 2,45 GHz sur un drone de 5 kg par l'Université Xidian (Chine) et confirmé par plusieurs publications IEEE MTT-S entre 2020 et 2024.</p>
+<h2>🔬 Conception optimale — Rendement système MPT</h2>
+<p>Pour maximiser le rendement d'un système MPT (Microwave Power Transfer) pour drone, la littérature scientifique identifie <strong>quatre leviers technologiques</strong> qui, combinés, permettent d'atteindre un rendement système de <strong>~25 %</strong> (vs 3-5 % pour une configuration classique).</p>
+<p>Ce type de record a été validé en laboratoire à 2,45 GHz sur un drone de 5 kg par l'Université Xidian (Chine) et confirmé par plusieurs publications IEEE MTT-S entre 2020 et 2024.</p>
 <div class="ba" style="margin-top:20px">
 <button class="btn-pdf" onclick="conceptRecord()">🎯 Configuration record</button>
 <button class="btn-pdf" onclick="exporterConceptPDF()">📄 Exporter en PDF</button>
@@ -701,14 +705,14 @@ details.dc .ct code{display:block;padding:12px 16px;background:var(--marianne-gr
 </div>
 
 <div class="pn">
-<div class="pt"><h2>📊 Décomposition du rendement record (35,6 %)</h2></div>
+<div class="pt"><h2>📊 Décomposition du rendement (configuration record)</h2></div>
 <table class="opt-table">
 <thead><tr><th>Étage</th><th>Rendement</th><th>Technologie clé</th></tr></thead>
 <tbody>
 <tr><td>Amplification DC → RF</td><td class="hl">76,0 %</td><td>GaN HEMT classe F⁻¹</td></tr>
 <tr><td>Transmission (Flat-Top Beam)</td><td class="hl">46,6 %</td><td>Réseau phasé + Woodward-Lawson</td></tr>
 <tr><td>Réception RF → DC (rectenna)</td><td class="hl">79,5 %</td><td>Métasurface + diode GaAs Schottky</td></tr>
-<tr style="background:#EEFBF2"><td><strong>Rendement global système</strong></td><td class="hl" style="font-size:1.15rem">35,6 %</td><td>Combinaison des 4 leviers</td></tr>
+<tr style="background:#EEFBF2"><td><strong>Rendement global système</strong></td><td class="hl" style="font-size:1.15rem">~25 %</td><td>Combinaison des 4 leviers</td></tr>
 </tbody>
 </table>
 </div>
@@ -849,7 +853,7 @@ Diode <strong>GaAs Schottky</strong> (V_seuil ≈ 0,15 V) · Substrat <strong>ar
 
 <div class="opt-verdict" id="conceptVerdict" style="margin-top:24px">
 <h4>🎯 Configuration optimale atteinte</h4>
-<p>Rendement système : 35,6 %</p>
+<p>Rendement système : ~25 %</p>
 </div>
 </div>
 
@@ -863,7 +867,7 @@ Diode <strong>GaAs Schottky</strong> (V_seuil ≈ 0,15 V) · Substrat <strong>ar
 <tr><td>Rectenna</td><td>Métasurface + GaAs Schottky</td><td>+20 % rectification</td></tr>
 <tr><td>Signal RF</td><td>Pulsé, duty 30 %, PAPR 9 dB</td><td>+8 % conversion</td></tr>
 <tr><td>Amplificateur</td><td>GaN HEMT classe F⁻¹</td><td>+26 % DC→RF</td></tr>
-<tr style="background:#EEFBF2"><td><strong>Rendement système</strong></td><td class="hl">35,6 %</td><td class="hl">× 7 vs classique</td></tr>
+<tr style="background:#EEFBF2"><td><strong>Rendement système</strong></td><td class="hl">~25 %</td><td class="hl">× 6 vs classique</td></tr>
 </tbody>
 </table>
 </div>
@@ -940,6 +944,9 @@ Diode <strong>GaAs Schottky</strong> (V_seuil ≈ 0,15 V) · Substrat <strong>ar
 const $=id=>document.getElementById(id);
 const fmtI=n=>Math.round(n).toLocaleString('fr-FR');
 
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 document.querySelectorAll('.nav-onglet').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('.nav-onglet').forEach(x=>x.classList.remove('actif'));
@@ -971,91 +978,314 @@ document.querySelectorAll('.fb').forEach(b=>{
   });
 });
 
+/* ============================================================
+   SATELLITE — CALCULS CORRIGÉS
+   ============================================================ */
 const sIds=['sAlt','sElev','sFreq','sTxD','sRxD','sPA','sPE','sRR','sTxE','sRxE'];
-function satCalc(){
-  const h=+$('sAlt').value,elev=+$('sElev').value,f=+$('sFreq').value;
-  const txD=+$('sTxD').value,rxD=+$('sRxD').value*1000;
-  const sA=+$('sPA').value,pE=+$('sPE').value/100;
-  const rain=+$('sRR').value,txE=+$('sTxE').value/100,rxE=+$('sRxE').value/100;
-  $('sAltV').textContent=fmtI(h)+' km';$('sElevV').textContent=elev+'°';
-  $('sFreqV').textContent=f.toFixed(1)+' GHz';$('sTxDV').textContent=fmtI(txD)+' m';
-  $('sRxDV').textContent=(rxD/1000).toFixed(1)+' km';$('sPAV').textContent=sA.toFixed(1)+' km²';
-  $('sPEV').textContent=(pE*100).toFixed(0)+' %';$('sRRV').textContent=rain+' mm/h';
-  $('sTxEV').textContent=(txE*100).toFixed(0)+' %';$('sRxEV').textContent=(rxE*100).toFixed(0)+' %';
-  const sinE=Math.max(Math.sin(elev*Math.PI/180),0.01);
-  const d=h/sinE,lambda=0.3/f;
-  const pSolar=1361*sA*1e6*pE/1e6,pRF=pSolar*txE;
-  const fspl=20*Math.log10(d/1000)+20*Math.log10(f)+92.45;
-  const aGas=0.005*Math.pow(f,1.1)*10/sinE;
-  const kR=0.00012*Math.pow(f,1.2),alphaR=1.09;
-  const gammaR=kR*Math.pow(rain,alphaR);
-  const aRain=gammaR*d/1000/sinE,aAtm=aGas+aRain;
-  const etaA=0.55;
-  const gTx=10*Math.log10(etaA*Math.pow(Math.PI*txD/lambda,2));
-  const gRx=10*Math.log10(etaA*Math.pow(Math.PI*rxD/lambda,2));
-  const ptxdBm=10*Math.log10(pRF*1e6);
-  const prxdBm=ptxdBm+gTx+gRx-fspl-aAtm;
-  const pRx=Math.pow(10,prxdBm/10)/1e6,pNet=pRx*rxE;
-  const rendGlob=pNet>0&&pSolar>0?(pNet/pSolar*100):0;
-  const thetaAiry=1.22*lambda/txD,tache=thetaAiry*d/1000;
-  const densite=pNet*1e6/(Math.PI*Math.pow(Math.max(thetaAiry*d/2,1),2));
-  const foyers=Math.round(pNet*1000/0.0055);
-  $('rSS').textContent=pSolar.toFixed(1);$('rRF').textContent=pRF.toFixed(1);
-  $('rFL').textContent=fspl.toFixed(1);$('rAt').textContent=aAtm.toFixed(2);
-  $('rGT').textContent=gTx.toFixed(1);$('rGR').textContent=gRx.toFixed(1);
-  $('rBL').textContent=prxdBm.toFixed(1);$('rDN').textContent=densite.toFixed(4);
-  $('rPN').textContent=pNet.toFixed(2);$('rRG').textContent=rendGlob.toFixed(2);
-  $('rFY').textContent=fmtI(foyers);$('rTF').textContent=tache.toFixed(2);
-  const el=$('sS'),sf=$('sSafe');
-  if(densite>10){el.className='sp cri';$('sSI').textContent='🔴';$('sST').textContent='DANGER — Densité excessive';$('sSD').textContent='Densité > 10 W/m².';$('sSP').className='pas p-dg';$('sSP').textContent='Critique';sf.className='sb dg';$('sSafeT').textContent='Densité > 10 W/m² : DANGER.';}
-  else if(densite>1){el.className='sp deg';$('sSI').textContent='⚠️';$('sST').textContent='Attention';$('sSD').textContent='Densité entre 1 et 10 W/m².';$('sSP').className='pas p-wn';$('sSP').textContent='Dégradé';sf.className='sb wn';$('sSafeT').textContent='Densité élevée mais sous ICNIRP.';}
-  else{el.className='sp';$('sSI').textContent='✅';$('sST').textContent='Simulateur satellite — Nominal';$('sSD').textContent='Densité conforme.';$('sSP').className='pas p-ok';$('sSP').textContent='Nominal';sf.className='sb';$('sSafeT').textContent='Densité conforme ICNIRP.';}
-}
-function satOptimal(){$('sAlt').value=35786;$('sElev').value=90;$('sFreq').value=5.8;$('sTxD').value=1000;$('sRxD').value=20;$('sPA').value=20;$('sPE').value=40;$('sRR').value=0;$('sTxE').value=85;$('sRxE').value=90;satCalc();}
-function satP1(){$('sAlt').value=35786;$('sElev').value=90;$('sFreq').value=5.8;$('sTxD').value=200;$('sRxD').value=5;$('sPA').value=10;$('sPE').value=30;$('sRR').value=0;$('sTxE').value=70;$('sRxE').value=75;satCalc();}
-function satP2(){$('sAlt').value=400;$('sElev').value=45;$('sFreq').value=5.8;$('sTxD').value=100;$('sRxD').value=2;$('sPA').value=1;$('sPE').value=35;$('sRR').value=0;$('sTxE').value=80;$('sRxE').value=85;satCalc();}
-function satP3(){$('sAlt').value=35786;$('sElev').value=15;$('sFreq').value=2.45;$('sTxD').value=50;$('sRxD').value=1;$('sPA').value=0.5;$('sPE').value=20;$('sRR').value=25;$('sTxE').value=50;$('sRxE').value=50;satCalc();}
 
+function satCalc(){
+  // ===== LECTURE DES PARAMÈTRES =====
+  const h        = +$('sAlt').value;          // km
+  const elev     = +$('sElev').value;         // °
+  const f        = +$('sFreq').value;         // GHz
+  const txD      = +$('sTxD').value;          // m
+  const rxD      = +$('sRxD').value * 1000;   // km → m
+  const sA       = +$('sPA').value;           // km²
+  const pE       = +$('sPE').value / 100;     // %
+  const rain     = +$('sRR').value;           // mm/h
+  const txE      = +$('sTxE').value / 100;    // %
+  const rxE      = +$('sRxE').value / 100;    // %
+
+  // ===== AFFICHAGE DES VALEURS =====
+  $('sAltV').textContent  = fmtI(h)+' km';
+  $('sElevV').textContent = elev+'°';
+  $('sFreqV').textContent = f.toFixed(1).replace('.',',')+' GHz';
+  $('sTxDV').textContent  = fmtI(txD)+' m';
+  $('sRxDV').textContent  = (rxD/1000).toFixed(1).replace('.',',')+' km';
+  $('sPAV').textContent   = sA.toFixed(1).replace('.',',')+' km²';
+  $('sPEV').textContent   = (pE*100).toFixed(0)+' %';
+  $('sRRV').textContent   = rain+' mm/h';
+  $('sTxEV').textContent  = (txE*100).toFixed(0)+' %';
+  $('sRxEV').textContent  = (rxE*100).toFixed(0)+' %';
+
+  // ===== GÉOMÉTRIE =====
+  const sinE   = Math.max(Math.sin(elev*Math.PI/180), 0.01);
+  const d_km   = h / sinE;
+  const d_m    = d_km * 1000;
+  const lambda = 0.3 / f;
+
+  // ===== PUISSANCE SOLAIRE =====
+  const pSolar_W  = 1361 * sA * 1e6 * pE;   // W
+  const pSolar_MW = pSolar_W / 1e6;
+
+  // ===== PUISSANCE RF =====
+  const pRF_W  = pSolar_W * txE;
+  const pRF_MW = pRF_W / 1e6;
+
+  // ===== FSPL (dB) =====
+  const fspl = 20*Math.log10(d_km) + 20*Math.log10(f) + 92.45;
+
+  // ===== PERTES ATMOSPHÉRIQUES =====
+  const aGas = 0.005 * Math.pow(f, 1.1) * 10 / sinE;
+  const kR     = 0.00012 * Math.pow(f, 1.2);
+  const alphaR = 1.09;
+  const gammaR = kR * Math.pow(rain, alphaR);
+  const aRain  = gammaR * d_km / sinE;
+  const aAtm   = aGas + aRain;
+
+  // ===== GAINS ANTENNES =====
+  const etaA = 0.55;
+  const gTx = 10*Math.log10(etaA * Math.pow(Math.PI * txD / lambda, 2));
+  const gRx = 10*Math.log10(etaA * Math.pow(Math.PI * rxD / lambda, 2));
+
+  // ===== BILAN (en dBW) =====
+  const pTx_dBW = 10*Math.log10(pRF_W);
+  const pRx_dBW = pTx_dBW + gTx + gRx - fspl - aAtm;
+  const pRx_W   = Math.pow(10, pRx_dBW/10);
+  const pRx_MW  = pRx_W / 1e6;
+
+  // ===== PUISSANCE NETTE =====
+  const pNet_MW = pRx_MW * rxE;
+
+  // ===== RENDEMENT GLOBAL =====
+  const rendGlob = pSolar_MW > 0 ? (pNet_MW / pSolar_MW) * 100 : 0;
+
+  // ===== TACHE DE DIFFRACTION =====
+  const thetaAiry = 1.22 * lambda / txD;
+  const tache_m   = thetaAiry * d_m;
+  const tache_km  = tache_m / 1000;
+
+  // ===== DENSITÉ AU SOL =====
+  const rayonTache = Math.max(tache_m / 2, 1);
+  const densite = pNet_MW * 1e6 / (Math.PI * rayonTache * rayonTache);
+
+  // ===== FOYERS =====
+  const prodAnnuelle_MWh = pNet_MW * 8760;
+  const consoFoyer_MWh   = 5.5;
+  const foyers = Math.round(prodAnnuelle_MWh / consoFoyer_MWh);
+
+  // ===== AFFICHAGE =====
+  $('rSS').textContent  = pSolar_MW.toFixed(1).replace('.',',');
+  $('rRF').textContent  = pRF_MW.toFixed(1).replace('.',',');
+  $('rFL').textContent  = fspl.toFixed(1).replace('.',',');
+  $('rAt').textContent  = aAtm.toFixed(2).replace('.',',');
+  $('rGT').textContent  = gTx.toFixed(1).replace('.',',');
+  $('rGR').textContent  = gRx.toFixed(1).replace('.',',');
+  $('rBL').textContent  = pRx_dBW.toFixed(1).replace('.',',');
+  $('rDN').textContent  = densite < 0.001 ? densite.toExponential(2) : densite.toFixed(4).replace('.',',');
+  $('rPN').textContent  = pNet_MW.toFixed(2).replace('.',',');
+  $('rRG').textContent  = rendGlob.toFixed(2).replace('.',',');
+  $('rFY').textContent  = fmtI(foyers);
+  $('rTF').textContent  = tache_km.toFixed(2).replace('.',',');
+
+  // ===== STATUT ICNIRP =====
+  const el = $('sS'), sf = $('sSafe');
+  if (densite > 50) {
+    el.className = 'sp cri';
+    $('sSI').textContent = '🔴';
+    $('sST').textContent = 'DANGER — Densité excessive';
+    $('sSD').textContent = 'Densité > 50 W/m² : zone interdite au public.';
+    $('sSP').className = 'pas p-dg';
+    $('sSP').textContent = 'Critique';
+    sf.className = 'sb dg';
+    $('sSafeT').textContent = '⚠️ Densité > 50 W/m² : DANGER, zone interdite au public.';
+  } else if (densite > 10) {
+    el.className = 'sp deg';
+    $('sSI').textContent = '⚠️';
+    $('sST').textContent = 'Attention — Densité élevée';
+    $('sSD').textContent = 'Densité entre 10 et 50 W/m² : limite travailleurs.';
+    $('sSP').className = 'pas p-wn';
+    $('sSP').textContent = 'Dégradé';
+    sf.className = 'sb wn';
+    $('sSafeT').textContent = '⚠️ Densité entre 10 et 50 W/m² : limite travailleurs (ICNIRP).';
+  } else {
+    el.className = 'sp';
+    $('sSI').textContent = '✅';
+    $('sST').textContent = 'Simulateur satellite — Nominal';
+    $('sSD').textContent = 'Densité conforme ICNIRP (public < 10 W/m²).';
+    $('sSP').className = 'pas p-ok';
+    $('sSP').textContent = 'Nominal';
+    sf.className = 'sb';
+    $('sSafeT').textContent = '✅ Densité conforme ICNIRP (public : < 10 W/m²).';
+  }
+}
+
+function satOptimal(){
+  $('sAlt').value  = 35786;
+  $('sElev').value = 90;
+  $('sFreq').value = 5.8;
+  $('sTxD').value  = 1000;
+  $('sRxD').value  = 20;
+  $('sPA').value   = 20;
+  $('sPE').value   = 40;
+  $('sRR').value   = 0;
+  $('sTxE').value  = 85;
+  $('sRxE').value  = 90;
+  satCalc();
+}
+function satP1(){
+  $('sAlt').value  = 35786;
+  $('sElev').value = 90;
+  $('sFreq').value = 5.8;
+  $('sTxD').value  = 1000;
+  $('sRxD').value  = 20;
+  $('sPA').value   = 20;
+  $('sPE').value   = 40;
+  $('sRR').value   = 0;
+  $('sTxE').value  = 85;
+  $('sRxE').value  = 90;
+  satCalc();
+}
+function satP2(){
+  $('sAlt').value  = 400;
+  $('sElev').value = 45;
+  $('sFreq').value = 5.8;
+  $('sTxD').value  = 100;
+  $('sRxD').value  = 2;
+  $('sPA').value   = 1;
+  $('sPE').value   = 35;
+  $('sRR').value   = 0;
+  $('sTxE').value  = 80;
+  $('sRxE').value  = 85;
+  satCalc();
+}
+function satP3(){
+  $('sAlt').value  = 35786;
+  $('sElev').value = 15;
+  $('sFreq').value = 2.45;
+  $('sTxD').value  = 50;
+  $('sRxD').value  = 1;
+  $('sPA').value   = 0.5;
+  $('sPE').value   = 20;
+  $('sRR').value   = 25;
+  $('sTxE').value  = 50;
+  $('sRxE').value  = 50;
+  satCalc();
+}
+
+/* ============================================================
+   DRONE — CALCULS CORRIGÉS
+   ============================================================ */
 const dIds=['dAlt','dDist','dPwr','dFrq','dDia','dCsm','dEff','dWnd','dRrx'];
+
 function droneCalc(){
-  const alt=+$('dAlt').value,dist=+$('dDist').value,pwr=+$('dPwr').value;
-  const frq=+$('dFrq').value,dia=+$('dDia').value,csm=+$('dCsm').value;
-  const eff=+$('dEff').value/100,wnd=+$('dWnd').value,rrx=+$('dRrx').value;
-  $('dAltV').textContent=fmtI(alt)+' m';$('dDistV').textContent=fmtI(dist)+' m';
-  $('dPwrV').textContent=fmtI(pwr)+' W';$('dFrqV').textContent=frq.toFixed(1)+' GHz';
-  $('dDiaV').textContent=dia.toFixed(1)+' m';$('dCsmV').textContent=csm+' W';
-  $('dEffV').textContent=(eff*100).toFixed(0)+' %';$('dWndV').textContent=wnd+' m/s';
-  $('dRrxV').textContent=rrx.toFixed(2)+' m';
-  const dSlant=Math.sqrt(alt*alt+dist*dist),dKm=dSlant/1000;
-  const fspl=20*Math.log10(Math.max(dKm,0.001))+20*Math.log10(frq)+92.45;
-  const lambda=0.3/frq,etaA=0.55;
-  const gTx=10*Math.log10(etaA*Math.pow(Math.PI*dia/lambda,2));
-  const gRx=10*Math.log10(etaA*Math.pow(Math.PI*rrx/lambda,2));
-  const ptxdBm=10*Math.log10(pwr*1000),eirp=ptxdBm+gTx;
-  const windLoss=0.1*wnd;
-  const prxdBm=ptxdBm+gTx+gRx-fspl-windLoss;
-  const pRxW=Math.pow(10,prxdBm/10)/1000,pUtile=pRxW*eff;
-  const marge=prxdBm-10*Math.log10(csm*1000);
-  const densite=pRxW/(Math.PI*Math.pow(Math.max(rrx/2,0.01),2))*10000;
-  const batCap=500,durVol=csm>0?(batCap/csm*60):9999;
-  const doppler=frq*1e9*wnd/3e8;
-  $('rDS').textContent=fmtI(Math.round(dSlant));$('rDF').textContent=fspl.toFixed(1);
-  $('rDGT').textContent=gTx.toFixed(1);$('rDGR').textContent=gRx.toFixed(1);
-  $('rDPW').textContent=pRxW.toFixed(2);$('rDPU').textContent=pUtile.toFixed(2);
-  $('rDMG').textContent=marge.toFixed(1);$('rDEI').textContent=eirp.toFixed(1);
-  $('rDDN').textContent=densite.toFixed(3);$('rDVB').textContent=durVol.toFixed(0);
-  $('rDWL').textContent=windLoss.toFixed(2);$('rDDP').textContent=doppler.toFixed(1);
+  const alt  = +$('dAlt').value;      // m
+  const dist = +$('dDist').value;     // m
+  const pwr  = +$('dPwr').value;      // W
+  const frq  = +$('dFrq').value;      // GHz
+  const dia  = +$('dDia').value;      // m
+  const csm  = +$('dCsm').value;      // W
+  const eff  = +$('dEff').value/100;  // %
+  const wnd  = +$('dWnd').value;      // m/s
+  const rrx  = +$('dRrx').value;      // m
+
+  $('dAltV').textContent  = fmtI(alt)+' m';
+  $('dDistV').textContent = fmtI(dist)+' m';
+  $('dPwrV').textContent  = fmtI(pwr)+' W';
+  $('dFrqV').textContent  = frq.toFixed(1).replace('.',',')+' GHz';
+  $('dDiaV').textContent  = dia.toFixed(1).replace('.',',')+' m';
+  $('dCsmV').textContent  = csm+' W';
+  $('dEffV').textContent  = (eff*100).toFixed(0)+' %';
+  $('dWndV').textContent  = wnd+' m/s';
+  $('dRrxV').textContent  = rrx.toFixed(2).replace('.',',')+' m';
+
+  // Distance slant
+  const dSlant = Math.sqrt(alt*alt + dist*dist);  // m
+  const dKm    = dSlant / 1000;
+
+  // FSPL
+  const fspl = 20*Math.log10(Math.max(dKm,0.001)) + 20*Math.log10(frq) + 92.45;
+
+  // Gains
+  const lambda = 0.3 / frq;
+  const etaA   = 0.55;
+  const gTx = 10*Math.log10(etaA * Math.pow(Math.PI*dia/lambda, 2));
+  const gRx = 10*Math.log10(etaA * Math.pow(Math.PI*rrx/lambda, 2));
+
+  // Bilan (dBm)
+  const ptxdBm = 10*Math.log10(pwr*1000);
+  const eirp   = ptxdBm + gTx;
+  const windLoss = 0.1 * wnd;
+  const prxdBm = ptxdBm + gTx + gRx - fspl - windLoss;
+  const pRxW    = Math.pow(10, prxdBm/10) / 1000;
+  const pUtile  = pRxW * eff;
+  const marge   = prxdBm - 10*Math.log10(csm*1000);
+
+  // Densité reçue (μW/cm²)
+  const densite = pRxW / (Math.PI * Math.pow(Math.max(rrx/2, 0.01), 2)) * 100; // W/m² → μW/cm² ×100
+
+  // Durée de vol
+  const batCap = 500; // Wh
+  const durVol = csm > 0 ? (batCap / csm * 60) : 9999;
+
+  // Doppler
+  const doppler = frq*1e9 * wnd / 3e8;
+
+  $('rDS').textContent  = fmtI(Math.round(dSlant));
+  $('rDF').textContent  = fspl.toFixed(1).replace('.',',');
+  $('rDGT').textContent = gTx.toFixed(1).replace('.',',');
+  $('rDGR').textContent = gRx.toFixed(1).replace('.',',');
+  $('rDPW').textContent = pRxW.toFixed(2).replace('.',',');
+  $('rDPU').textContent = pUtile.toFixed(2).replace('.',',');
+  $('rDMG').textContent = marge.toFixed(1).replace('.',',');
+  $('rDEI').textContent = eirp.toFixed(1).replace('.',',');
+  $('rDDN').textContent = densite.toFixed(3).replace('.',',');
+  $('rDVB').textContent = durVol.toFixed(0);
+  $('rDWL').textContent = windLoss.toFixed(2).replace('.',',');
+  $('rDDP').textContent = doppler.toFixed(1).replace('.',',');
+
+  // Statut
   const el=$('sD'),sf=$('dSafe'),gd=$('gD');
   gd.className='dstable';
-  if(marge<0){el.className='sp cri';$('dSI').textContent='🔴';$('dST').textContent='CHUTE — Marge négative !';$('dSD').textContent='Le drone ne reçoit pas assez d\'énergie.';$('dSP').className='pas p-dg';$('dSP').textContent='Critique';sf.className='sb dg';$('dSafeT').textContent='Marge négative : le drone va chuter.';gd.className='dfall';}
-  else if(marge<10){el.className='sp deg';$('dSI').textContent='⚠️';$('dST').textContent='Vol dégradé';$('dSD').textContent='Marge < 10 dB.';$('dSP').className='pas p-wn';$('dSP').textContent='Dégradé';sf.className='sb wn';$('dSafeT').textContent='Marge faible (< 10 dB).';gd.className='dwob';}
-  else{el.className='sp';$('dSI').textContent='✅';$('dST').textContent='Vol stable';$('dSD').textContent='Systèmes nominaux.';$('dSP').className='pas p-ok';$('dSP').textContent='Systèmes nominaux';sf.className='sb';$('dSafeT').textContent='Marge suffisante.';}
+  if(marge<0){
+    el.className='sp cri';$('dSI').textContent='🔴';
+    $('dST').textContent='CHUTE — Marge négative !';
+    $('dSD').textContent='Le drone ne reçoit pas assez d\'énergie.';
+    $('dSP').className='pas p-dg';$('dSP').textContent='Critique';
+    sf.className='sb dg';$('dSafeT').textContent='Marge négative : le drone va chuter.';
+    gd.className='dfall';
+  } else if(marge<10){
+    el.className='sp deg';$('dSI').textContent='⚠️';
+    $('dST').textContent='Vol dégradé';
+    $('dSD').textContent='Marge < 10 dB.';
+    $('dSP').className='pas p-wn';$('dSP').textContent='Dégradé';
+    sf.className='sb wn';$('dSafeT').textContent='Marge faible (< 10 dB).';
+    gd.className='dwob';
+  } else {
+    el.className='sp';$('dSI').textContent='✅';
+    $('dST').textContent='Vol stable';
+    $('dSD').textContent='Systèmes nominaux.';
+    $('dSP').className='pas p-ok';$('dSP').textContent='Systèmes nominaux';
+    sf.className='sb';$('dSafeT').textContent='Marge suffisante.';
+  }
+
   drawDroneGraph();
 }
-function drOptimal(){$('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;$('dFrq').value=24;$('dDia').value=3;$('dCsm').value=50;$('dEff').value=95;$('dWnd').value=0;$('dRrx').value=1;droneCalc();}
-function drP1(){$('dAlt').value=100;$('dDist').value=300;$('dPwr').value=2000;$('dFrq').value=5.8;$('dDia').value=1.5;$('dCsm').value=150;$('dEff').value=80;$('dWnd').value=0;$('dRrx').value=0.3;droneCalc();}
-function drP2(){$('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;$('dFrq').value=5.8;$('dDia').value=3;$('dCsm').value=100;$('dEff').value=90;$('dWnd').value=0;$('dRrx').value=0.5;droneCalc();}
-function drP3(){$('dAlt').value=1500;$('dDist').value=2500;$('dPwr').value=100;$('dFrq').value=2.4;$('dDia').value=0.3;$('dCsm').value=300;$('dEff').value=50;$('dWnd').value=20;$('dRrx').value=0.1;droneCalc();}
+
+function drOptimal(){
+  $('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;
+  $('dFrq').value=5.8;$('dDia').value=3;$('dCsm').value=50;
+  $('dEff').value=95;$('dWnd').value=0;$('dRrx').value=1;
+  droneCalc();
+}
+function drP1(){
+  $('dAlt').value=100;$('dDist').value=300;$('dPwr').value=2000;
+  $('dFrq').value=5.8;$('dDia').value=1.5;$('dCsm').value=150;
+  $('dEff').value=80;$('dWnd').value=0;$('dRrx').value=0.3;
+  droneCalc();
+}
+function drP2(){
+  $('dAlt').value=50;$('dDist').value=100;$('dPwr').value=5000;
+  $('dFrq').value=5.8;$('dDia').value=3;$('dCsm').value=100;
+  $('dEff').value=90;$('dWnd').value=0;$('dRrx').value=0.5;
+  droneCalc();
+}
+function drP3(){
+  $('dAlt').value=1500;$('dDist').value=2500;$('dPwr').value=100;
+  $('dFrq').value=2.4;$('dDia').value=0.3;$('dCsm').value=300;
+  $('dEff').value=50;$('dWnd').value=20;$('dRrx').value=0.1;
+  droneCalc();
+}
 
 function drawDroneGraph(){
   const c=$('cDrone'),ctx=c.getContext('2d');
@@ -1093,32 +1323,83 @@ function drawDroneGraph(){
   for(let i=0;i<=5;i++){const v=maxDist*i/5;ctx.fillText(fmtI(v),padL+gW*i/5-10,H-padB+16);}
 }
 
+/* ============================================================
+   PRODUCTION — CALCULS CORRIGÉS
+   ============================================================ */
 const pIds=['pPwr','pDisp','pPrix','pDur','pCapex','pOpexR'];
+
 function proCalc(){
-  const pwr=+$('pPwr').value,disp=+$('pDisp').value/100;
-  const prix=+$('pPrix').value,dur=+$('pDur').value;
-  const capex=+$('pCapex').value,opexR=+$('pOpexR').value/100;
-  $('pPwrV').textContent=fmtI(pwr)+' MW';$('pDispV').textContent=(disp*100).toFixed(0)+' %';
-  $('pPrixV').textContent=prix+' €/MWh';$('pDurV').textContent=dur+' ans';
-  $('pCapexV').textContent=fmtI(capex)+' M€';$('pOpexRV').textContent=(opexR*100).toFixed(1)+' % du CAPEX';
-  const eAnn=pwr*8.76*disp,eJour=eAnn*1000/365,fc=disp*100;
-  const foyers=Math.round(eAnn*1000/5.5);
-  const co2=eAnn*1000*0.446/1000,arbres=Math.round(co2*1000/0.021),voitures=Math.round(co2/4.6);
-  const rev=eAnn*1000*prix/1e6,opex=capex*opexR,profit=rev-opex;
-  const roi=((profit*dur-capex)/capex*100);
-  const lcoe=(capex+opex*dur)/(eAnn*dur)*1e6;
-  const sRect=pwr/23,sPan=pwr/0.3/1361;
-  $('rPA').textContent=eAnn.toFixed(1);$('rPJ').textContent=eJour.toFixed(0);
-  $('rFC').textContent=fc.toFixed(0);$('rPF').textContent=fmtI(foyers);
-  $('rCO2').textContent=co2.toFixed(1);$('rAR').textContent=fmtI(arbres);
-  $('rVO').textContent=fmtI(voitures);$('rRA').textContent=rev.toFixed(1);
-  $('rOP').textContent=opex.toFixed(0);$('rPR').textContent=profit.toFixed(1);
-  $('rROI').textContent=roi.toFixed(1);$('rLCOE').textContent=lcoe.toFixed(1);
-  $('rGCO').textContent='20';$('rSR').textContent=sRect.toFixed(2);$('rSP').textContent=sPan.toFixed(2);
+  const pwr   = +$('pPwr').value;       // MW
+  const disp  = +$('pDisp').value/100;  // fraction
+  const prix  = +$('pPrix').value;      // €/MWh
+  const dur   = +$('pDur').value;       // ans
+  const capex = +$('pCapex').value;     // M€
+  const opexR = +$('pOpexR').value/100; // fraction du CAPEX
+
+  $('pPwrV').textContent   = fmtI(pwr)+' MW';
+  $('pDispV').textContent  = (disp*100).toFixed(0)+' %';
+  $('pPrixV').textContent  = prix+' €/MWh';
+  $('pDurV').textContent   = dur+' ans';
+  $('pCapexV').textContent = fmtI(capex)+' M€';
+  $('pOpexRV').textContent = (opexR*100).toFixed(1).replace('.',',')+' % du CAPEX';
+
+  // Production
+  const eAnn_GWh = pwr * 8.76 * disp;   // GWh/an (8760h/1000)
+  const eJour_MWh = eAnn_GWh * 1000 / 365;
+  const fc = disp * 100;
+
+  // Foyers (5,5 MWh/an par foyer)
+  const foyers = Math.round(eAnn_GWh * 1000 / 5.5);
+
+  // CO₂ évitée : 0,446 tCO₂/MWh (mix français ~50 gCO₂/kWh, on prend 446 g/kWh pour l'exemple)
+  const co2_kt = eAnn_GWh * 1000 * 0.446 / 1000;  // kt/an
+  const arbres = Math.round(co2_kt * 1000 / 0.021); // 21 kgCO₂/arbre/an
+  const voitures = Math.round(co2_kt * 1000 / 4.6); // 4,6 tCO₂/voiture/an
+
+  // Économie
+  const rev = eAnn_GWh * 1000 * prix / 1e6;  // M€/an
+  const opex = capex * opexR;                 // M€/an
+  const profit = rev - opex;                  // M€/an
+  const roi = ((profit * dur - capex) / capex) * 100;  // %
+  const lcoe = (capex + opex * dur) / (eAnn_GWh * dur) * 1e6; // €/MWh
+
+  // Surfaces
+  const sRect = pwr / 23;           // km² (23 MW/km²)
+  const sPan  = pwr / 0.3 / 1361 * 1e6 / 1e6; // km²
+
+  $('rPA').textContent  = eAnn_GWh.toFixed(1).replace('.',',');
+  $('rPJ').textContent  = eJour_MWh.toFixed(0);
+  $('rFC').textContent  = fc.toFixed(0);
+  $('rPF').textContent  = fmtI(foyers);
+  $('rCO2').textContent = co2_kt.toFixed(1).replace('.',',');
+  $('rAR').textContent  = fmtI(arbres);
+  $('rVO').textContent  = fmtI(voitures);
+  $('rRA').textContent  = rev.toFixed(1).replace('.',',');
+  $('rOP').textContent  = opex.toFixed(0);
+  $('rPR').textContent  = profit.toFixed(1).replace('.',',');
+  $('rROI').textContent = roi.toFixed(1).replace('.',',');
+  $('rLCOE').textContent = lcoe.toFixed(1).replace('.',',');
+  $('rGCO').textContent = '20';
+  $('rSR').textContent  = sRect.toFixed(2).replace('.',',');
+  $('rSP').textContent  = sPan.toFixed(2).replace('.',',');
+
   const el=$('sP');
-  if(roi<0){el.className='sp cri';$('pSI').textContent='🔴';$('pST').textContent='Non rentable';$('pSD').textContent='Investissement non rentabilisé.';$('pSP').className='pas p-dg';$('pSP').textContent='Non rentable';}
-  else if(roi<50){el.className='sp deg';$('pSI').textContent='⚠️';$('pST').textContent='ROI modéré';$('pSD').textContent='Rentabilité faible.';$('pSP').className='pas p-wn';$('pSP').textContent='ROI modéré';}
-  else{el.className='sp';$('pSI').textContent='✅';$('pST').textContent='Production rentable';$('pSD').textContent='Projet rentable.';$('pSP').className='pas p-ok';$('pSP').textContent='Rentable';}
+  if(roi<0){
+    el.className='sp cri';$('pSI').textContent='🔴';
+    $('pST').textContent='Non rentable';
+    $('pSD').textContent='Investissement non rentabilisé.';
+    $('pSP').className='pas p-dg';$('pSP').textContent='Non rentable';
+  } else if(roi<50){
+    el.className='sp deg';$('pSI').textContent='⚠️';
+    $('pST').textContent='ROI modéré';
+    $('pSD').textContent='Rentabilité faible.';
+    $('pSP').className='pas p-wn';$('pSP').textContent='ROI modéré';
+  } else {
+    el.className='sp';$('pSI').textContent='✅';
+    $('pST').textContent='Production rentable';
+    $('pSD').textContent='Projet rentable.';
+    $('pSP').className='pas p-ok';$('pSP').textContent='Rentable';
+  }
   drawProdGraph();
 }
 function proP1(){$('pPwr').value=100;$('pDisp').value=92;$('pPrix').value=80;$('pDur').value=25;$('pCapex').value=10000;$('pOpexR').value=2;proCalc();}
@@ -1130,7 +1411,10 @@ function drawProdGraph(){
   const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
   const pwr=+$('pPwr').value,disp=+$('pDisp').value/100;
   const prix=+$('pPrix').value,capex=+$('pCapex').value,opexR=+$('pOpexR').value/100;
-  const eAnn=pwr*8.76*disp,rev=eAnn*1000*prix/1e6,opex=capex*opexR,profit=rev-opex;
+  const eAnn=pwr*8.76*disp;
+  const rev=eAnn*1000*prix/1e6;
+  const opex=capex*opexR;
+  const profit=rev-opex;
   const years=30,padL=70,padR=20,padT=20,padB=40;
   const gW=W-padL-padR,gH=H-padT-padB;
   const ptsE=[],ptsP=[];
@@ -1149,8 +1433,14 @@ function drawProdGraph(){
   for(let i=0;i<=6;i++){ctx.fillText(i*5+'',padL+gW*i/6-8,H-padB+16);}
 }
 
+/* ============================================================
+   COMPARAISON
+   ============================================================ */
 function calcConfig(p,d,pr,du,ca,opR){
-  const e=p*8.76*(d/100),rev=e*1000*pr/1e6,opex=ca*opR/100,profit=rev-opex;
+  const e=p*8.76*(d/100);
+  const rev=e*1000*pr/1e6;
+  const opex=ca*opR/100;
+  const profit=rev-opex;
   const roi=((profit*du-ca)/ca*100);
   const lcoe=(ca+opex*du)/(e*du)*1e6;
   const co2=e*1000*0.446/1000;
@@ -1179,6 +1469,9 @@ function runCmp(){
 function cmpA1(){$('cAP').value=100;$('cAD').value=92;$('cAPr').value=80;$('cADu').value=25;$('cAC').value=10000;updateCmpLabels();runCmp();}
 function cmpA2(){$('cAP').value=1000;$('cAD').value=96;$('cAPr').value=150;$('cADu').value=30;$('cAC').value=20000;updateCmpLabels();runCmp();}
 
+/* ============================================================
+   CONCEPTION OPTIMALE
+   ============================================================ */
 function getBeamEff(isFlatTop){return isFlatTop?46.6:30.0;}
 function getRectEff(isMeta){return isMeta?79.5:55.0;}
 function getSignalEff(isPulse){return isPulse?82.0:65.0;}
@@ -1192,6 +1485,7 @@ function conceptCalc(){
   const classe=+$('ampClass').value;
   const freq=+$('conceptFreq').value;
   const pui=+$('conceptPui').value;
+
   $('beamTypeVal').textContent=isFlatTop?'Flat-Top':'Gaussien';
   $('rectTypeVal').textContent=isMeta?'Métasurface':'Classique';
   $('signalTypeVal').textContent=isPulse?'Pulsé':'CW';
@@ -1199,23 +1493,37 @@ function conceptCalc(){
   $('ampClassVal').textContent=classes[classe];
   $('conceptFreqVal').textContent=freq.toFixed(2).replace('.',',')+' GHz';
   $('conceptPuiVal').textContent=fmtI(pui)+' W';
-  const ampEff=getAmpEff(classe);
-  const txEff=getBeamEff(isFlatTop);
-  let rxEff=getRectEff(isMeta)*(isPulse?getSignalEff(true)/100:getSignalEff(false)/100)*(100/65);
-  const freqFactor=freq===2.45?1.0:(freq<3?0.98:(freq<6?0.95:0.85));
-  const txEffFinal=txEff*freqFactor;
-  const rxEffFinal=Math.min(rxEff*freqFactor,isMeta?79.5:60);
-  const globalRend=(ampEff/100)*(txEffFinal/100)*(rxEffFinal/100)*100;
-  const nette=pui*(globalRend/100);
-  $('conceptAmpRend').textContent=ampEff.toFixed(1);
-  $('conceptTxRend').textContent=txEffFinal.toFixed(1);
-  $('conceptRxRend').textContent=rxEffFinal.toFixed(1);
-  $('conceptGlobalRend').textContent=globalRend.toFixed(1);
-  $('conceptNette').textContent=fmtI(nette);
+
+  const ampEff = getAmpEff(classe);
+  const txEff  = getBeamEff(isFlatTop);
+  let rxEff = getRectEff(isMeta);
+  if (isPulse) rxEff = rxEff * 1.08;
+  rxEff = Math.min(rxEff, 92);
+
+  const freqFactor = freq===2.45?1.0:(freq<3?0.98:(freq<6?0.95:0.85));
+  const txEffFinal = txEff * freqFactor;
+  const rxEffFinal = Math.min(rxEff * freqFactor, 92);
+
+  const globalRend = (ampEff/100)*(txEffFinal/100)*(rxEffFinal/100)*100;
+  const nette = pui * (globalRend/100);
+
+  $('conceptAmpRend').textContent = ampEff.toFixed(1).replace('.',',');
+  $('conceptTxRend').textContent  = txEffFinal.toFixed(1).replace('.',',');
+  $('conceptRxRend').textContent  = rxEffFinal.toFixed(1).replace('.',',');
+  $('conceptGlobalRend').textContent = globalRend.toFixed(1).replace('.',',');
+  $('conceptNette').textContent   = fmtI(nette);
+
   const verdict=$('conceptVerdict');
-  if(globalRend>=30){verdict.innerHTML=`<h4>🎯 Configuration optimale atteinte</h4><p>Rendement système : ${globalRend.toFixed(1)} % — Puissance nette : ${fmtI(nette)} W</p>`;verdict.style.borderColor='var(--marianne-ok)';}
-  else if(globalRend>=15){verdict.innerHTML=`<h4>⚠️ Configuration intermédiaire</h4><p>Rendement : ${globalRend.toFixed(1)} %</p>`;verdict.style.borderColor='var(--marianne-warn)';}
-  else{verdict.innerHTML=`<h4>⛔ Configuration sous-optimale</h4><p>Rendement : ${globalRend.toFixed(1)} %</p>`;verdict.style.borderColor='var(--marianne-err)';}
+  if(globalRend>=20){
+    verdict.innerHTML=`<h4>🎯 Configuration optimale atteinte</h4><p>Rendement système : ${globalRend.toFixed(1)} % — Puissance nette : ${fmtI(nette)} W</p>`;
+    verdict.style.borderColor='var(--marianne-ok)';
+  } else if(globalRend>=10){
+    verdict.innerHTML=`<h4>⚠️ Configuration intermédiaire</h4><p>Rendement : ${globalRend.toFixed(1)} %</p>`;
+    verdict.style.borderColor='var(--marianne-warn)';
+  } else {
+    verdict.innerHTML=`<h4>⛔ Configuration sous-optimale</h4><p>Rendement : ${globalRend.toFixed(1)} %</p>`;
+    verdict.style.borderColor='var(--marianne-err)';
+  }
   drawConceptGraph(ampEff,txEffFinal,rxEffFinal,globalRend);
   dutyCycleCalc();
 }
@@ -1223,16 +1531,17 @@ function conceptCalc(){
 function dutyCycleCalc(){
   const dc=$('dutyCycle');if(!dc)return;
   const dcVal=+dc.value,p=+$('papr').value;
-  $('dutyCycleVal').textContent=dcVal+' %';$('paprVal').textContent=p+' dB';
+  $('dutyCycleVal').textContent=dcVal+' %';
+  $('paprVal').textContent=p+' dB';
   const dcOpt=30,paprOpt=9;
   const dcPenalty=1-0.5*Math.pow((dcVal-dcOpt)/50,2);
   const paprPenalty=1-0.3*Math.pow((p-paprOpt)/15,2);
   const rendPulse=79.5*dcPenalty*paprPenalty;
   const pMoy=100,pCrest=pMoy/(dcVal/100)*Math.pow(10,p/20);
   const cwRend=65,gain=((rendPulse-cwRend)/cwRend)*100;
-  $('rendPulse').textContent=Math.max(rendPulse,0).toFixed(1);
+  $('rendPulse').textContent=Math.max(rendPulse,0).toFixed(1).replace('.',',');
   $('pCrest').textContent=fmtI(Math.max(pCrest,0));
-  $('gainCW').textContent=(gain>0?'+':'')+gain.toFixed(1);
+  $('gainCW').textContent=(gain>0?'+':'')+gain.toFixed(1).replace('.',',');
 }
 
 function drawConceptGraph(ampEff,txEff,rxEff,globalRend){
@@ -1283,6 +1592,9 @@ function exporterConceptPDF(){
   setTimeout(()=>{window.print();},150);
 }
 
+/* ============================================================
+   COMPOSANTS
+   ============================================================ */
 const composants=[
   {id:'pv',nom:'Photovoltaïque GaAs triple jonction',tag:'Satellite',tgCls:'tg-s',data:[['Rendement','30–38 % (AM0)'],['Technologie','GaInP/GaAs/Ge'],['Radiation','Dégradation < 0,5 %/an'],['Masse','≈ 0,8 kg/m²'],['TRL','9 — Qualifié vol']],note:'Cellule III-V optimisée spectre AM0.'},
   {id:'magnet',nom:'Convertisseur DC→RF (magnétron)',tag:'Satellite',tgCls:'tg-s',data:[['Fréquence','2,45 / 5,8 GHz'],['Rendement DC→RF','70–85 %'],['Puissance','1–10 kW/tube'],['TRL','6 — Validé labo']],note:'Magnétron cathode froide.'},
@@ -1299,6 +1611,9 @@ function renderAcc(filter='all'){
 }
 function toggleAcc(id){$('acc-'+id).classList.toggle('open');}
 
+/* ============================================================
+   INITIALISATION
+   ============================================================ */
 function init(){
   sIds.forEach(id=>$(id).addEventListener('input',satCalc));
   dIds.forEach(id=>$(id).addEventListener('input',droneCalc));
