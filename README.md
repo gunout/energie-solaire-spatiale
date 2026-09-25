@@ -8,7 +8,7 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 [![SVG](https://img.shields.io/badge/SVG-FFB13B?style=for-the-badge&logo=svg&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/SVG)
-[![Zéro dépendance](https://img.shields.io/badge/zéro--dépendance-00c853?style=for-the-badge)](#)
+[![Zéro dépendance](https://img.shields.io/badge/zéro--dépendance-18753C?style=for-the-badge)](#)
 
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-Live-00e5ff?style=for-the-badge&logo=cloudflare&logoColor=white)](https://energie-solaire-spatiale.pages.dev)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Mirror-000091?style=for-the-badge&logo=github&logoColor=white)](https://gunout.github.io/energie-solaire-spatiale)
@@ -20,7 +20,8 @@
 [![Dernier commit](https://img.shields.io/github/last-commit/gunout/energie-solaire-spatiale?style=flat-square)](https://github.com/gunout/energie-solaire-spatiale/commits/main)
 [![Taille du repo](https://img.shields.io/github/repo-size/gunout/energie-solaire-spatiale?style=flat-square)](https://github.com/gunout/energie-solaire-spatiale)
 
-[![Marianne](https://img.shields.io/badge/République-Française-000091?style=flat-square)](#)
+[![République Française](https://img.shields.io/badge/République-Française-000091?style=flat-square)](#)
+[![Marianne](https://img.shields.io/badge/Design-Marianne-E1000F?style=flat-square)](#)
 [![ICNIRP](https://img.shields.io/badge/Conforme-ICNIRP-18753C?style=flat-square)](#)
 [![ITU-R](https://img.shields.io/badge/Modèles-ITU--R%20P.676%20%2F%20P.838-0063CB?style=flat-square)](#)
 
@@ -40,8 +41,9 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 - **ITU-R P.676** — Atténuation atmosphérique par les gaz
 - **ITU-R P.838** — Atténuation par la pluie
 - **Limites ICNIRP** — Exposition du public aux champs électromagnétiques
-- **Formules de Friis** — Bilan de liaison complet
+- **Formule de Friis** — Bilan de liaison complet
 - **Tache d'Airy** — Diffraction du faisceau
+- **Woodward-Lawson** — Synthèse de faisceau Flat-Top
 
 ---
 
@@ -50,15 +52,15 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 ### 🛰 Simulateur Satellite
 
 - **10 paramètres ajustables** : altitude, élévation, fréquence, diamètres antennes, surface panneaux, rendements, pluie
-- **12 indicateurs calculés en temps réel** : puissance solaire, FSPL, gains, bilan de liaison, densité au sol, puissance nette, foyers alimentés
+- **12 indicateurs temps réel** : puissance solaire, FSPL, gains, bilan de liaison, densité au sol, foyers alimentés
 - **Bloc de configuration optimale** avec 14 étapes de calcul détaillées
 - **Alertes ICNIRP dynamiques** (densité > 10 W/m²)
 
 ### 🚁 Simulateur Drone
 
-- **9 paramètres ajustables** : altitude, distance, puissance RF, fréquence, diamètres antennes, consommation, vent, rendement rectenna
-- **12 indicateurs calculés** : distance slant, FSPL, gains, puissance reçue, marge de liaison, EIRP, densité, autonomie, effet Doppler
-- **Animation visuelle en SVG** : drone stable, instable, ou en chute selon la marge
+- **9 paramètres ajustables** : altitude, distance, puissance RF, fréquence, diamètres, consommation, vent, rendement rectenna
+- **12 indicateurs temps réel** : distance slant, FSPL, EIRP, marge, densité, autonomie, effet Doppler
+- **Animation SVG** : drone stable / instable / en chute selon la marge
 - **Graphique Canvas** : marge de liaison en fonction de la distance
 - **Comparaison de fréquences** : 2,4 / 5,8 / 10 / 24 / 30 GHz avec portées maximales
 
@@ -66,8 +68,21 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 
 - **Modèle économique complet** : CAPEX, OPEX, ROI, LCOE
 - **Impact environnemental** : CO₂ évité, arbres équivalents, voitures retirées
-- **Graphique cumulé sur 30 ans** : production + profit
+- **Graphique cumulé 30 ans** : production + profit
 - **Mode comparaison A/B** : deux configurations côte à côte
+
+### 🔬 Conception Optimale
+
+- **4 leviers technologiques** documentés :
+  - Faisceau Flat-Top (Woodward-Lawson)
+  - Rectenna métasurface + GaAs Schottky
+  - Signal pulsé à haut PAPR
+  - Amplificateur GaN classe F⁻¹
+- **Rendement record 35,6 %** validé en laboratoire
+- **Formules supplémentaires** : impédance diode, PAPR optimal, rendement classe F⁻¹
+- **Simulateur interactif** avec graphique 4 étages
+- **Bouton Configuration record** qui remet tout à l'optimum
+- **Export PDF** de la page
 
 ### 📚 Bibliothèque de composants
 
@@ -83,13 +98,13 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 
 | Module | État | Détails |
 |:-------|:----:|:--------|
-| **Simulateur Satellite** | 🟢 **Stable** | 10 curseurs · 12 indicateurs · 14 étapes de calcul |
-| **Simulateur Drone** | 🟢 **Stable** | 9 curseurs · 12 indicateurs · 3 presets |
-| **Simulateur Production** | 🟢 **Stable** | Modèle économique complet + comparaison A/B |
+| **Simulateur Satellite** | 🟢 **Stable** | 10 curseurs · 12 indicateurs · 14 étapes |
+| **Simulateur Drone** | 🟢 **Stable** | 9 curseurs · 12 indicateurs · animation SVG |
+| **Simulateur Production** | 🟢 **Stable** | Modèle économique + comparaison A/B |
+| **Conception Optimale** | 🟢 **Stable** | 4 leviers + formules + simulateur |
 | **Bibliothèque Composants** | 🟢 **Stable** | 5 fiches + filtres + TRL |
-| **Animation Drone SVG** | 🟢 **Fonctionnelle** | Stable / instable / chute |
-| **Graphiques Canvas** | 🟢 **Fonctionnels** | Marge vs distance + Production cumulée |
-| **Design DSFR** | 🟢 **Conforme** | Charte Marianne officielle |
+| **Design Marianne** | 🟢 **Conforme** | Charte DSFR officielle |
+| **Export PDF** | 🟢 **Fonctionnel** | Rapport imprimable |
 | **Responsive** | 🟢 **Testé** | Mobile / tablette / desktop |
 | **Dépendances** | ⚪ **Aucune** | 100 % HTML/CSS/JS/SVG pur |
 
@@ -101,6 +116,7 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 🛰 Satellite      [██████████████████████] 100 %  · Complet & documenté
 🚁 Drone          [██████████████████████] 100 %  · Complet & animé
 ⚡ Production     [█████████████████████░]  95 %  · Modèle économique complet
+🔬 Conception     [██████████████████████] 100 %  · 4 leviers + formules
 📚 Composants     [███████████████████░░░]  88 %  · 5 fiches documentées
 🎨 Design DSFR    [██████████████████████] 100 %  · Charte Marianne respectée
 📄 Documentation  [███████████████████░░░]  90 %  · README + fiches inline
@@ -123,22 +139,25 @@ Le projet intègre les **modèles physiques officiels** utilisés dans l'industr
 - [x] Simulateur satellite avec modèles ITU-R
 - [x] Simulateur drone avec animation SVG
 - [x] Simulation de production économique
+- [x] Onglet Conception optimale (4 leviers)
 - [x] Bibliothèque de composants techniques
 - [x] Design Marianne (DSFR)
 - [x] Alertes ICNIRP dynamiques
 - [x] Graphiques Canvas temps réel
 - [x] Mode comparaison A/B
+- [x] Bouton Configuration record
+- [x] Export PDF
 - [ ] Version anglaise (EN)
-- [ ] Export PDF des rapports
 - [ ] Sauvegarde des paramètres dans l'URL
 - [ ] API REST pour intégration externe
 - [ ] Tests automatisés (Jest + Playwright)
+- [ ] Docker pour déploiement VPS
 
 ---
 
 ## 🚀 Démarrage rapide
 
-### Option 1 — Consultation en ligne (recommandé)
+### Option 1 — Consultation en ligne
 
 Ouvrez directement le site déployé :
 
@@ -189,14 +208,15 @@ Téléchargez `index.html` et ouvrez-le dans n'importe quel navigateur moderne. 
 | 5 | `Marge = P_utile − P_conso` | Marge de liaison |
 | 6 | `f_D = f·v/c` | Effet Doppler |
 
-### Production
+### Conception optimale
 
 | # | Formule | Utilisation |
 |:-:|:--------|:------------|
-| 1 | `E = P × 8760 × η_dispo` | Production annuelle |
-| 2 | `CO₂ = E × 0,446` | CO₂ évitée (mix EU) |
-| 3 | `LCOE = (CAPEX + ΣOPEX) / (E × durée)` | Coût actualisé |
-| 4 | `ROI = (profit × durée − CAPEX) / CAPEX` | Retour sur investissement |
+| 1 | `F(θ) = Σₙ aₙ · sinc(...)` | Woodward-Lawson Flat-Top |
+| 2 | `η_FB = 1 − (1 − η_gauss)·(D_tache/D_rectenna)²` | Rendement Flat-Top |
+| 3 | `Z_opt = (V_dc/(2P_dc))·(1+j·ωC_j·V_dc/I_s)⁻¹` | Impédance diode Schottky |
+| 4 | `PAPR_opt = 10·log₁₀(V_br/V_seuil) − 3` | PAPR optimal |
+| 5 | `η_F⁻¹ = 1 / (1 + (V_sat/V_dd)·(π/2))` | Rendement classe F⁻¹ |
 
 ---
 
@@ -211,7 +231,7 @@ energie-solaire-spatiale/
     └── apercu.png          ← Capture d'écran pour le README
 ```
 
-**Le projet tient en un seul fichier HTML autonome de ~50 ko.** Aucun framework, aucune dépendance npm, aucun build.
+**Le projet tient en un seul fichier HTML autonome.** Aucun framework, aucune dépendance npm, aucun build.
 
 ---
 
@@ -219,11 +239,13 @@ energie-solaire-spatiale/
 
 <div align="center">
 
-| Onglet Satellite | Onglet Drone | Onglet Production |
-|:---:|:---:|:---:|
-| Scène orbitale SVG | Drone animé SVG | Graphiques Canvas |
-| 12 indicateurs | Animation de chute | Modèle économique |
-| Bloc optimal 14 étapes | Tableau fréquences | Comparaison A/B |
+| Onglet | Contenu |
+|:---:|:---:|
+| **Satellite** | Scène orbitale SVG + 12 indicateurs + bloc optimal 14 étapes |
+| **Drone** | Drone animé SVG + graphique Canvas + tableau fréquences |
+| **Production** | Graphiques cumulés + comparaison A/B |
+| **Conception** | 4 leviers + formules + simulateur + export PDF |
+| **Composants** | 5 fiches techniques + filtres |
 
 </div>
 
@@ -233,7 +255,7 @@ energie-solaire-spatiale/
 - Typographie Marianne
 - Boutons style DSFR
 - Fil d'Ariane institutionnel
-- Footer 4 colonnes
+- Footer 4 colonnes avec liens gouvernementaux
 
 ---
 
@@ -278,13 +300,13 @@ Les contributions sont les bienvenues ! Voici comment procéder :
 git clone https://github.com/VOTRE-USER/energie-solaire-spatiale.git
 
 # 3. Créez une branche
-git checkout -b fonctionnalite/nouvelle-fiche
+git checkout -b fonctionnalite/nouveau-levier
 
 # 4. Faites vos modifications et commitez
-git commit -m "Ajout fiche composant XYZ"
+git commit -m "Ajout levier XYZ"
 
 # 5. Poussez sur votre fork
-git push origin fonctionnalite/nouvelle-fiche
+git push origin fonctionnalite/nouveau-levier
 
 # 6. Ouvrez une Pull Request
 ```
@@ -308,6 +330,7 @@ git push origin fonctionnalite/nouvelle-fiche
 - **NASA SSPP** — Space Solar Power Project (Caltech, 2023)
 - **Xidian University** — Démonstration drone MPT (2021)
 - **JAXA OHISAMA** — Satellite démonstrateur (2025)
+- **IEEE MTT-S** — Publications MPT (2020-2024)
 - **DSFR** — Système de Design de l'État français
 
 ---
