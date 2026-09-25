@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drone SBSP — Simulateur avancé</title>
+<title>Énergie Solaire Spatiale — Projet SBSP complet</title>
 <style>
 :root {
     --bleu-france: #0055A4;
@@ -14,7 +14,6 @@
     --rouge-fonce: #c23320;
     --gris-fonce: #0a1228;
     --gris-mid: #142142;
-    --gris-clair: #e8ecf5;
 
     --ok: #00c853;
     --warn: #ffb800;
@@ -46,6 +45,7 @@ body {
 
 .container { max-width: 1300px; margin: 0 auto; padding: 50px 20px 40px; }
 
+/* HEADER */
 header { text-align: center; padding: 30px 20px; }
 header .embleme {
     display: inline-flex; align-items: center; gap: 14px;
@@ -72,7 +72,36 @@ h1 {
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text; letter-spacing: -1px;
 }
-.subtitle { color: var(--text-dim); font-size: 1.05rem; max-width: 700px; margin: 0 auto; }
+.subtitle { color: var(--text-dim); font-size: 1.05rem; max-width: 750px; margin: 0 auto; }
+
+/* ONGLETS PRINCIPAUX */
+.onglets-principaux {
+    display: flex; gap: 10px; margin: 40px 0 25px;
+    justify-content: center; flex-wrap: wrap;
+}
+.onglet-principal {
+    padding: 12px 26px;
+    background: rgba(20, 33, 66, 0.6);
+    border: 2px solid var(--panel-border);
+    border-radius: 999px;
+    color: var(--text-dim);
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s ease;
+    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 8px;
+}
+.onglet-principal:hover { color: var(--blanc); border-color: rgba(255, 255, 255, 0.4); }
+.onglet-principal.actif {
+    background: linear-gradient(135deg, rgba(0, 85, 164, 0.4), rgba(255, 255, 255, 0.08), rgba(239, 65, 53, 0.4));
+    border-color: var(--blanc); color: var(--blanc);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+.vue-principale { display: none; }
+.vue-principale.actif { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
 /* BANDEAU D'ÉTAT */
 .statut-principal {
@@ -110,36 +139,6 @@ h1 {
 .pastille-ok      { background: rgba(0, 200, 83, 0.2); color: var(--ok); border: 1px solid var(--ok); }
 .pastille-warn    { background: rgba(255, 184, 0, 0.2); color: var(--warn); border: 1px solid var(--warn); }
 .pastille-danger  { background: rgba(239, 65, 53, 0.2); color: var(--danger); border: 1px solid var(--danger); }
-
-/* ONGLETS SIMULATEUR / COMPARAISON */
-.onglets-modes {
-    display: flex; gap: 10px; margin: 30px 0 20px;
-    justify-content: center; flex-wrap: wrap;
-}
-.onglet-mode {
-    padding: 10px 22px;
-    background: rgba(20, 33, 66, 0.6);
-    border: 2px solid var(--panel-border);
-    border-radius: 999px;
-    color: var(--text-dim);
-    font-size: 0.9rem; font-weight: 700;
-    cursor: pointer; transition: all 0.3s ease;
-    font-family: inherit;
-    display: inline-flex; align-items: center; gap: 8px;
-}
-.onglet-mode:hover { color: var(--blanc); border-color: rgba(255, 255, 255, 0.4); }
-.onglet-mode.actif {
-    background: linear-gradient(135deg, rgba(0, 85, 164, 0.4), rgba(255, 255, 255, 0.05), rgba(239, 65, 53, 0.4));
-    border-color: var(--blanc); color: var(--blanc);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.vue-mode { display: none; }
-.vue-mode.actif { display: block; animation: fadeIn 0.4s ease; }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
 
 /* SCÈNE */
 .scene {
@@ -206,7 +205,7 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* Groupe contrôles */
+/* CONTRÔLES */
 .groupe {
     margin-bottom: 30px; padding-bottom: 25px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -248,7 +247,7 @@ h1 {
     cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-/* Bandeau stabilité */
+/* BANDEAU STABILITÉ */
 .bandeau-stabilite {
     margin: 24px 0; padding: 16px 24px;
     border-radius: 10px;
@@ -277,7 +276,7 @@ h1 {
 .bandeau-stabilite.warn .badge { background: var(--warn); color: #3a2b00; }
 .bandeau-stabilite.danger .badge { background: var(--danger); color: #4a0a04; }
 
-/* Résultats */
+/* RÉSULTATS */
 .resultats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -314,7 +313,7 @@ h1 {
 .carte-resultat.danger { border-color: rgba(239, 65, 53, 0.5); }
 .carte-resultat.danger .chiffre { color: #ff9a90; }
 
-/* Graphique */
+/* GRAPHIQUE */
 .graphique-conteneur {
     margin-top: 30px; padding: 24px;
     background: rgba(10, 18, 40, 0.7);
@@ -326,9 +325,7 @@ h1 {
     margin-bottom: 16px; display: flex;
     align-items: center; gap: 10px;
 }
-.graphique-titre::before {
-    content: '📈'; font-size: 1.2rem;
-}
+.graphique-titre::before { content: '📈'; font-size: 1.2rem; }
 .graphique-svg {
     width: 100%; height: auto;
     background: rgba(0, 0, 0, 0.3);
@@ -348,7 +345,15 @@ h1 {
     border-radius: 2px;
 }
 
-/* Mode comparaison */
+/* GRAPHIQUE PRODUCTION */
+.graphique-production {
+    margin-top: 30px; padding: 24px;
+    background: rgba(10, 18, 40, 0.7);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+}
+
+/* COMPARAISON */
 .comparaison-grille {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -400,7 +405,38 @@ h1 {
 .verdict.warn { background: rgba(255, 184, 0, 0.15); color: #ffd97a; border: 2px solid var(--warn); }
 .verdict.danger { background: rgba(239, 65, 53, 0.15); color: #ff9a90; border: 2px solid var(--danger); }
 
-/* Détails calculs */
+/* SATELLITE — sim spécifique */
+.sim-group {
+    margin-bottom: 30px; padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sim-group:last-of-type { border-bottom: none; padding-bottom: 0; }
+.sim-group-title {
+    font-size: 0.85rem; font-weight: 800;
+    color: var(--blanc); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 20px;
+    padding-left: 12px; border-left: 4px solid;
+    border-image: linear-gradient(180deg, var(--bleu-france), var(--blanc), var(--rouge-france)) 1;
+}
+
+.safety-banner {
+    margin-top: 24px; padding: 14px 20px;
+    background: rgba(0, 200, 83, 0.08);
+    border: 1px solid rgba(0, 200, 83, 0.3);
+    border-radius: 8px; color: #6effa8;
+    font-size: 0.92rem; display: flex; align-items: center; gap: 12px;
+    transition: all 0.3s ease;
+}
+.safety-banner.danger {
+    background: rgba(239, 65, 53, 0.1);
+    border-color: var(--danger); color: #ff9a90;
+}
+.safety-banner.warn {
+    background: rgba(255, 184, 0, 0.1);
+    border-color: var(--warn); color: #ffd97a;
+}
+
+/* DÉTAILS */
 details.details-calculs {
     margin-top: 24px;
     background: rgba(10, 18, 40, 0.7);
@@ -441,6 +477,81 @@ details.details-calculs .contenu code {
     overflow-x: auto; margin: 6px 0;
 }
 
+/* ACCORDÉONS */
+.filters {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 30px; justify-content: center;
+}
+.filter-btn {
+    padding: 8px 18px; background: rgba(20, 33, 66, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px; color: var(--text-dim);
+    font-size: 0.9rem; cursor: pointer;
+    transition: all 0.3s ease; font-family: inherit;
+}
+.filter-btn:hover { color: var(--blanc); border-color: rgba(255, 255, 255, 0.4); }
+.filter-btn.active {
+    background: linear-gradient(135deg, rgba(0, 85, 164, 0.3), rgba(255, 255, 255, 0.05), rgba(239, 65, 53, 0.3));
+    border-color: var(--blanc); color: var(--blanc);
+}
+.accordion {
+    margin-bottom: 16px;
+    background: rgba(10, 18, 40, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px; overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+.accordion:hover { border-color: rgba(255, 255, 255, 0.4); }
+.accordion-header {
+    padding: 18px 24px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(90deg, rgba(20, 33, 66, 0.8), rgba(10, 18, 40, 0.8));
+    transition: background 0.3s ease; user-select: none;
+}
+.accordion-header:hover { background: rgba(255, 255, 255, 0.03); }
+.accordion-title {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 1.05rem; font-weight: 600; color: var(--blanc);
+}
+.accordion-tag {
+    font-size: 0.7rem; padding: 3px 10px;
+    border-radius: 999px; text-transform: uppercase;
+    letter-spacing: 1px; font-weight: 700;
+}
+.tag-satellite { background: rgba(0, 85, 164, 0.25); color: #7ab8ff; }
+.tag-drone     { background: rgba(0, 200, 83, 0.2); color: #6effa8; }
+.tag-both      { background: rgba(255, 184, 0, 0.2); color: #ffd97a; }
+.accordion-icon { font-size: 1.2rem; color: var(--blanc); transition: transform 0.3s ease; }
+.accordion.open .accordion-icon { transform: rotate(180deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+.accordion.open .accordion-body { max-height: 3000px; }
+.accordion-content { padding: 20px 24px 24px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+.tech-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88rem; }
+.tech-table th {
+    text-align: left; padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--blanc); font-weight: 700;
+    font-size: 0.78rem; text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(90deg, var(--bleu-france), var(--blanc), var(--rouge-france)) 1;
+}
+.tech-table td {
+    padding: 10px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-dim); vertical-align: top;
+}
+.tech-table td:first-child { color: var(--blanc); font-weight: 600; width: 32%; }
+.tech-table tr:last-child td { border-bottom: none; }
+
+.callout {
+    margin-top: 16px; padding: 14px 18px;
+    background: rgba(0, 85, 164, 0.1);
+    border-left: 3px solid var(--bleu-clair);
+    border-radius: 6px; font-size: 0.9rem; color: #7ab8ff;
+}
+
+/* FOOTER */
 footer {
     text-align: center; padding: 40px 20px 20px;
     color: var(--text-dim); font-size: 0.85rem;
@@ -457,6 +568,7 @@ footer .drapeau-petit .bleu { background: var(--bleu-france); }
 footer .drapeau-petit .blanc { background: var(--blanc); }
 footer .drapeau-petit .rouge { background: var(--rouge-france); }
 
+/* RESPONSIVE */
 @media (max-width: 700px) {
     .container { padding: 30px 14px; }
     .panneau { padding: 20px; }
@@ -504,12 +616,22 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
     80%  { opacity: 1; }
     100% { opacity: 0; transform: translate(0, -40px); }
 }
-.energy-particle-down { animation: energyFlowDown 1.5s linear infinite; }
-@keyframes energyFlowDown {
-    0%   { opacity: 0; transform: translate(0, -20px); }
+.satellite-float { animation: satelliteFloat 6s ease-in-out infinite; }
+@keyframes satelliteFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(0, -8px); }
+}
+.sun-rays { animation: sunRays 4s ease-in-out infinite; }
+@keyframes sunRays {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.05); }
+}
+.energy-particle { animation: energyFlow 2s linear infinite; }
+@keyframes energyFlow {
+    0%   { opacity: 0; transform: translateY(-50px); }
     20%  { opacity: 1; }
     80%  { opacity: 1; }
-    100% { opacity: 0; transform: translate(0, 60px); }
+    100% { opacity: 0; transform: translateY(50px); }
 }
 </style>
 </head>
@@ -526,39 +648,298 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
     <header>
         <div class="embleme">
             <span class="drapeau"><div class="bleu"></div><div class="blanc"></div><div class="rouge"></div></span>
-            Projet SBSP · Alimentation sans fil
+            Projet SBSP · Énergie solaire spatiale
         </div>
-        <h1>Drone à faisceau d'énergie</h1>
+        <h1>Énergie Solaire Spatiale</h1>
         <p class="subtitle">
-            Simulateur physique avancé avec graphique d'analyse, mode comparaison
-            et animation de chute en temps réel.
+            Satellite, drone et production d'énergie — simulateurs physiques temps réel,
+            analyse économique et bibliothèque technique complète.
         </p>
     </header>
 
-    <!-- BANDEAU D'ÉTAT -->
-    <div class="statut-principal" id="statutPrincipal">
-        <div class="statut-gauche">
-            <div class="statut-icone" id="statutIcone">✅</div>
-            <div class="statut-texte">
-                <h3 id="statutTitre">Vol stable — Tous systèmes nominaux</h3>
-                <p id="statutDescription">Le drone reçoit suffisamment d'énergie pour un vol continu.</p>
-            </div>
+    <!-- ONGLETS PRINCIPAUX -->
+    <div class="onglets-principaux">
+        <button class="onglet-principal" data-vue="satellite">🛰 Satellite</button>
+        <button class="onglet-principal actif" data-vue="drone">🚁 Drone en vol</button>
+        <button class="onglet-principal" data-vue="production">⚡ Production</button>
+        <button class="onglet-principal" data-vue="composants">📚 Composants</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VUE SATELLITE -->
+    <!-- ============================================================ -->
+    <div class="vue-principale" id="vue-satellite">
+
+        <div class="scene">
+            <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="spaceGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0a1228"/>
+                        <stop offset="50%" stop-color="#142142"/>
+                        <stop offset="100%" stop-color="#1a2a5c"/>
+                    </linearGradient>
+                    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fff8d0"/>
+                        <stop offset="40%" stop-color="#ffd54a"/>
+                        <stop offset="100%" stop-color="#ff6b00"/>
+                    </radialGradient>
+                    <radialGradient id="earthGrad" cx="40%" cy="40%" r="70%">
+                        <stop offset="0%" stop-color="#4a90d9"/>
+                        <stop offset="60%" stop-color="#2b6cb0"/>
+                        <stop offset="100%" stop-color="#1a3a5c"/>
+                    </radialGradient>
+                    <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#1e78d1" stop-opacity="0.1"/>
+                    </linearGradient>
+                    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#1e78d1"/>
+                        <stop offset="100%" stop-color="#003d7a"/>
+                    </linearGradient>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+
+                <rect width="1000" height="500" fill="url(#spaceGrad)"/>
+
+                <g opacity="0.7">
+                    <circle cx="80" cy="60" r="1" fill="white"/>
+                    <circle cx="200" cy="120" r="1" fill="white"/>
+                    <circle cx="350" cy="40" r="1.2" fill="white"/>
+                    <circle cx="500" cy="100" r="1" fill="white"/>
+                    <circle cx="650" cy="70" r="1.1" fill="white"/>
+                    <circle cx="800" cy="50" r="1" fill="white"/>
+                    <circle cx="920" cy="130" r="1.2" fill="white"/>
+                </g>
+
+                <g transform="translate(850, 80)" class="sun-rays" filter="url(#glowStrong)">
+                    <circle r="55" fill="url(#sunGrad)"/>
+                    <circle r="40" fill="#fff8d0" opacity="0.4"/>
+                    <g stroke="#ffd54a" stroke-width="2" opacity="0.6">
+                        <line x1="0" y1="-70" x2="0" y2="-90"/>
+                        <line x1="0" y1="70"  x2="0" y2="90"/>
+                        <line x1="-70" y1="0" x2="-90" y2="0"/>
+                        <line x1="70" y1="0"  x2="90" y2="0"/>
+                    </g>
+                </g>
+
+                <g stroke="#ffd54a" stroke-width="1.5" opacity="0.4">
+                    <line x1="800" y1="100" x2="620" y2="180" stroke-dasharray="4 4"/>
+                    <line x1="800" y1="110" x2="620" y2="190" stroke-dasharray="4 4"/>
+                </g>
+
+                <g transform="translate(600, 180)" class="satellite-float">
+                    <rect x="-40" y="-15" width="80" height="30" rx="4" fill="#FFFFFF" stroke="#0055A4" stroke-width="2"/>
+                    <g transform="translate(-100, -20)">
+                        <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#FFFFFF" stroke-width="1"/>
+                        <line x1="0" y1="13" x2="55" y2="13" stroke="#FFFFFF" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="0" y1="26" x2="55" y2="26" stroke="#FFFFFF" stroke-width="0.5" opacity="0.6"/>
+                    </g>
+                    <g transform="translate(45, -20)">
+                        <rect x="0" y="0" width="55" height="40" rx="2" fill="url(#panelGrad)" stroke="#FFFFFF" stroke-width="1"/>
+                        <line x1="0" y1="13" x2="55" y2="13" stroke="#FFFFFF" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="0" y1="26" x2="55" y2="26" stroke="#FFFFFF" stroke-width="0.5" opacity="0.6"/>
+                    </g>
+                    <rect x="-15" y="15" width="30" height="10" rx="2" fill="#EF4135" opacity="0.9"/>
+                    <circle cx="0" cy="25" r="3" fill="#FFFFFF" filter="url(#glow)"/>
+                </g>
+
+                <g>
+                    <path d="M 600 210 L 570 420 L 630 420 Z" fill="url(#beamGrad)" class="beam-pulse"/>
+                    <circle cx="600" cy="250" r="3" fill="#FFFFFF" filter="url(#glow)" class="energy-particle"/>
+                    <circle cx="595" cy="300" r="3" fill="#FFFFFF" filter="url(#glow)" class="energy-particle" style="animation-delay: 0.3s"/>
+                    <circle cx="605" cy="350" r="3" fill="#FFFFFF" filter="url(#glow)" class="energy-particle" style="animation-delay: 0.6s"/>
+                </g>
+
+                <g transform="translate(500, 480)">
+                    <ellipse cx="0" cy="0" rx="400" ry="180" fill="url(#earthGrad)"/>
+                    <path d="M -200 -60 Q -150 -90 -100 -70 Q -70 -50 -100 -20 Q -140 0 -180 -10 Z" fill="#38a169" opacity="0.7"/>
+                    <path d="M 100 -80 Q 160 -100 220 -70 Q 260 -40 240 10 Q 200 30 160 10 Q 120 -10 100 -50 Z" fill="#38a169" opacity="0.7"/>
+                </g>
+
+                <g transform="translate(600, 430)">
+                    <ellipse cx="0" cy="0" rx="60" ry="12" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/>
+                    <ellipse cx="0" cy="0" rx="40" ry="8" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" filter="url(#glow)" class="beam-pulse"/>
+                </g>
+
+                <g font-family="Segoe UI, sans-serif" font-size="11">
+                    <text x="850" y="30" text-anchor="middle" fill="#ffd54a" font-weight="700" font-size="12">☀ SOLEIL</text>
+                    <text x="600" y="140" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="12">🛰 SATELLITE</text>
+                    <text x="600" y="470" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="12">📡 RECTENNA</text>
+                </g>
+            </svg>
         </div>
-        <span class="statut-pastille pastille-ok" id="statutPastille">Systèmes nominaux</span>
-    </div>
 
-    <!-- ONGLETS DE MODE -->
-    <div class="onglets-modes">
-        <button class="onglet-mode actif" data-mode="simulateur">🎛 Simulateur</button>
-        <button class="onglet-mode" data-mode="comparaison">⚖️ Comparaison</button>
+        <div class="statut-principal" id="statutSat">
+            <div class="statut-gauche">
+                <div class="statut-icone" id="statutSatIcone">✅</div>
+                <div class="statut-texte">
+                    <h3 id="statutSatTitre">Simulateur satellite — Prêt</h3>
+                    <p id="statutSatDesc">Ajustez les paramètres pour voir la production d'énergie.</p>
+                </div>
+            </div>
+            <span class="statut-pastille pastille-ok" id="statutSatPastille">Nominal</span>
+        </div>
+
+        <div class="panneau">
+            <div class="panneau-titre">
+                <h2>Simulateur satellite</h2>
+                <div class="boutons-actions">
+                    <button class="btn btn-bleu" onclick="satPresetStable()">🎯 Cible 1 GW</button>
+                    <button class="btn btn-blanc" onclick="satPresetLEO()">⚡ Mode LEO</button>
+                    <button class="btn btn-rouge" onclick="satPresetCritique()">⚠️ Mode dégradé</button>
+                </div>
+            </div>
+
+            <div class="sim-group">
+                <div class="sim-group-title">🛰 Orbite</div>
+                <div class="controle">
+                    <label for="satAltitude">Altitude <span class="valeur" id="satAltitudeVal">35 786 km</span></label>
+                    <input type="range" id="satAltitude" min="400" max="40000" value="35786" step="100">
+                </div>
+                <div class="controle">
+                    <label for="satElevation">Angle d'élévation <span class="valeur" id="satElevationVal">90°</span></label>
+                    <input type="range" id="satElevation" min="10" max="90" value="90" step="1">
+                </div>
+            </div>
+
+            <div class="sim-group">
+                <div class="sim-group-title">📡 Faisceau et antennes</div>
+                <div class="controle">
+                    <label for="satFrequency">Fréquence <span class="valeur" id="satFrequencyVal">5,8 GHz</span></label>
+                    <input type="range" id="satFrequency" min="1" max="30" value="5.8" step="0.1">
+                </div>
+                <div class="controle">
+                    <label for="satTxDiameter">Diamètre antenne Tx <span class="valeur" id="satTxDiameterVal">200 m</span></label>
+                    <input type="range" id="satTxDiameter" min="50" max="1000" value="200" step="10">
+                </div>
+                <div class="controle">
+                    <label for="satRxDiameter">Diamètre rectenna <span class="valeur" id="satRxDiameterVal">5 km</span></label>
+                    <input type="range" id="satRxDiameter" min="1" max="20" value="5" step="0.5">
+                </div>
+            </div>
+
+            <div class="sim-group">
+                <div class="sim-group-title">☀ Source et environnement</div>
+                <div class="controle">
+                    <label for="satPanelArea">Surface panneaux <span class="valeur" id="satPanelAreaVal">3 km²</span></label>
+                    <input type="range" id="satPanelArea" min="0.5" max="20" value="3" step="0.1">
+                </div>
+                <div class="controle">
+                    <label for="satPanelEff">Rendement panneaux <span class="valeur" id="satPanelEffVal">30 %</span></label>
+                    <input type="range" id="satPanelEff" min="15" max="40" value="30" step="1">
+                </div>
+                <div class="controle">
+                    <label for="satRainRate">Intensité pluie <span class="valeur" id="satRainRateVal">0 mm/h</span></label>
+                    <input type="range" id="satRainRate" min="0" max="50" value="0" step="1">
+                </div>
+                <div class="controle">
+                    <label for="satTxEff">Rendement DC→RF <span class="valeur" id="satTxEffVal">70 %</span></label>
+                    <input type="range" id="satTxEff" min="40" max="85" value="70" step="1">
+                </div>
+                <div class="controle">
+                    <label for="satRxEff">Rendement RF→DC <span class="valeur" id="satRxEffVal">75 %</span></label>
+                    <input type="range" id="satRxEff" min="40" max="90" value="75" step="1">
+                </div>
+            </div>
+
+            <div class="resultats">
+                <div class="carte-resultat">
+                    <div class="etiquette">P. solaire captée</div>
+                    <div class="chiffre"><span id="satSolar">0</span><span class="unite">MW</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">P. RF émise</div>
+                    <div class="chiffre"><span id="satRf">0</span><span class="unite">MW</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">FSPL</div>
+                    <div class="chiffre"><span id="satFspl">0</span><span class="unite">dB</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Pertes atmosphériques</div>
+                    <div class="chiffre"><span id="satAtm">0</span><span class="unite">dB</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Gain Tx</div>
+                    <div class="chiffre"><span id="satGainTx">0</span><span class="unite">dBi</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Gain Rx</div>
+                    <div class="chiffre"><span id="satGainRx">0</span><span class="unite">dBi</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Bilan de liaison</div>
+                    <div class="chiffre"><span id="satBilan">0</span><span class="unite">dB</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Densité au sol</div>
+                    <div class="chiffre"><span id="satDensite">0</span><span class="unite">W/m²</span></div>
+                </div>
+                <div class="carte-resultat important">
+                    <div class="etiquette">P. nette reçue</div>
+                    <div class="chiffre"><span id="satNette">0</span><span class="unite">MW</span></div>
+                </div>
+                <div class="carte-resultat important">
+                    <div class="etiquette">Rendement global</div>
+                    <div class="chiffre"><span id="satRendement">0</span><span class="unite">%</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Foyers alimentés</div>
+                    <div class="chiffre"><span id="satFoyers">0</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Tache faisceau</div>
+                    <div class="chiffre"><span id="satTache">0</span><span class="unite">km</span></div>
+                </div>
+            </div>
+
+            <div class="safety-banner" id="satSafety">
+                <span>✅</span>
+                <span id="satSafetyText">Densité conforme aux limites ICNIRP.</span>
+            </div>
+
+            <details class="details-calculs">
+                <summary>🧮 Détail des calculs satellite</summary>
+                <div class="contenu">
+                    <p><strong>1. Distance effective</strong></p>
+                    <code>d = h / sin(θ)</code>
+                    <p><strong>2. Puissance solaire captée</strong></p>
+                    <code>P_solar = E × S × η_panneaux</code>
+                    <p><strong>3. Puissance RF émise</strong></p>
+                    <code>P_RF = P_solar × η_DC→RF</code>
+                    <p><strong>4. FSPL</strong></p>
+                    <code>FSPL(dB) = 20·log₁₀(d) + 20·log₁₀(f) + 92,45</code>
+                    <p><strong>5. Pertes gaz (ITU-R P.676)</strong></p>
+                    <code>A_gaz ≈ 0,005·f^1,1 · 10 / sin(θ)</code>
+                    <p><strong>6. Pertes pluie (ITU-R P.838)</strong></p>
+                    <code>γ_R = k·R^α</code>
+                    <p><strong>7. Gain antenne parabolique</strong></p>
+                    <code>G(dBi) = 10·log₁₀(η·(πD/λ)²)</code>
+                    <p><strong>8. Bilan de liaison</strong></p>
+                    <code>P_rx = P_tx + G_Tx + G_Rx − FSPL − A_atm</code>
+                    <p><strong>9. Tache de diffraction</strong></p>
+                    <code>θ = 1,22·λ/D</code>
+                    <p><strong>10. Densité au sol</strong></p>
+                    <code>ρ = P_reçue / (π·(θd/2)²)</code>
+                </div>
+            </details>
+        </div>
+
     </div>
 
     <!-- ============================================================ -->
-    <!-- VUE SIMULATEUR -->
+    <!-- VUE DRONE -->
     <!-- ============================================================ -->
-    <div class="vue-mode actif" id="vue-simulateur">
+    <div class="vue-principale actif" id="vue-drone">
 
-        <!-- SCÈNE SVG -->
         <div class="scene">
             <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 <defs>
@@ -591,22 +972,17 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     </filter>
                 </defs>
 
-                <!-- Ciel -->
                 <rect width="1000" height="500" fill="url(#cielGrad)"/>
 
-                <!-- Nuages -->
                 <ellipse cx="140" cy="80" rx="90" ry="25" fill="white" opacity="0.5"/>
                 <ellipse cx="210" cy="90" rx="60" ry="20" fill="white" opacity="0.4"/>
                 <ellipse cx="820" cy="110" rx="100" ry="28" fill="white" opacity="0.4"/>
-                <ellipse cx="880" cy="120" rx="70" ry="22" fill="white" opacity="0.35"/>
 
-                <!-- Sol tricolore -->
                 <rect x="0" y="420" width="1000" height="80" fill="#0a1228"/>
                 <rect x="0" y="420" width="333" height="4" fill="#0055A4"/>
                 <rect x="333" y="420" width="334" height="4" fill="#FFFFFF"/>
                 <rect x="667" y="420" width="333" height="4" fill="#EF4135"/>
 
-                <!-- VÉHICULE ÉMETTEUR -->
                 <g transform="translate(180, 400)">
                     <rect x="-70" y="-35" width="140" height="35" rx="5" fill="#0055A4" stroke="#FFFFFF" stroke-width="2"/>
                     <circle cx="-45" cy="2" r="10" fill="#0a1228" stroke="#FFFFFF" stroke-width="1.5"/>
@@ -620,7 +996,6 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     <text x="0" y="30" text-anchor="middle" fill="#FFFFFF" font-size="11" font-family="Segoe UI" font-weight="700" letter-spacing="1">ÉMETTEUR AU SOL</text>
                 </g>
 
-                <!-- FAISCEAU (couleur dynamique) -->
                 <g id="groupeFaisceau">
                     <path id="faisceauPath" d="M 180 345 L 460 170 L 500 195 L 180 365 Z" fill="url(#faisceauGrad)" class="beam-pulse"/>
                     <g id="particulesFaisceau">
@@ -631,7 +1006,6 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     </g>
                 </g>
 
-                <!-- DRONE (avec animation dynamique) -->
                 <g id="groupeDrone" transform="translate(480, 185)" class="drone-stable">
                     <circle cx="0" cy="0" r="60" fill="url(#haloBleu)" opacity="0.6"/>
                     <line x1="0" y1="0" x2="-45" y2="-25" stroke="#0055A4" stroke-width="5" stroke-linecap="round"/>
@@ -654,38 +1028,38 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     </g>
                 </g>
 
-                <!-- Labels -->
                 <g font-family="Segoe UI, sans-serif">
-                    <text id="labelDrone" x="480" y="115" text-anchor="middle" fill="#FFFFFF" font-weight="800" font-size="13" letter-spacing="1">🚁 DRONE EN VOL</text>
-                    <text id="labelFaisceau" x="620" y="200" fill="#FFFFFF" font-weight="800" font-size="11">FAISCEAU MICRO-ONDES</text>
-                    <text id="labelPuissance" x="620" y="215" fill="#e8ecf5" font-size="10" opacity="0.8">5,8 GHz · 2 kW</text>
-                </g>
-
-                <!-- Légende -->
-                <g transform="translate(20, 20)" font-family="Segoe UI, sans-serif" font-size="11">
-                    <rect x="0" y="0" width="230" height="70" rx="8" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.2)"/>
-                    <text x="15" y="22" fill="#FFFFFF" font-weight="700" font-size="12">● Système nominal</text>
-                    <text x="15" y="40" fill="#e8ecf5" font-size="10">Alimentation continue par faisceau</text>
-                    <text x="15" y="58" fill="#e8ecf5" font-size="10">Vol illimité tant que le faisceau est maintenu</text>
+                    <text x="480" y="115" text-anchor="middle" fill="#FFFFFF" font-weight="800" font-size="13" letter-spacing="1">🚁 DRONE EN VOL</text>
+                    <text x="620" y="200" fill="#FFFFFF" font-weight="800" font-size="11">FAISCEAU MICRO-ONDES</text>
                 </g>
             </svg>
         </div>
 
-        <!-- PANNEAU SIMULATEUR -->
+        <div class="statut-principal" id="statutPrincipal">
+            <div class="statut-gauche">
+                <div class="statut-icone" id="statutIcone">✅</div>
+                <div class="statut-texte">
+                    <h3 id="statutTitre">Vol stable — Tous systèmes nominaux</h3>
+                    <p id="statutDescription">Le drone reçoit suffisamment d'énergie pour un vol continu.</p>
+                </div>
+            </div>
+            <span class="statut-pastille pastille-ok" id="statutPastille">Systèmes nominaux</span>
+        </div>
+
         <div class="panneau">
             <div class="panneau-titre">
-                <h2>Simulateur de vol</h2>
+                <h2>Simulateur drone</h2>
                 <div class="boutons-actions">
-                    <button class="btn btn-bleu" onclick="appliquerReglageStable()">🎯 Réglage stable</button>
-                    <button class="btn btn-blanc" onclick="appliquerReglageOptimal()">⚡ Réglage optimal</button>
-                    <button class="btn btn-rouge" onclick="appliquerReglageCritique()">⚠️ Tester la chute</button>
+                    <button class="btn btn-bleu" onclick="dronePresetStable()">🎯 Réglage stable</button>
+                    <button class="btn btn-blanc" onclick="dronePresetOptimal()">⚡ Réglage optimal</button>
+                    <button class="btn btn-rouge" onclick="dronePresetCritique()">⚠️ Tester la chute</button>
                 </div>
             </div>
 
             <div class="groupe">
                 <div class="groupe-titre">🚁 Géométrie du vol</div>
                 <div class="controle">
-                    <label for="altitude">Altitude du drone <span class="valeur" id="altitudeVal">100 m</span></label>
+                    <label for="altitude">Altitude <span class="valeur" id="altitudeVal">100 m</span></label>
                     <input type="range" id="altitude" min="10" max="2000" value="100" step="10">
                 </div>
                 <div class="controle">
@@ -695,9 +1069,9 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
             </div>
 
             <div class="groupe">
-                <div class="groupe-titre">📡 Émetteur et faisceau</div>
+                <div class="groupe-titre">📡 Émetteur</div>
                 <div class="controle">
-                    <label for="puissance">Puissance RF émise <span class="valeur" id="puissanceVal">2 000 W</span></label>
+                    <label for="puissance">Puissance RF <span class="valeur" id="puissanceVal">2 000 W</span></label>
                     <input type="range" id="puissance" min="10" max="5000" value="2000" step="10">
                 </div>
                 <div class="controle">
@@ -711,7 +1085,7 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
             </div>
 
             <div class="groupe">
-                <div class="groupe-titre">🔋 Consommation et conditions</div>
+                <div class="groupe-titre">🔋 Consommation</div>
                 <div class="controle">
                     <label for="consommation">Consommation moteurs <span class="valeur" id="consommationVal">300 W</span></label>
                     <input type="range" id="consommation" min="50" max="2000" value="300" step="10">
@@ -741,15 +1115,15 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     <div class="chiffre"><span id="fspl">0</span><span class="unite">dB</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Gain antenne Tx</div>
+                    <div class="etiquette">Gain Tx</div>
                     <div class="chiffre"><span id="gainTx">0</span><span class="unite">dBi</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Bilan de liaison</div>
+                    <div class="etiquette">Bilan liaison</div>
                     <div class="chiffre"><span id="bilan">0</span><span class="unite">dB</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Densité faisceau</div>
+                    <div class="etiquette">Densité</div>
                     <div class="chiffre"><span id="densite">0</span><span class="unite">W/m²</span></div>
                 </div>
                 <div class="carte-resultat">
@@ -757,11 +1131,11 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     <div class="chiffre"><span id="puissanceBrute">0</span><span class="unite">W</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">P. nette après RF→DC</div>
+                    <div class="etiquette">P. nette</div>
                     <div class="chiffre"><span id="puissanceNette">0</span><span class="unite">W</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Rendement global</div>
+                    <div class="etiquette">Rendement</div>
                     <div class="chiffre"><span id="rendement">0</span><span class="unite">%</span></div>
                 </div>
                 <div class="carte-resultat">
@@ -773,76 +1147,41 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
                     <div class="chiffre"><span id="marge">0</span><span class="unite">W</span></div>
                 </div>
                 <div class="carte-resultat important" id="carteAutonomie">
-                    <div class="etiquette">Autonomie avec faisceau</div>
+                    <div class="etiquette">Autonomie</div>
                     <div class="chiffre" id="autonomie">∞</div>
                 </div>
                 <div class="carte-resultat" id="carteStatut">
-                    <div class="etiquette">Statut du vol</div>
+                    <div class="etiquette">Statut</div>
                     <div class="chiffre" id="statutVol" style="font-size:1.1rem;">—</div>
                 </div>
             </div>
 
-            <!-- GRAPHIQUE -->
             <div class="graphique-conteneur">
-                <div class="graphique-titre">
-                    Marge de puissance en fonction de la distance horizontale
-                </div>
+                <div class="graphique-titre">Marge de puissance vs distance horizontale</div>
                 <svg class="graphique-svg" id="graphiqueSvg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="aireGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#00c853" stop-opacity="0.4"/>
                             <stop offset="100%" stop-color="#00c853" stop-opacity="0.02"/>
                         </linearGradient>
-                        <linearGradient id="aireGradDanger" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#EF4135" stop-opacity="0.4"/>
-                            <stop offset="100%" stop-color="#EF4135" stop-opacity="0.02"/>
-                        </linearGradient>
                     </defs>
-                    <g id="graphiqueGroupe">
-                        <!-- Grille et axes générés en JS -->
-                    </g>
+                    <g id="graphiqueGroupe"></g>
                 </svg>
-                <div class="legende-graphique">
-                    <div class="legende-item">
-                        <span class="legende-pastille" style="background:#00c853;"></span>
-                        Zone de vol stable
-                    </div>
-                    <div class="legende-item">
-                        <span class="legende-pastille" style="background:#ffb800;"></span>
-                        Zone limite
-                    </div>
-                    <div class="legende-item">
-                        <span class="legende-pastille" style="background:#EF4135;"></span>
-                        Zone de chute
-                    </div>
-                    <div class="legende-item">
-                        <span style="display:inline-block; width:12px; height:12px; background:#FFFFFF; border-radius:50%;"></span>
-                        Position actuelle
-                    </div>
-                </div>
             </div>
 
             <details class="details-calculs">
-                <summary>🧮 Détail des calculs physiques</summary>
+                <summary>🧮 Détail des calculs drone</summary>
                 <div class="contenu">
-                    <p><strong>1. Distance 3D entre émetteur et drone</strong></p>
-                    <code>d = √(h² + distance_horizontale²)</code>
-                    <p><strong>2. Longueur d'onde</strong></p>
-                    <code>λ = c / f   avec c = 299 792 458 m/s</code>
-                    <p><strong>3. Perte en espace libre (FSPL)</strong></p>
+                    <p><strong>1. Distance 3D</strong></p>
+                    <code>d = √(h² + distance²)</code>
+                    <p><strong>2. FSPL</strong></p>
                     <code>FSPL(dB) = 20·log₁₀(d) + 20·log₁₀(f) + 92,45</code>
-                    <p><strong>4. Gain de l'antenne émettrice</strong></p>
-                    <code>G_Tx(dBi) = 10·log₁₀(η · (π · D / λ)²)   avec η = 0,5</code>
-                    <p><strong>5. Bilan de liaison complet</strong></p>
-                    <code>P_rx(dB) = P_tx(dB) + G_Tx + G_Rx − FSPL − A_atm</code>
-                    <p><strong>6. Rendement chaîne de conversion</strong></p>
-                    <code>η = η_DC→RF × η_RF→DC = 0,60 × 0,65 = 0,39</code>
-                    <p><strong>7. Pénalité de vent</strong></p>
-                    <code>ΔP_vent = 0,5 × v²</code>
-                    <p><strong>8. Marge de puissance</strong></p>
-                    <code>Marge = P_nette − (P_consommation + ΔP_vent)</code>
-                    <p><strong>9. Densité ICNIRP</strong></p>
-                    <code>ρ = P_brute / (π × (θ × d / 2)²)   limite : 10 W/m²</code>
+                    <p><strong>3. Gain antenne</strong></p>
+                    <code>G(dBi) = 10·log₁₀(η·(πD/λ)²)</code>
+                    <p><strong>4. Pénalité vent</strong></p>
+                    <code>ΔP = 0,5·v²</code>
+                    <p><strong>5. Marge</strong></p>
+                    <code>Marge = P_nette − P_consommation</code>
                 </div>
             </details>
         </div>
@@ -850,129 +1189,285 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
     </div>
 
     <!-- ============================================================ -->
-    <!-- VUE COMPARAISON -->
+    <!-- VUE PRODUCTION -->
     <!-- ============================================================ -->
-    <div class="vue-mode" id="vue-comparaison">
+    <div class="vue-principale" id="vue-production">
 
-        <div class="comparaison-grille">
-
-            <!-- DRONE A (bleu) -->
-            <div class="comparaison-carte bleu">
-                <h3>🔵 Configuration A</h3>
-
-                <div class="groupe">
-                    <div class="groupe-titre">Paramètres</div>
-                    <div class="controle">
-                        <label for="altA">Altitude <span class="valeur" id="altAVal">100 m</span></label>
-                        <input type="range" id="altA" min="10" max="2000" value="100" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="distA">Distance <span class="valeur" id="distAVal">300 m</span></label>
-                        <input type="range" id="distA" min="10" max="3000" value="300" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="puiA">Puissance <span class="valeur" id="puiAVal">2000 W</span></label>
-                        <input type="range" id="puiA" min="10" max="5000" value="2000" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="consoA">Consommation <span class="valeur" id="consoAVal">300 W</span></label>
-                        <input type="range" id="consoA" min="50" max="2000" value="300" step="10">
-                    </div>
+        <div class="statut-principal" id="statutProd">
+            <div class="statut-gauche">
+                <div class="statut-icone" id="statutProdIcone">✅</div>
+                <div class="statut-texte">
+                    <h3 id="statutProdTitre">Production nominale</h3>
+                    <p id="statutProdDesc">La centrale spatiale produit de l'énergie en continu.</p>
                 </div>
-
-                <div class="mini-resultats">
-                    <div class="mini-resultat">
-                        <div class="label">Puissance nette</div>
-                        <div class="val" id="resA_nette">0 W</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Marge</div>
-                        <div class="val" id="resA_marge">0 W</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Rendement</div>
-                        <div class="val" id="resA_rendement">0 %</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Autonomie</div>
-                        <div class="val" id="resA_autonomie">∞</div>
-                    </div>
-                </div>
-
-                <div class="verdict ok" id="verdictA">Aucun verdict</div>
             </div>
-
-            <!-- DRONE B (rouge) -->
-            <div class="comparaison-carte rouge">
-                <h3>🔴 Configuration B</h3>
-
-                <div class="groupe">
-                    <div class="groupe-titre">Paramètres</div>
-                    <div class="controle">
-                        <label for="altB">Altitude <span class="valeur" id="altBVal">300 m</span></label>
-                        <input type="range" id="altB" min="10" max="2000" value="300" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="distB">Distance <span class="valeur" id="distBVal">800 m</span></label>
-                        <input type="range" id="distB" min="10" max="3000" value="800" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="puiB">Puissance <span class="valeur" id="puiBVal">1000 W</span></label>
-                        <input type="range" id="puiB" min="10" max="5000" value="1000" step="10">
-                    </div>
-                    <div class="controle">
-                        <label for="consoB">Consommation <span class="valeur" id="consoBVal">500 W</span></label>
-                        <input type="range" id="consoB" min="50" max="2000" value="500" step="10">
-                    </div>
-                </div>
-
-                <div class="mini-resultats">
-                    <div class="mini-resultat">
-                        <div class="label">Puissance nette</div>
-                        <div class="val" id="resB_nette">0 W</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Marge</div>
-                        <div class="val" id="resB_marge">0 W</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Rendement</div>
-                        <div class="val" id="resB_rendement">0 %</div>
-                    </div>
-                    <div class="mini-resultat">
-                        <div class="label">Autonomie</div>
-                        <div class="val" id="resB_autonomie">0 min</div>
-                    </div>
-                </div>
-
-                <div class="verdict warn" id="verdictB">Aucun verdict</div>
-            </div>
-
+            <span class="statut-pastille pastille-ok" id="statutProdPastille">Nominal</span>
         </div>
 
         <div class="panneau">
             <div class="panneau-titre">
-                <h2>Analyse comparative</h2>
-                <button class="btn btn-blanc" onclick="echangerConfigs()">🔄 Échanger A ↔ B</button>
+                <h2>⚡ Production d'énergie annuelle</h2>
+                <div class="boutons-actions">
+                    <button class="btn btn-bleu" onclick="prodPresetRealiste()">🎯 Réaliste</button>
+                    <button class="btn btn-blanc" onclick="prodPresetOptimiste()">🚀 Optimiste</button>
+                    <button class="btn btn-rouge" onclick="prodPresetPessimiste()">⚠️ Pessimiste</button>
+                </div>
             </div>
 
-            <div class="resultats" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-                <div class="carte-resultat important" id="carteGagnant">
-                    <div class="etiquette">Meilleure configuration</div>
-                    <div class="chiffre" id="gagnant" style="font-size:1.3rem;">—</div>
+            <div class="sim-group">
+                <div class="sim-group-title">🏭 Configuration de la centrale</div>
+                <div class="controle">
+                    <label for="prodPower">Puissance électrique nette <span class="valeur" id="prodPowerVal">100 MW</span></label>
+                    <input type="range" id="prodPower" min="1" max="5000" value="100" step="1">
+                </div>
+                <div class="controle">
+                    <label for="prodAvailability">Disponibilité annuelle <span class="valeur" id="prodAvailabilityVal">92 %</span></label>
+                    <input type="range" id="prodAvailability" min="60" max="99" value="92" step="1">
+                </div>
+                <div class="controle">
+                    <label for="prodPrice">Prix de vente de l'électricité <span class="valeur" id="prodPriceVal">80 €/MWh</span></label>
+                    <input type="range" id="prodPrice" min="20" max="300" value="80" step="5">
+                </div>
+                <div class="controle">
+                    <label for="prodLifetime">Durée de vie <span class="valeur" id="prodLifetimeVal">25 ans</span></label>
+                    <input type="range" id="prodLifetime" min="10" max="40" value="25" step="1">
+                </div>
+                <div class="controle">
+                    <label for="prodCost">Coût d'investissement <span class="valeur" id="prodCostVal">10 000 M€</span></label>
+                    <input type="range" id="prodCost" min="1000" max="50000" value="10000" step="500">
+                </div>
+                <div class="controle">
+                    <label for="prodOpex">Coût d'exploitation annuel <span class="valeur" id="prodOpexVal">2 %</span></label>
+                    <input type="range" id="prodOpex" min="0.5" max="5" value="2" step="0.1">
+                </div>
+            </div>
+
+            <!-- Résultats production -->
+            <div class="resultats">
+                <div class="carte-resultat important">
+                    <div class="etiquette">Production annuelle</div>
+                    <div class="chiffre"><span id="prodAnnualGWh">0</span><span class="unite">GWh</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Écart de marge</div>
-                    <div class="chiffre"><span id="ecartMarge">0</span><span class="unite">W</span></div>
+                    <div class="etiquette">Production journalière</div>
+                    <div class="chiffre"><span id="prodDailyMWh">0</span><span class="unite">MWh</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Gain de rendement</div>
-                    <div class="chiffre"><span id="ecartRendement">0</span><span class="unite">pts</span></div>
+                    <div class="etiquette">Facteur de charge</div>
+                    <div class="chiffre"><span id="prodCapacityFactor">0</span><span class="unite">%</span></div>
                 </div>
                 <div class="carte-resultat">
-                    <div class="etiquette">Distance critique B</div>
-                    <div class="chiffre"><span id="distanceCritiqueB">0</span><span class="unite">m</span></div>
+                    <div class="etiquette">Foyers alimentés / an</div>
+                    <div class="chiffre"><span id="prodHomes">0</span></div>
                 </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Équivalent CO₂ évité</div>
+                    <div class="chiffre"><span id="prodCO2">0</span><span class="unite">kt/an</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Équivalent arbres plantés</div>
+                    <div class="chiffre"><span id="prodTrees">0</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Équivalent voitures retirées</div>
+                    <div class="chiffre"><span id="prodCars">0</span></div>
+                </div>
+                <div class="carte-resultat important">
+                    <div class="etiquette">Revenu annuel</div>
+                    <div class="chiffre"><span id="prodRevenue">0</span><span class="unite">M€</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Coût d'exploitation / an</div>
+                    <div class="chiffre"><span id="prodAnnualOpex">0</span><span class="unite">M€</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Profit net / an</div>
+                    <div class="chiffre"><span id="prodProfit">0</span><span class="unite">M€</span></div>
+                </div>
+                <div class="carte-resultat important">
+                    <div class="etiquette">Retour sur investissement</div>
+                    <div class="chiffre"><span id="prodROI">0</span><span class="unite">ans</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Revenu sur durée de vie</div>
+                    <div class="chiffre"><span id="prodLifetimeRevenue">0</span><span class="unite">M€</span></div>
+                </div>
+                <div class="carte-resultat important">
+                    <div class="etiquette">Coût du kWh (LCOE)</div>
+                    <div class="chiffre"><span id="prodLCOE">0</span><span class="unite">€/MWh</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Empreinte carbone</div>
+                    <div class="chiffre"><span id="prodCarbonFootprint">0</span><span class="unite">gCO₂/kWh</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Surface rectenna</div>
+                    <div class="chiffre"><span id="prodRectenna">0</span><span class="unite">km²</span></div>
+                </div>
+                <div class="carte-resultat">
+                    <div class="etiquette">Surface panneaux</div>
+                    <div class="chiffre"><span id="prodPanels">0</span><span class="unite">km²</span></div>
+                </div>
+            </div>
+
+            <!-- Graphique production -->
+            <div class="graphique-production">
+                <div class="graphique-titre">Production cumulée sur 30 ans (GWh)</div>
+                <svg class="graphique-svg" id="graphiqueProdSvg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <g id="graphiqueProdGroupe"></g>
+                </svg>
+            </div>
+
+            <details class="details-calculs">
+                <summary>🧮 Détail des calculs de production</summary>
+                <div class="contenu">
+                    <p><strong>1. Production annuelle</strong></p>
+                    <code>E_an = P_nette × 8760 h × disponibilité</code>
+                    <p><strong>2. Facteur de charge</strong></p>
+                    <code>FC = disponibilité</code>
+                    <p><strong>3. Foyers alimentés</strong></p>
+                    <code>N = E_an / 5 000 kWh (conso moyenne foyer)</code>
+                    <p><strong>4. CO₂ évité</strong></p>
+                    <code>CO₂ = E_an × 0,5 t/MWh</code>
+                    <p><strong>5. Équivalent arbres</strong></p>
+                    <code>Arbres = CO₂ / 0,025 t (absorption moyenne par arbre/an)</code>
+                    <p><strong>6. Équivalent voitures</strong></p>
+                    <code>Voitures = CO₂ / 4,6 t (émission moyenne par voiture/an)</code>
+                    <p><strong>7. Revenu annuel</strong></p>
+                    <code>R = E_an × prix de vente</code>
+                    <p><strong>8. Coût d'exploitation annuel</strong></p>
+                    <code>OPEX = Investissement × taux_OPEX</code>
+                    <p><strong>9. Profit net annuel</strong></p>
+                    <code>Profit = R − OPEX</code>
+                    <p><strong>10. Retour sur investissement (ROI)</strong></p>
+                    <code>ROI = Investissement / Profit</code>
+                    <p><strong>11. LCOE (coût actualisé de l'électricité)</strong></p>
+                    <code>LCOE = (CAPEX + Σ OPEX) / Σ E_an (simplifié)</code>
+                    <p><strong>12. Empreinte carbone</strong></p>
+                    <code>gCO₂/kWh = (Émissions fabrication + lancement) / E_vie</code>
+                    <p><strong>13. Surface rectenna</strong></p>
+                    <code>S = P / 10 W/m²</code>
+                    <p><strong>14. Surface panneaux</strong></p>
+                    <code>S = P / (E × η × rendement_global)</code>
+                </div>
+            </details>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VUE COMPOSANTS -->
+    <!-- ============================================================ -->
+    <div class="vue-principale" id="vue-composants">
+
+        <div class="panneau">
+            <div class="panneau-titre">
+                <h2>📚 Bibliothèque technique</h2>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="satellite">🛰 Satellite</button>
+                <button class="filter-btn" data-filter="drone">🚁 Drone</button>
+            </div>
+
+            <div id="accordion-container">
+
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>1. Panneaux photovoltaïques spatiaux</span><span class="accordion-tag tag-satellite">Satellite</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Technologie</td><td>Triple jonction InGaP/GaAs/Ge</td></tr>
+                            <tr><td>Rendement</td><td>30-32 % labo, 28 % prod</td></tr>
+                            <tr><td>Densité</td><td>300-350 W/m²</td></tr>
+                            <tr><td>Surface 1 GW</td><td>~3 km²</td></tr>
+                            <tr><td>Fournisseurs</td><td>Azur Space, Spectrolab, CESI</td></tr>
+                        </table>
+                        <div class="callout">⚠️ Refroidissement passif obligatoire, sinon rendement effondré à 15 %.</div>
+                    </div></div>
+                </div>
+
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>2. Convertisseur DC → RF</span><span class="accordion-tag tag-satellite">Satellite</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Fréquence</td><td>5,8 GHz ISM</td></tr>
+                            <tr><td>Technologie</td><td>GaN HEMT</td></tr>
+                            <tr><td>Rendement DC→RF</td><td>60-75 %</td></tr>
+                            <tr><td>Composants</td><td>Qorvo QPA2213, Wolfspeed CGHV1J006D</td></tr>
+                        </table>
+                    </div></div>
+                </div>
+
+                <div class="accordion" data-cat="satellite">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>3. Rectenna au sol</span><span class="accordion-tag tag-satellite">Satellite</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Type</td><td>Dipôles + diodes Schottky</td></tr>
+                            <tr><td>Fréquence</td><td>5,8 GHz (λ = 5,2 cm)</td></tr>
+                            <tr><td>Rendement RF→DC</td><td>70-85 %</td></tr>
+                            <tr><td>Densité au sol</td><td>< 10 W/m²</td></tr>
+                            <tr><td>Surface 1 GW</td><td>50-100 km²</td></tr>
+                        </table>
+                    </div></div>
+                </div>
+
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>4. Émetteur au sol drone</span><span class="accordion-tag tag-drone">Drone</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Puissance RF</td><td>100 W à 5 kW</td></tr>
+                            <tr><td>Fréquence</td><td>5,8 GHz ISM</td></tr>
+                            <tr><td>Antenne</td><td>Réseau phasé 16×16 à 64×64</td></tr>
+                            <tr><td>Portée</td><td>100 m à 5 km</td></tr>
+                        </table>
+                    </div></div>
+                </div>
+
+                <div class="accordion" data-cat="drone">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>5. Rectenna embarquée drone</span><span class="accordion-tag tag-drone">Drone</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Type</td><td>Réseau planaire imprimé</td></tr>
+                            <tr><td>Dimensions</td><td>20×20 à 50×50 cm</td></tr>
+                            <tr><td>Masse</td><td>100-500 g</td></tr>
+                            <tr><td>Rendement</td><td>60-75 %</td></tr>
+                            <tr><td>Substrat</td><td>Rogers RO4003C</td></tr>
+                        </table>
+                        <div class="callout">⚠️ Masse < 200 g pour 1 kW nécessaire.</div>
+                    </div></div>
+                </div>
+
+                <div class="accordion" data-cat="both">
+                    <div class="accordion-header">
+                        <div class="accordion-title"><span>📊 Récapitulatif Satellite vs Drone</span><span class="accordion-tag tag-both">Les deux</span></div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-content">
+                        <table class="tech-table">
+                            <tr><td>Critère</td><td><strong>Satellite 1 GW</strong></td><td><strong>Drone 1 kW</strong></td></tr>
+                            <tr><td>Distance</td><td>36 000 km</td><td>100 m – 5 km</td></tr>
+                            <tr><td>Rendement chaîne</td><td>10-20 %</td><td>3-10 %</td></tr>
+                            <tr><td>Maturité (TRL)</td><td>TRL 4-5</td><td>TRL 6-7</td></tr>
+                        </table>
+                    </div></div>
+                </div>
+
             </div>
         </div>
 
@@ -980,10 +1475,10 @@ footer .drapeau-petit .rouge { background: var(--rouge-france); }
 
     <footer>
         <span class="drapeau-petit"><div class="bleu"></div><div class="blanc"></div><div class="rouge"></div></span>
-        Projet SBSP — Simulateur de drone à faisceau d'énergie
+        Projet SBSP — Énergie solaire spatiale
         <span class="drapeau-petit"><div class="bleu"></div><div class="blanc"></div><div class="rouge"></div></span>
         <br>
-        <span style="font-size:0.8rem; opacity:0.7;">Graphique · Comparaison · Animation de chute · 2026</span>
+        <span style="font-size:0.8rem; opacity:0.7;">Satellite · Drone · Production · Composants · 2026</span>
     </footer>
 
 </div>
@@ -999,8 +1494,13 @@ const RX_EFFICIENCY = 0.65;
 const APERTURE_EFF = 0.5;
 const RX_GAIN_DBI = 11;
 
+const CO2_PER_MWH = 0.5;          // t CO2 / MWh (mix européen)
+const HOME_CONSUMPTION_KWH = 5000; // kWh/an par foyer
+const TREE_ABSORPTION_T = 0.025;   // t CO2 par arbre par an
+const CAR_EMISSION_T = 4.6;        // t CO2 par voiture par an
+
 // ============================================================
-// FONCTIONS UTILITAIRES
+// UTILITAIRES
 // ============================================================
 function fmt(n, decimals = 0) {
     if (!isFinite(n)) return '∞';
@@ -1010,10 +1510,192 @@ function fmt(n, decimals = 0) {
     });
 }
 
-// Calcul générique d'un drone
+// ============================================================
+// GESTION DES VUES
+// ============================================================
+document.querySelectorAll('.onglet-principal').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const vue = btn.dataset.vue;
+        document.querySelectorAll('.onglet-principal').forEach(b => b.classList.remove('actif'));
+        btn.classList.add('actif');
+        document.querySelectorAll('.vue-principale').forEach(v => v.classList.remove('actif'));
+        document.getElementById('vue-' + vue).classList.add('actif');
+    });
+});
+
+// ============================================================
+// SATELLITE
+// ============================================================
+const S = {
+    altitude:    document.getElementById('satAltitude'),
+    elevation:   document.getElementById('satElevation'),
+    frequency:   document.getElementById('satFrequency'),
+    txDiameter:  document.getElementById('satTxDiameter'),
+    rxDiameter:  document.getElementById('satRxDiameter'),
+    panelArea:   document.getElementById('satPanelArea'),
+    panelEff:    document.getElementById('satPanelEff'),
+    rainRate:    document.getElementById('satRainRate'),
+    txEff:       document.getElementById('satTxEff'),
+    rxEff:       document.getElementById('satRxEff'),
+};
+
+function computeSatellite() {
+    const altitude    = parseFloat(S.altitude.value);
+    const elevation   = parseFloat(S.elevation.value);
+    const frequency   = parseFloat(S.frequency.value);
+    const txDiameter  = parseFloat(S.txDiameter.value);
+    const rxDiameter  = parseFloat(S.rxDiameter.value);
+    const panelArea   = parseFloat(S.panelArea.value);
+    const panelEff    = parseFloat(S.panelEff.value) / 100;
+    const rainRate    = parseFloat(S.rainRate.value);
+    const txEff       = parseFloat(S.txEff.value) / 100;
+    const rxEff       = parseFloat(S.rxEff.value) / 100;
+
+    document.getElementById('satAltitudeVal').textContent = fmt(altitude) + ' km';
+    document.getElementById('satElevationVal').textContent = elevation + '°';
+    document.getElementById('satFrequencyVal').textContent = fmt(frequency, 1) + ' GHz';
+    document.getElementById('satTxDiameterVal').textContent = fmt(txDiameter) + ' m';
+    document.getElementById('satRxDiameterVal').textContent = fmt(rxDiameter, 1) + ' km';
+    document.getElementById('satPanelAreaVal').textContent = fmt(panelArea, 1) + ' km²';
+    document.getElementById('satPanelEffVal').textContent = fmt(panelEff * 100) + ' %';
+    document.getElementById('satRainRateVal').textContent = fmt(rainRate) + ' mm/h';
+    document.getElementById('satTxEffVal').textContent = fmt(txEff * 100) + ' %';
+    document.getElementById('satRxEffVal').textContent = fmt(rxEff * 100) + ' %';
+
+    const elevationRad = elevation * Math.PI / 180;
+    const distanceKm = altitude / Math.sin(elevationRad);
+    const distanceM = distanceKm * 1000;
+
+    const effectiveIrradiance = 1361 * (1 - 0.13); // 13% dégradation moyenne
+    const panelAreaM2 = panelArea * 1e6;
+    const solarCapturedW = effectiveIrradiance * panelAreaM2 * panelEff;
+    const solarCapturedMW = solarCapturedW / 1e6;
+
+    const rfPowerW = solarCapturedW * txEff;
+    const rfPowerMW = rfPowerW / 1e6;
+
+    const freqHz = frequency * 1e9;
+    const lambda = C_LIGHT / freqHz;
+
+    const fsplDb = 20 * Math.log10(distanceM) + 20 * Math.log10(freqHz) - 147.55;
+
+    const gasAttenuationDbPerKm = 0.005 * Math.pow(frequency, 1.1) / 10;
+    const gasLossDb = (gasAttenuationDbPerKm * 10) / Math.sin(elevationRad);
+
+    const k = 0.0001 * Math.pow(frequency, 1.5);
+    const alpha = 1.15 + 0.02 * Math.log10(frequency);
+    const gammaR = k * Math.pow(rainRate, alpha);
+    const rainPathKm = 5 / Math.sin(elevationRad);
+    const rainLossDb = gammaR * rainPathKm;
+
+    const txGainLin = APERTURE_EFF * Math.pow(Math.PI * txDiameter / lambda, 2);
+    const txGainDb = 10 * Math.log10(txGainLin);
+
+    const rxDiameterM = rxDiameter * 1000;
+    const rxGainLin = APERTURE_EFF * Math.pow(Math.PI * rxDiameterM / lambda, 2);
+    const rxGainDb = 10 * Math.log10(rxGainLin);
+
+    const rfPowerDbm = 10 * Math.log10(rfPowerW * 1000);
+    const receivedDbm = rfPowerDbm + txGainDb + rxGainDb - fsplDb - gasLossDb - rainLossDb;
+    let receivedW = Math.max(Math.pow(10, receivedDbm / 10) / 1000, 0);
+    const linkBudget = receivedDbm - rfPowerDbm;
+
+    const receivedAfterRectennaW = receivedW * rxEff;
+    const receivedMW = receivedAfterRectennaW / 1e6;
+
+    const thetaRad = 1.22 * lambda / txDiameter;
+    const beamSpotKm = thetaRad * distanceKm;
+    const beamSpotM = beamSpotKm * 1000;
+    const surfaceTacheM2 = Math.PI * Math.pow(beamSpotM / 2, 2);
+    const beamDensity = receivedW / Math.max(surfaceTacheM2, 1);
+
+    const globalEfficiency = solarCapturedW > 0 ? (receivedAfterRectennaW / solarCapturedW) * 100 : 0;
+    const homes = (receivedMW * 1000) / 500;
+
+    document.getElementById('satSolar').textContent = fmt(solarCapturedMW, 1);
+    document.getElementById('satRf').textContent = fmt(rfPowerMW, 1);
+    document.getElementById('satFspl').textContent = fmt(fsplDb, 1);
+    document.getElementById('satAtm').textContent = fmt(gasLossDb + rainLossDb, 2);
+    document.getElementById('satGainTx').textContent = fmt(txGainDb, 1);
+    document.getElementById('satGainRx').textContent = fmt(rxGainDb, 1);
+    document.getElementById('satBilan').textContent = fmt(linkBudget, 1);
+    document.getElementById('satDensite').textContent = fmt(beamDensity, 2);
+    document.getElementById('satNette').textContent = fmt(receivedMW, 2);
+    document.getElementById('satRendement').textContent = fmt(globalEfficiency, 2);
+    document.getElementById('satFoyers').textContent = fmt(Math.max(homes, 0));
+    document.getElementById('satTache').textContent = fmt(beamSpotKm, 1);
+
+    const safety = document.getElementById('satSafety');
+    const safetyText = document.getElementById('satSafetyText');
+    const statutSat = document.getElementById('statutSat');
+
+    if (beamDensity > ICNIRP_LIMIT) {
+        safety.className = 'safety-banner danger';
+        safetyText.textContent = `⛔ Densité ${fmt(beamDensity, 2)} W/m² > 10 W/m² (ICNIRP). Zone interdite au public.`;
+        statutSat.className = 'statut-principal critique';
+        document.getElementById('statutSatIcone').textContent = '⛔';
+        document.getElementById('statutSatTitre').textContent = 'Densité excessive';
+        document.getElementById('statutSatDesc').textContent = 'La densité au sol dépasse la limite ICNIRP.';
+        document.getElementById('statutSatPastille').className = 'statut-pastille pastille-danger';
+        document.getElementById('statutSatPastille').textContent = 'Critique';
+    } else if (beamDensity > ICNIRP_LIMIT * 0.5) {
+        safety.className = 'safety-banner warn';
+        safetyText.textContent = `⚠️ Densité ${fmt(beamDensity, 2)} W/m² proche de la limite ICNIRP.`;
+        statutSat.className = 'statut-principal degrade';
+        document.getElementById('statutSatIcone').textContent = '⚠️';
+        document.getElementById('statutSatTitre').textContent = 'Densité élevée';
+        document.getElementById('statutSatDesc').textContent = 'Proche de la limite ICNIRP.';
+        document.getElementById('statutSatPastille').className = 'statut-pastille pastille-warn';
+        document.getElementById('statutSatPastille').textContent = 'Attention';
+    } else {
+        safety.className = 'safety-banner';
+        safetyText.textContent = `✅ Densité ${fmt(beamDensity, 2)} W/m² conforme ICNIRP.`;
+        statutSat.className = 'statut-principal';
+        document.getElementById('statutSatIcone').textContent = '✅';
+        document.getElementById('statutSatTitre').textContent = 'Simulateur satellite — Nominal';
+        document.getElementById('statutSatDesc').textContent = `Production : ${fmt(receivedMW, 1)} MW nets — Rendement global : ${fmt(globalEfficiency, 1)} %`;
+        document.getElementById('statutSatPastille').className = 'statut-pastille pastille-ok';
+        document.getElementById('statutSatPastille').textContent = 'Nominal';
+    }
+}
+
+Object.values(S).forEach(el => el.addEventListener('input', computeSatellite));
+
+function satPresetStable() {
+    S.altitude.value = 35786; S.elevation.value = 90; S.frequency.value = 5.8;
+    S.txDiameter.value = 200; S.rxDiameter.value = 5; S.panelArea.value = 3;
+    S.panelEff.value = 30; S.rainRate.value = 0; S.txEff.value = 70; S.rxEff.value = 75;
+    computeSatellite();
+}
+function satPresetLEO() {
+    S.altitude.value = 800; S.elevation.value = 60; S.frequency.value = 5.8;
+    S.txDiameter.value = 50; S.rxDiameter.value = 2; S.panelArea.value = 1;
+    S.panelEff.value = 32; S.rainRate.value = 5; S.txEff.value = 75; S.rxEff.value = 80;
+    computeSatellite();
+}
+function satPresetCritique() {
+    S.altitude.value = 40000; S.elevation.value = 15; S.frequency.value = 24;
+    S.txDiameter.value = 50; S.rxDiameter.value = 1; S.panelArea.value = 0.5;
+    S.panelEff.value = 18; S.rainRate.value = 30; S.txEff.value = 45; S.rxEff.value = 50;
+    computeSatellite();
+}
+
+// ============================================================
+// DRONE
+// ============================================================
+const E = {
+    altitude:     document.getElementById('altitude'),
+    distance:     document.getElementById('distance'),
+    puissance:    document.getElementById('puissance'),
+    frequence:    document.getElementById('frequence'),
+    diametre:     document.getElementById('diametre'),
+    consommation: document.getElementById('consommation'),
+    batterie:     document.getElementById('batterie'),
+    vent:         document.getElementById('vent'),
+};
+
 function calculerDrone(params) {
     const { altitude, distance, puissance, frequence, diametre, consommation, batterie, vent } = params;
-
     const d = Math.sqrt(altitude * altitude + distance * distance);
     const lambda = C_LIGHT / (frequence * 1e9);
     const fsplDb = 20 * Math.log10(d) + 20 * Math.log10(frequence * 1e9) - 147.55;
@@ -1027,91 +1709,16 @@ function calculerDrone(params) {
     const spotM = thetaRad * d;
     const spotSurfaceM2 = Math.PI * Math.pow(spotM / 2, 2);
     const densite = puissanceBrute / Math.max(spotSurfaceM2, 0.01);
-
     const puissanceNette = puissanceBrute * RX_EFFICIENCY;
     const rendement = (puissanceNette / puissance) * 100;
-
     const penaliteVent = 0.5 * vent * vent;
     const consommationEffective = consommation + penaliteVent;
     const marge = puissanceNette - consommationEffective;
+    let autonomie = marge >= 0 ? Infinity : (batterie / consommationEffective) * 60;
 
-    let autonomie;
-    if (marge >= 0) {
-        autonomie = Infinity;
-    } else {
-        autonomie = (batterie / consommationEffective) * 60;
-    }
-
-    return {
-        d, fsplDb, gainTxDb, bilanDb, densite,
-        puissanceBrute, puissanceNette, rendement,
-        penaliteVent, consommationEffective, marge, autonomie
-    };
+    return { d, fsplDb, gainTxDb, bilanDb, densite, puissanceBrute, puissanceNette, rendement, penaliteVent, consommationEffective, marge, autonomie };
 }
 
-// ============================================================
-// ÉLÉMENTS DOM
-// ============================================================
-const E = {
-    altitude:     document.getElementById('altitude'),
-    distance:     document.getElementById('distance'),
-    puissance:    document.getElementById('puissance'),
-    frequence:    document.getElementById('frequence'),
-    diametre:     document.getElementById('diametre'),
-    consommation: document.getElementById('consommation'),
-    batterie:     document.getElementById('batterie'),
-    vent:         document.getElementById('vent'),
-};
-
-const V = {
-    altitude:     document.getElementById('altitudeVal'),
-    distance:     document.getElementById('distanceVal'),
-    puissance:    document.getElementById('puissanceVal'),
-    frequence:    document.getElementById('frequenceVal'),
-    diametre:     document.getElementById('diametreVal'),
-    consommation: document.getElementById('consommationVal'),
-    batterie:     document.getElementById('batterieVal'),
-    vent:         document.getElementById('ventVal'),
-};
-
-const R = {
-    distance3D:   document.getElementById('distance3D'),
-    fspl:         document.getElementById('fspl'),
-    gainTx:       document.getElementById('gainTx'),
-    bilan:        document.getElementById('bilan'),
-    densite:      document.getElementById('densite'),
-    puissanceBrute: document.getElementById('puissanceBrute'),
-    puissanceNette: document.getElementById('puissanceNette'),
-    rendement:    document.getElementById('rendement'),
-    penaliteVent: document.getElementById('penaliteVent'),
-    marge:        document.getElementById('marge'),
-    autonomie:    document.getElementById('autonomie'),
-    statutVol:    document.getElementById('statutVol'),
-    carteAutonomie: document.getElementById('carteAutonomie'),
-    carteStatut:  document.getElementById('carteStatut'),
-};
-
-const STATUT = {
-    principal:    document.getElementById('statutPrincipal'),
-    icone:        document.getElementById('statutIcone'),
-    titre:        document.getElementById('statutTitre'),
-    description:  document.getElementById('statutDescription'),
-    pastille:     document.getElementById('statutPastille'),
-    bandeau:      document.getElementById('bandeauStabilite'),
-    texte:        document.getElementById('stabiliteTexte'),
-    badge:        document.getElementById('stabiliteBadge'),
-};
-
-const SCENE = {
-    groupe:       document.getElementById('groupeDrone'),
-    faisceau:     document.getElementById('faisceauPath'),
-    particules:   document.getElementById('particulesFaisceau'),
-    labelPuissance: document.getElementById('labelPuissance'),
-};
-
-// ============================================================
-// CALCUL & ANIMATION
-// ============================================================
 let etatPrecedent = null;
 
 function calculer() {
@@ -1123,180 +1730,123 @@ function calculer() {
         diametre:     parseFloat(E.diametre.value),
         consommation: parseFloat(E.consommation.value),
         batterie:     parseFloat(E.batterie.value),
-        vent:         parseFloat(E.vent.value)
+        vent:         parseFloat(E.vent.value),
     };
 
-    // Affichage sliders
-    V.altitude.textContent     = fmt(params.altitude) + ' m';
-    V.distance.textContent     = fmt(params.distance) + ' m';
-    V.puissance.textContent    = fmt(params.puissance) + ' W';
-    V.frequence.textContent    = fmt(params.frequence, 1) + ' GHz';
-    V.diametre.textContent     = fmt(params.diametre, 1) + ' m';
-    V.consommation.textContent = fmt(params.consommation) + ' W';
-    V.batterie.textContent     = fmt(params.batterie) + ' Wh';
-    V.vent.textContent         = fmt(params.vent) + ' m/s';
+    document.getElementById('altitudeVal').textContent = fmt(params.altitude) + ' m';
+    document.getElementById('distanceVal').textContent = fmt(params.distance) + ' m';
+    document.getElementById('puissanceVal').textContent = fmt(params.puissance) + ' W';
+    document.getElementById('frequenceVal').textContent = fmt(params.frequence, 1) + ' GHz';
+    document.getElementById('diametreVal').textContent = fmt(params.diametre, 1) + ' m';
+    document.getElementById('consommationVal').textContent = fmt(params.consommation) + ' W';
+    document.getElementById('batterieVal').textContent = fmt(params.batterie) + ' Wh';
+    document.getElementById('ventVal').textContent = fmt(params.vent) + ' m/s';
 
-    // Calcul
     const r = calculerDrone(params);
 
-    // Affichage résultats
-    R.distance3D.textContent     = fmt(r.d, 0);
-    R.fspl.textContent           = fmt(r.fsplDb, 1);
-    R.gainTx.textContent         = fmt(r.gainTxDb, 1);
-    R.bilan.textContent          = fmt(r.bilanDb, 1);
-    R.densite.textContent        = fmt(r.densite, 2);
-    R.puissanceBrute.textContent = fmt(r.puissanceBrute, 1);
-    R.puissanceNette.textContent = fmt(r.puissanceNette, 1);
-    R.rendement.textContent      = fmt(r.rendement, 2);
-    R.penaliteVent.textContent   = fmt(r.penaliteVent, 1);
-    R.marge.textContent          = fmt(r.marge, 1);
+    document.getElementById('distance3D').textContent = fmt(r.d, 0);
+    document.getElementById('fspl').textContent = fmt(r.fsplDb, 1);
+    document.getElementById('gainTx').textContent = fmt(r.gainTxDb, 1);
+    document.getElementById('bilan').textContent = fmt(r.bilanDb, 1);
+    document.getElementById('densite').textContent = fmt(r.densite, 2);
+    document.getElementById('puissanceBrute').textContent = fmt(r.puissanceBrute, 1);
+    document.getElementById('puissanceNette').textContent = fmt(r.puissanceNette, 1);
+    document.getElementById('rendement').textContent = fmt(r.rendement, 2);
+    document.getElementById('penaliteVent').textContent = fmt(r.penaliteVent, 1);
+    document.getElementById('marge').textContent = fmt(r.marge, 1);
 
     if (r.autonomie === Infinity) {
-        R.autonomie.textContent = '∞';
+        document.getElementById('autonomie').textContent = '∞';
     } else {
-        R.autonomie.textContent = Math.round(r.autonomie) + ' min';
+        document.getElementById('autonomie').textContent = Math.round(r.autonomie) + ' min';
     }
-
-    // Cartes d'état
-    R.carteAutonomie.className = 'carte-resultat important';
-    R.carteStatut.className = 'carte-resultat';
 
     let niveau;
-    if (r.marge > r.consommationEffective * 0.3 && r.densite <= ICNIRP_LIMIT) {
-        niveau = 'ok';
-        R.carteAutonomie.classList.add('ok');
-        R.carteStatut.classList.add('ok');
-        R.statutVol.textContent = '✅ Stable';
-    } else if (r.marge > 0 && r.densite <= ICNIRP_LIMIT) {
-        niveau = 'warn';
-        R.carteAutonomie.classList.add('warn');
-        R.carteStatut.classList.add('warn');
-        R.statutVol.textContent = '⚠️ Limite';
-    } else {
-        niveau = 'danger';
-        R.carteAutonomie.classList.add('danger');
-        R.carteStatut.classList.add('danger');
-        R.statutVol.textContent = '❌ Chute';
-    }
+    if (r.marge > r.consommationEffective * 0.3 && r.densite <= ICNIRP_LIMIT) niveau = 'ok';
+    else if (r.marge > 0 && r.densite <= ICNIRP_LIMIT) niveau = 'warn';
+    else niveau = 'danger';
 
-    // Mise à jour bandeau
     majStatut(r, niveau);
-
-    // Animation du drone
     animerDrone(niveau, etatPrecedent);
     etatPrecedent = niveau;
 
-    // Mise à jour label puissance
-    SCENE.labelPuissance.textContent = fmt(params.frequence, 1) + ' GHz · ' + fmt(params.puissance, 0) + ' W';
-
-    // Mise à jour couleur du faisceau selon niveau
-    if (niveau === 'danger') {
-        SCENE.faisceau.setAttribute('fill', 'url(#faisceauFaible)');
-    } else {
-        SCENE.faisceau.setAttribute('fill', 'url(#faisceauGrad)');
-    }
-
-    // Mise à jour graphique
     majGraphique(params, r);
+    majVue3D(r, niveau);
 }
 
-// ============================================================
-// ANIMATION DRONE
-// ============================================================
 function animerDrone(niveau, precedent) {
-    const g = SCENE.groupe;
+    const g = document.getElementById('groupeDrone');
     g.classList.remove('drone-stable', 'drone-falling', 'drone-wobble');
 
-    if (niveau === 'ok') {
-        g.classList.add('drone-stable');
-    } else if (niveau === 'warn') {
-        g.classList.add('drone-wobble');
-    } else if (niveau === 'danger') {
-        // Ne déclencher l'animation de chute que si on vient d'un état non-danger
-        if (precedent !== 'danger') {
-            g.classList.add('drone-falling');
-        } else {
-            // Sinon garder le drone au sol
-            g.classList.add('drone-falling');
-            g.style.animationPlayState = 'paused';
-            g.style.animationDelay = '0s';
-        }
-    }
+    if (niveau === 'ok') g.classList.add('drone-stable');
+    else if (niveau === 'warn') g.classList.add('drone-wobble');
+    else if (niveau === 'danger') g.classList.add('drone-falling');
 }
 
-// ============================================================
-// BANDEAU D'ÉTAT
-// ============================================================
 function majStatut(r, niveau) {
+    const principal = document.getElementById('statutPrincipal');
+    const icone = document.getElementById('statutIcone');
+    const titre = document.getElementById('statutTitre');
+    const desc = document.getElementById('statutDescription');
+    const pastille = document.getElementById('statutPastille');
+    const bandeau = document.getElementById('bandeauStabilite');
+    const texte = document.getElementById('stabiliteTexte');
+    const badge = document.getElementById('stabiliteBadge');
+
     if (niveau === 'ok') {
-        STATUT.principal.className = 'statut-principal';
-        STATUT.icone.textContent = '✅';
-        STATUT.titre.textContent = 'Vol stable — Tous systèmes nominaux';
-        STATUT.description.textContent = 'Le drone reçoit suffisamment d\'énergie pour un vol continu.';
-        STATUT.pastille.className = 'statut-pastille pastille-ok';
-        STATUT.pastille.textContent = 'Systèmes nominaux';
-
-        STATUT.bandeau.className = 'bandeau-stabilite ok';
-        STATUT.texte.textContent = `Vol stable — marge de ${fmt(r.marge, 0)} W (${fmt(r.marge / r.consommationEffective * 100, 0)} %)`;
-        STATUT.badge.textContent = 'Stable';
+        principal.className = 'statut-principal';
+        icone.textContent = '✅';
+        titre.textContent = 'Vol stable — Tous systèmes nominaux';
+        desc.textContent = 'Le drone reçoit suffisamment d\'énergie pour un vol continu.';
+        pastille.className = 'statut-pastille pastille-ok';
+        pastille.textContent = 'Systèmes nominaux';
+        bandeau.className = 'bandeau-stabilite ok';
+        texte.textContent = `Vol stable — marge de ${fmt(r.marge, 0)} W (${fmt(r.marge / r.consommationEffective * 100, 0)} %)`;
+        badge.textContent = 'Stable';
     } else if (niveau === 'warn') {
-        STATUT.principal.className = 'statut-principal degrade';
-        STATUT.icone.textContent = '⚠️';
-        STATUT.titre.textContent = 'Vol en limite — Marge faible';
-        STATUT.description.textContent = 'Le drone reste en vol mais la marge de puissance est réduite.';
-        STATUT.pastille.className = 'statut-pastille pastille-warn';
-        STATUT.pastille.textContent = 'Attention';
-
-        STATUT.bandeau.className = 'bandeau-stabilite warn';
-        STATUT.texte.textContent = `Vol limite — marge de ${fmt(r.marge, 0)} W (${fmt(r.marge / r.consommationEffective * 100, 0)} %)`;
-        STATUT.badge.textContent = 'Limite';
+        principal.className = 'statut-principal degrade';
+        icone.textContent = '⚠️';
+        titre.textContent = 'Vol en limite — Marge faible';
+        desc.textContent = 'Le drone reste en vol mais la marge est réduite.';
+        pastille.className = 'statut-pastille pastille-warn';
+        pastille.textContent = 'Attention';
+        bandeau.className = 'bandeau-stabilite warn';
+        texte.textContent = `Vol limite — marge de ${fmt(r.marge, 0)} W (${fmt(r.marge / r.consommationEffective * 100, 0)} %)`;
+        badge.textContent = 'Limite';
     } else {
-        STATUT.principal.className = 'statut-principal critique';
-        STATUT.icone.textContent = '⛔';
+        principal.className = 'statut-principal critique';
+        icone.textContent = '⛔';
         if (r.densite > ICNIRP_LIMIT) {
-            STATUT.titre.textContent = 'ALERTE — Densité dépasse la limite ICNIRP';
-            STATUT.description.textContent = `Densité ${fmt(r.densite, 2)} W/m² > 10 W/m². Zone interdite au public.`;
+            titre.textContent = 'ALERTE — Densité dépasse la limite ICNIRP';
+            desc.textContent = `Densité ${fmt(r.densite, 2)} W/m² > 10 W/m².`;
         } else {
-            STATUT.titre.textContent = 'CRITIQUE — Le drone va chuter';
-            STATUT.description.textContent = `Marge négative : ${fmt(r.marge, 0)} W. Le drone perd de l'altitude.`;
+            titre.textContent = 'CRITIQUE — Le drone va chuter';
+            desc.textContent = `Marge négative : ${fmt(r.marge, 0)} W.`;
         }
-        STATUT.pastille.className = 'statut-pastille pastille-danger';
-        STATUT.pastille.textContent = 'Critique';
-
-        STATUT.bandeau.className = 'bandeau-stabilite danger';
-        STATUT.texte.textContent = r.densite > ICNIRP_LIMIT
-            ? `⚠️ Densité ${fmt(r.densite, 2)} W/m² > limite ICNIRP (10 W/m²)`
-            : `❌ Chute imminente — marge de ${fmt(r.marge, 0)} W`;
-        STATUT.badge.textContent = 'Critique';
+        pastille.className = 'statut-pastille pastille-danger';
+        pastille.textContent = 'Critique';
+        bandeau.className = 'bandeau-stabilite danger';
+        texte.textContent = `❌ Chute — marge de ${fmt(r.marge, 0)} W`;
+        badge.textContent = 'Critique';
     }
 }
 
-// ============================================================
-// GRAPHIQUE SVG — Marge vs Distance
-// ============================================================
 function majGraphique(params, rActuel) {
-    const svg = document.getElementById('graphiqueSvg');
     const groupe = document.getElementById('graphiqueGroupe');
     groupe.innerHTML = '';
-
     const W = 800, H = 300;
     const margeG = 60, margeD = 30, margeH = 30, margeB = 40;
     const zoneW = W - margeG - margeD;
     const zoneH = H - margeH - margeB;
 
-    // Calcul de la marge pour chaque distance
     const points = [];
     const maxDist = 3000;
-    const nbPoints = 60;
-
-    for (let i = 0; i <= nbPoints; i++) {
-        const dist = (i / nbPoints) * maxDist;
-        const p = { ...params, distance: dist };
-        const r = calculerDrone(p);
+    for (let i = 0; i <= 60; i++) {
+        const dist = (i / 60) * maxDist;
+        const r = calculerDrone({ ...params, distance: dist });
         points.push({ dist, marge: r.marge });
     }
 
-    // Échelles
     const marges = points.map(p => p.marge);
     const maxMarge = Math.max(...marges, rActuel.consommationEffective * 0.5);
     const minMarge = Math.min(...marges, -rActuel.consommationEffective);
@@ -1305,284 +1855,328 @@ function majGraphique(params, rActuel) {
     const scaleX = d => margeG + (d / maxDist) * zoneW;
     const scaleY = m => margeH + zoneH - ((m - minMarge) / range) * zoneH;
 
-    // Fond zones (danger / warn / ok)
     const y0 = scaleY(0);
     const ySeuilWarn = scaleY(rActuel.consommationEffective * 0.3);
 
-    // Zone danger (marge < 0)
     groupe.innerHTML += `<rect x="${margeG}" y="${y0}" width="${zoneW}" height="${margeH + zoneH - y0}" fill="#EF4135" opacity="0.08"/>`;
-    // Zone warn (0 < marge < seuil)
     groupe.innerHTML += `<rect x="${margeG}" y="${ySeuilWarn}" width="${zoneW}" height="${Math.max(y0 - ySeuilWarn, 0)}" fill="#ffb800" opacity="0.08"/>`;
-    // Zone ok (marge > seuil)
     groupe.innerHTML += `<rect x="${margeG}" y="${margeH}" width="${zoneW}" height="${Math.max(ySeuilWarn - margeH, 0)}" fill="#00c853" opacity="0.06"/>`;
 
-    // Axes
     groupe.innerHTML += `<line x1="${margeG}" y1="${margeH + zoneH}" x2="${margeG + zoneW}" y2="${margeH + zoneH}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
     groupe.innerHTML += `<line x1="${margeG}" y1="${margeH}" x2="${margeG}" y2="${margeH + zoneH}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
 
-    // Grille horizontale
-    const nbGradY = 5;
-    for (let i = 0; i <= nbGradY; i++) {
-        const m = minMarge + (i / nbGradY) * range;
+    for (let i = 0; i <= 5; i++) {
+        const m = minMarge + (i / 5) * range;
         const y = scaleY(m);
         groupe.innerHTML += `<line x1="${margeG}" y1="${y}" x2="${margeG + zoneW}" y2="${y}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
         groupe.innerHTML += `<text x="${margeG - 8}" y="${y + 4}" fill="#a8b2c8" font-size="10" font-family="Segoe UI" text-anchor="end">${fmt(m, 0)}</text>`;
     }
 
-    // Grille verticale
-    const nbGradX = 6;
-    for (let i = 0; i <= nbGradX; i++) {
-        const d = (i / nbGradX) * maxDist;
+    for (let i = 0; i <= 6; i++) {
+        const d = (i / 6) * maxDist;
         const x = scaleX(d);
         groupe.innerHTML += `<line x1="${x}" y1="${margeH}" x2="${x}" y2="${margeH + zoneH}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
         groupe.innerHTML += `<text x="${x}" y="${margeH + zoneH + 18}" fill="#a8b2c8" font-size="10" font-family="Segoe UI" text-anchor="middle">${fmt(d, 0)}</text>`;
     }
 
-    // Ligne du zéro
     groupe.innerHTML += `<line x1="${margeG}" y1="${scaleY(0)}" x2="${margeG + zoneW}" y2="${scaleY(0)}" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>`;
 
-    // Courbe
     const pathPoints = points.map(p => `${scaleX(p.dist)},${scaleY(p.marge)}`).join(' ');
     groupe.innerHTML += `<polyline points="${pathPoints}" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
 
-    // Aire sous la courbe
     const airePoints = `${margeG},${margeH + zoneH} ${pathPoints} ${margeG + zoneW},${margeH + zoneH}`;
     groupe.innerHTML += `<polygon points="${airePoints}" fill="url(#aireGrad)" opacity="0.4"/>`;
 
-    // Points indicateurs sur la courbe selon zone
-    points.forEach((p, i) => {
-        if (i % 4 === 0) {
-            const x = scaleX(p.dist);
-            const y = scaleY(p.marge);
-            let color = '#00c853';
-            if (p.marge < 0) color = '#EF4135';
-            else if (p.marge < rActuel.consommationEffective * 0.3) color = '#ffb800';
-            groupe.innerHTML += `<circle cx="${x}" cy="${y}" r="2.5" fill="${color}" opacity="0.6"/>`;
-        }
-    });
-
-    // Marqueur position actuelle
     const xActuel = scaleX(params.distance);
     const yActuel = scaleY(rActuel.marge);
 
-    // Ligne verticale de la position
     groupe.innerHTML += `<line x1="${xActuel}" y1="${margeH}" x2="${xActuel}" y2="${margeH + zoneH}" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>`;
-
-    // Halo autour du marqueur
     groupe.innerHTML += `<circle cx="${xActuel}" cy="${yActuel}" r="12" fill="rgba(255,255,255,0.15)"/>`;
-    // Marqueur
     groupe.innerHTML += `<circle cx="${xActuel}" cy="${yActuel}" r="6" fill="#FFFFFF" stroke="#0055A4" stroke-width="2.5"/>`;
-
-    // Valeur au-dessus du marqueur
     groupe.innerHTML += `<text x="${xActuel}" y="${yActuel - 14}" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Segoe UI" text-anchor="middle">${fmt(rActuel.marge, 0)} W</text>`;
 
-    // Légende des axes
     groupe.innerHTML += `<text x="${margeG + zoneW / 2}" y="${H - 6}" fill="#a8b2c8" font-size="11" font-family="Segoe UI" text-anchor="middle">Distance horizontale (m)</text>`;
     groupe.innerHTML += `<text x="16" y="${margeH + zoneH / 2}" fill="#a8b2c8" font-size="11" font-family="Segoe UI" text-anchor="middle" transform="rotate(-90 16 ${margeH + zoneH / 2})">Marge (W)</text>`;
 }
 
-// ============================================================
-// PRÉRÉGLAGES
-// ============================================================
-function setSlider(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.value = value;
+function majVue3D(r, niveau) {
+    // Facultatif : peut être utilisé pour changer la couleur du faisceau
+    const faisceau = document.getElementById('faisceauPath');
+    if (faisceau) {
+        if (niveau === 'danger') faisceau.setAttribute('fill', 'url(#faisceauFaible)');
+        else faisceau.setAttribute('fill', 'url(#faisceauGrad)');
+    }
 }
 
-function appliquerReglageStable() {
-    setSlider('altitude', 100);
-    setSlider('distance', 300);
-    setSlider('puissance', 2000);
-    setSlider('frequence', 5.8);
-    setSlider('diametre', 1.5);
-    setSlider('consommation', 300);
-    setSlider('batterie', 1000);
-    setSlider('vent', 2);
-    // Reset l'animation si on était en chute
-    const g = SCENE.groupe;
-    g.style.animationPlayState = '';
-    g.style.animationDelay = '';
+Object.values(E).forEach(el => el.addEventListener('input', calculer));
+
+function dronePresetStable() {
+    E.altitude.value = 100; E.distance.value = 300; E.puissance.value = 2000;
+    E.frequence.value = 5.8; E.diametre.value = 1.5; E.consommation.value = 300;
+    E.batterie.value = 1000; E.vent.value = 2;
+    etatPrecedent = null;
+    calculer();
+}
+function dronePresetOptimal() {
+    E.altitude.value = 50; E.distance.value = 150; E.puissance.value = 3000;
+    E.frequence.value = 5.8; E.diametre.value = 2.0; E.consommation.value = 250;
+    E.batterie.value = 1500; E.vent.value = 1;
+    etatPrecedent = null;
+    calculer();
+}
+function dronePresetCritique() {
+    E.altitude.value = 1500; E.distance.value = 2500; E.puissance.value = 100;
+    E.frequence.value = 24; E.diametre.value = 0.4; E.consommation.value = 1800;
+    E.batterie.value = 200; E.vent.value = 15;
     etatPrecedent = null;
     calculer();
 }
 
-function appliquerReglageOptimal() {
-    setSlider('altitude', 50);
-    setSlider('distance', 150);
-    setSlider('puissance', 3000);
-    setSlider('frequence', 5.8);
-    setSlider('diametre', 2.0);
-    setSlider('consommation', 250);
-    setSlider('batterie', 1500);
-    setSlider('vent', 1);
-    const g = SCENE.groupe;
-    g.style.animationPlayState = '';
-    g.style.animationDelay = '';
-    etatPrecedent = null;
-    calculer();
+// ============================================================
+// PRODUCTION
+// ============================================================
+const P = {
+    power:        document.getElementById('prodPower'),
+    availability: document.getElementById('prodAvailability'),
+    price:        document.getElementById('prodPrice'),
+    lifetime:     document.getElementById('prodLifetime'),
+    cost:         document.getElementById('prodCost'),
+    opex:         document.getElementById('prodOpex'),
+};
+
+function computeProduction() {
+    const power        = parseFloat(P.power.value);          // MW
+    const availability = parseFloat(P.availability.value) / 100;
+    const price        = parseFloat(P.price.value);          // €/MWh
+    const lifetime     = parseFloat(P.lifetime.value);       // années
+    const cost         = parseFloat(P.cost.value);           // M€
+    const opex         = parseFloat(P.opex.value) / 100;     // % du CAPEX
+
+    document.getElementById('prodPowerVal').textContent = fmt(power) + ' MW';
+    document.getElementById('prodAvailabilityVal').textContent = fmt(availability * 100) + ' %';
+    document.getElementById('prodPriceVal').textContent = fmt(price) + ' €/MWh';
+    document.getElementById('prodLifetimeVal').textContent = fmt(lifetime) + ' ans';
+    document.getElementById('prodCostVal').textContent = fmt(cost) + ' M€';
+    document.getElementById('prodOpexVal').textContent = fmt(opex * 100, 1) + ' %';
+
+    // 1. Production annuelle (GWh)
+    const annualMWh = power * 8760 * availability;
+    const annualGWh = annualMWh / 1000;
+
+    // 2. Production journalière
+    const dailyMWh = annualMWh / 365;
+
+    // 3. Facteur de charge
+    const capacityFactor = availability * 100;
+
+    // 4. Foyers alimentés
+    const homes = (annualMWh * 1000) / HOME_CONSUMPTION_KWH;
+
+    // 5. CO2 évité (kt/an)
+    const co2 = (annualMWh * CO2_PER_MWH) / 1000;
+
+    // 6. Arbres équivalents
+    const trees = (co2 * 1000) / TREE_ABSORPTION_T;
+
+    // 7. Voitures équivalentes
+    const cars = (co2 * 1000) / CAR_EMISSION_T;
+
+    // 8. Revenu annuel (M€)
+    const revenue = (annualMWh * price) / 1e6;
+
+    // 9. OPEX annuel (M€)
+    const annualOpex = cost * opex;
+
+    // 10. Profit net annuel (M€)
+    const profit = revenue - annualOpex;
+
+    // 11. ROI
+    const roi = profit > 0 ? cost / profit : Infinity;
+
+    // 12. Revenu sur durée de vie
+    const lifetimeRevenue = revenue * lifetime - cost;
+
+    // 13. LCOE (€/MWh)
+    const lcoe = (cost * 1e6 + annualOpex * 1e6 * lifetime) / (annualMWh * lifetime);
+
+    // 14. Empreinte carbone
+    // On suppose 500 000 t CO2 pour la fabrication + lancement du satellite
+    const fabricationCO2t = 500000;
+    const lifetimeMWh = annualMWh * lifetime;
+    const carbonFootprint = (fabricationCO2t * 1e6) / (lifetimeMWh * 1000); // g CO2/kWh
+
+    // 15. Surface rectenna
+    const rectennaKm2 = power / 10; // 10 W/m² = 10 MW/km²
+
+    // 16. Surface panneaux
+    const panelKm2 = power / (1361 * 0.30 * 0.20) / 1e3; // approximation
+
+    // Affichage
+    document.getElementById('prodAnnualGWh').textContent = fmt(annualGWh, 0);
+    document.getElementById('prodDailyMWh').textContent = fmt(dailyMWh, 0);
+    document.getElementById('prodCapacityFactor').textContent = fmt(capacityFactor, 1);
+    document.getElementById('prodHomes').textContent = fmt(homes);
+    document.getElementById('prodCO2').textContent = fmt(co2, 1);
+    document.getElementById('prodTrees').textContent = fmt(trees);
+    document.getElementById('prodCars').textContent = fmt(cars);
+    document.getElementById('prodRevenue').textContent = fmt(revenue, 1);
+    document.getElementById('prodAnnualOpex').textContent = fmt(annualOpex, 1);
+    document.getElementById('prodProfit').textContent = fmt(profit, 1);
+    document.getElementById('prodROI').textContent = isFinite(roi) ? fmt(roi, 1) : '> 100';
+    document.getElementById('prodLifetimeRevenue').textContent = fmt(lifetimeRevenue, 0);
+    document.getElementById('prodLCOE').textContent = fmt(lcoe, 1);
+    document.getElementById('prodCarbonFootprint').textContent = fmt(carbonFootprint, 1);
+    document.getElementById('prodRectenna').textContent = fmt(rectennaKm2, 1);
+    document.getElementById('prodPanels').textContent = fmt(panelKm2, 2);
+
+    // Statut
+    const statutProd = document.getElementById('statutProd');
+    if (profit > 0 && roi < lifetime) {
+        statutProd.className = 'statut-principal';
+        document.getElementById('statutProdIcone').textContent = '✅';
+        document.getElementById('statutProdTitre').textContent = 'Production rentable';
+        document.getElementById('statutProdDesc').textContent = `ROI en ${fmt(roi, 1)} ans — LCOE ${fmt(lcoe, 1)} €/MWh`;
+        document.getElementById('statutProdPastille').className = 'statut-pastille pastille-ok';
+        document.getElementById('statutProdPastille').textContent = 'Rentable';
+    } else if (profit > 0) {
+        statutProd.className = 'statut-principal degrade';
+        document.getElementById('statutProdIcone').textContent = '⚠️';
+        document.getElementById('statutProdTitre').textContent = 'Production limite';
+        document.getElementById('statutProdDesc').textContent = `ROI en ${fmt(roi, 1)} ans (durée de vie : ${lifetime} ans)`;
+        document.getElementById('statutProdPastille').className = 'statut-pastille pastille-warn';
+        document.getElementById('statutProdPastille').textContent = 'Limite';
+    } else {
+        statutProd.className = 'statut-principal critique';
+        document.getElementById('statutProdIcone').textContent = '⛔';
+        document.getElementById('statutProdTitre').textContent = 'Production non rentable';
+        document.getElementById('statutProdDesc').textContent = 'Le projet ne rembourse pas son investissement.';
+        document.getElementById('statutProdPastille').className = 'statut-pastille pastille-danger';
+        document.getElementById('statutProdPastille').textContent = 'Non rentable';
+    }
+
+    // Graphique production cumulée
+    majGraphiqueProduction(annualGWh, cost, lifetime, price, annualOpex);
 }
 
-function appliquerReglageCritique() {
-    setSlider('altitude', 1500);
-    setSlider('distance', 2500);
-    setSlider('puissance', 100);
-    setSlider('frequence', 24);
-    setSlider('diametre', 0.4);
-    setSlider('consommation', 1800);
-    setSlider('batterie', 200);
-    setSlider('vent', 15);
-    etatPrecedent = null; // Force l'animation de chute
-    calculer();
+function majGraphiqueProduction(annualGWh, capex, lifetime, price, annualOpex) {
+    const groupe = document.getElementById('graphiqueProdGroupe');
+    groupe.innerHTML = '';
+
+    const W = 800, H = 300;
+    const margeG = 70, margeD = 40, margeH = 30, margeB = 40;
+    const zoneW = W - margeG - margeD;
+    const zoneH = H - margeH - margeB;
+
+    const maxYears = Math.min(30, lifetime);
+    const points = [];
+    let cumulGWh = 0;
+    let cumulM€ = 0;
+
+    for (let y = 0; y <= maxYears; y++) {
+        points.push({
+            year: y,
+            production: cumulGWh,
+            revenu: cumulM€,
+            profit: cumulM€ - capex - annualOpex * y
+        });
+        cumulGWh += annualGWh;
+        cumulM€ += (annualGWh * 1000 * price) / 1e6;
+    }
+
+    const maxProd = Math.max(...points.map(p => p.production));
+    const maxRev = Math.max(...points.map(p => p.profit));
+
+    const scaleX = y => margeG + (y / maxYears) * zoneW;
+    const scaleY = v => margeH + zoneH - ((v - Math.min(0, ...points.map(p => p.profit))) / (maxRev - Math.min(0, ...points.map(p => p.profit)))) * zoneH;
+    const scaleYProd = v => margeH + zoneH - (v / maxProd) * zoneH;
+
+    // Grille
+    for (let i = 0; i <= 5; i++) {
+        const y = margeH + (i / 5) * zoneH;
+        groupe.innerHTML += `<line x1="${margeG}" y1="${y}" x2="${margeG + zoneW}" y2="${y}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+    }
+
+    // Axes
+    groupe.innerHTML += `<line x1="${margeG}" y1="${margeH + zoneH}" x2="${margeG + zoneW}" y2="${margeH + zoneH}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
+    groupe.innerHTML += `<line x1="${margeG}" y1="${margeH}" x2="${margeG}" y2="${margeH + zoneH}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
+
+    // Ligne zéro
+    const yZero = scaleY(0);
+    groupe.innerHTML += `<line x1="${margeG}" y1="${yZero}" x2="${margeG + zoneW}" y2="${yZero}" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>`;
+
+    // Courbe production
+    const prodPoints = points.map(p => `${scaleX(p.year)},${scaleYProd(p.production)}`).join(' ');
+    groupe.innerHTML += `<polyline points="${prodPoints}" fill="none" stroke="#1e78d1" stroke-width="2.5"/>`;
+
+    // Aire production
+    const aireProd = `${margeG},${margeH + zoneH} ${prodPoints} ${scaleX(maxYears)},${margeH + zoneH}`;
+    groupe.innerHTML += `<polygon points="${aireProd}" fill="#1e78d1" opacity="0.15"/>`;
+
+    // Courbe profit
+    const profitPoints = points.map(p => `${scaleX(p.year)},${scaleY(p.profit)}`).join(' ');
+    groupe.innerHTML += `<polyline points="${profitPoints}" fill="none" stroke="#00c853" stroke-width="2.5"/>`;
+
+    // Axe X
+    for (let i = 0; i <= 5; i++) {
+        const y = Math.round((i / 5) * maxYears);
+        const x = scaleX(y);
+        groupe.innerHTML += `<text x="${x}" y="${margeH + zoneH + 18}" fill="#a8b2c8" font-size="10" font-family="Segoe UI" text-anchor="middle">${y} an${y > 1 ? 's' : ''}</text>`;
+    }
+
+    // Légende
+    groupe.innerHTML += `<text x="${margeG + 10}" y="${margeH + 15}" fill="#1e78d1" font-size="11" font-family="Segoe UI" font-weight="700">━ Production cumulée (GWh)</text>`;
+    groupe.innerHTML += `<text x="${margeG + 10}" y="${margeH + 30}" fill="#00c853" font-size="11" font-family="Segoe UI" font-weight="700">━ Profit cumulé (M€)</text>`;
+
+    // Axe Y à droite (production)
+    for (let i = 0; i <= 5; i++) {
+        const v = (i / 5) * maxProd;
+        const y = scaleYProd(v);
+        groupe.innerHTML += `<text x="${margeG + zoneW + 8}" y="${y + 4}" fill="#1e78d1" font-size="10" font-family="Segoe UI">${fmt(v, 0)}</text>`;
+    }
+
+    // Axe Y à gauche (profit)
+    const minP = Math.min(0, ...points.map(p => p.profit));
+    for (let i = 0; i <= 5; i++) {
+        const v = minP + (i / 5) * (maxRev - minP);
+        const y = scaleY(v);
+        groupe.innerHTML += `<text x="${margeG - 8}" y="${y + 4}" fill="#00c853" font-size="10" font-family="Segoe UI" text-anchor="end">${fmt(v, 0)}</text>`;
+    }
+}
+
+Object.values(P).forEach(el => el.addEventListener('input', computeProduction));
+
+function prodPresetRealiste() {
+    P.power.value = 100; P.availability.value = 92; P.price.value = 80;
+    P.lifetime.value = 25; P.cost.value = 10000; P.opex.value = 2;
+    computeProduction();
+}
+function prodPresetOptimiste() {
+    P.power.value = 1000; P.availability.value = 96; P.price.value = 150;
+    P.lifetime.value = 30; P.cost.value = 20000; P.opex.value = 1;
+    computeProduction();
+}
+function prodPresetPessimiste() {
+    P.power.value = 50; P.availability.value = 75; P.price.value = 40;
+    P.lifetime.value = 15; P.cost.value = 30000; P.opex.value = 4;
+    computeProduction();
 }
 
 // ============================================================
-// ÉCOUTEURS SIMULATEUR
+// ACCORDÉONS
 // ============================================================
-Object.values(E).forEach(el => {
-    if (el) el.addEventListener('input', calculer);
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => header.parentElement.classList.toggle('open'));
 });
 
-// ============================================================
-// MODE COMPARAISON
-// ============================================================
-const CA = {
-    alt:   document.getElementById('altA'),
-    dist:  document.getElementById('distA'),
-    pui:   document.getElementById('puiA'),
-    conso: document.getElementById('consoA'),
-};
-const CB = {
-    alt:   document.getElementById('altB'),
-    dist:  document.getElementById('distB'),
-    pui:   document.getElementById('puiB'),
-    conso: document.getElementById('consoB'),
-};
-
-function calculerComparaison() {
-    const paramsA = {
-        altitude: parseFloat(CA.alt.value),
-        distance: parseFloat(CA.dist.value),
-        puissance: parseFloat(CA.pui.value),
-        frequence: 5.8,
-        diametre: 1.5,
-        consommation: parseFloat(CA.conso.value),
-        batterie: 1000,
-        vent: 2
-    };
-    const paramsB = {
-        altitude: parseFloat(CB.alt.value),
-        distance: parseFloat(CB.dist.value),
-        puissance: parseFloat(CB.pui.value),
-        frequence: 5.8,
-        diametre: 1.5,
-        consommation: parseFloat(CB.conso.value),
-        batterie: 1000,
-        vent: 2
-    };
-
-    document.getElementById('altAVal').textContent = fmt(paramsA.altitude) + ' m';
-    document.getElementById('distAVal').textContent = fmt(paramsA.distance) + ' m';
-    document.getElementById('puiAVal').textContent = fmt(paramsA.puissance) + ' W';
-    document.getElementById('consoAVal').textContent = fmt(paramsA.consommation) + ' W';
-    document.getElementById('altBVal').textContent = fmt(paramsB.altitude) + ' m';
-    document.getElementById('distBVal').textContent = fmt(paramsB.distance) + ' m';
-    document.getElementById('puiBVal').textContent = fmt(paramsB.puissance) + ' W';
-    document.getElementById('consoBVal').textContent = fmt(paramsB.consommation) + ' W';
-
-    const rA = calculerDrone(paramsA);
-    const rB = calculerDrone(paramsB);
-
-    document.getElementById('resA_nette').textContent = fmt(rA.puissanceNette, 0) + ' W';
-    document.getElementById('resA_marge').textContent = fmt(rA.marge, 0) + ' W';
-    document.getElementById('resA_rendement').textContent = fmt(rA.rendement, 1) + ' %';
-    document.getElementById('resA_autonomie').textContent = rA.autonomie === Infinity ? '∞' : Math.round(rA.autonomie) + ' min';
-
-    document.getElementById('resB_nette').textContent = fmt(rB.puissanceNette, 0) + ' W';
-    document.getElementById('resB_marge').textContent = fmt(rB.marge, 0) + ' W';
-    document.getElementById('resB_rendement').textContent = fmt(rB.rendement, 1) + ' %';
-    document.getElementById('resB_autonomie').textContent = rB.autonomie === Infinity ? '∞' : Math.round(rB.autonomie) + ' min';
-
-    // Verdicts
-    const verdictA = document.getElementById('verdictA');
-    const verdictB = document.getElementById('verdictB');
-
-    if (rA.marge > rA.consommationEffective * 0.3) {
-        verdictA.className = 'verdict ok';
-        verdictA.textContent = '✅ Vol stable — Aucun risque de chute';
-    } else if (rA.marge > 0) {
-        verdictA.className = 'verdict warn';
-        verdictA.textContent = '⚠️ Vol limite — Marge faible';
-    } else {
-        verdictA.className = 'verdict danger';
-        verdictA.textContent = '❌ Chute imminente';
-    }
-
-    if (rB.marge > rB.consommationEffective * 0.3) {
-        verdictB.className = 'verdict ok';
-        verdictB.textContent = '✅ Vol stable — Aucun risque de chute';
-    } else if (rB.marge > 0) {
-        verdictB.className = 'verdict warn';
-        verdictB.textContent = '⚠️ Vol limite — Marge faible';
-    } else {
-        verdictB.className = 'verdict danger';
-        verdictB.textContent = '❌ Chute imminente';
-    }
-
-    // Analyse
-    const gagnant = document.getElementById('gagnant');
-    const carteGagnant = document.getElementById('carteGagnant');
-    carteGagnant.className = 'carte-resultat important';
-
-    if (Math.abs(rA.marge - rB.marge) < 10) {
-        gagnant.textContent = '⚖️ Égalité';
-    } else if (rA.marge > rB.marge) {
-        gagnant.textContent = '🔵 Configuration A';
-        carteGagnant.classList.add('ok');
-    } else {
-        gagnant.textContent = '🔴 Configuration B';
-        carteGagnant.classList.add('ok');
-    }
-
-    document.getElementById('ecartMarge').textContent = fmt(Math.abs(rA.marge - rB.marge), 0);
-    document.getElementById('ecartRendement').textContent = fmt(Math.abs(rA.rendement - rB.rendement), 1);
-
-    // Distance critique B (où la marge devient négative)
-    let distanceCritique = 0;
-    for (let d = 10; d <= 3000; d += 10) {
-        const r = calculerDrone({ ...paramsB, distance: d });
-        if (r.marge < 0) {
-            distanceCritique = d;
-            break;
-        }
-    }
-    document.getElementById('distanceCritiqueB').textContent = distanceCritique > 0 ? fmt(distanceCritique, 0) : '> 3000';
-}
-
-function echangerConfigs() {
-    const vals = {
-        altA: CA.alt.value, distA: CA.dist.value, puiA: CA.pui.value, consoA: CA.conso.value,
-        altB: CB.alt.value, distB: CB.dist.value, puiB: CB.pui.value, consoB: CB.conso.value
-    };
-    CA.alt.value = vals.altB; CA.dist.value = vals.distB; CA.pui.value = vals.puiB; CA.conso.value = vals.consoB;
-    CB.alt.value = vals.altA; CB.dist.value = vals.distA; CB.pui.value = vals.puiA; CB.conso.value = vals.consoA;
-    calculerComparaison();
-}
-
-// Écouteurs comparaison
-Object.values(CA).forEach(el => el.addEventListener('input', calculerComparaison));
-Object.values(CB).forEach(el => el.addEventListener('input', calculerComparaison));
-
-// ============================================================
-// ONGLETS DE MODE
-// ============================================================
-document.querySelectorAll('.onglet-mode').forEach(btn => {
+document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const mode = btn.dataset.mode;
-        document.querySelectorAll('.onglet-mode').forEach(b => b.classList.remove('actif'));
-        btn.classList.add('actif');
-        document.querySelectorAll('.vue-mode').forEach(v => v.classList.remove('actif'));
-        document.getElementById('vue-' + mode).classList.add('actif');
-        if (mode === 'comparaison') calculerComparaison();
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.accordion').forEach(acc => {
+            const cat = acc.dataset.cat;
+            acc.style.display = (filter === 'all' || cat === filter || cat === 'both') ? '' : 'none';
+        });
     });
 });
 
@@ -1590,8 +2184,9 @@ document.querySelectorAll('.onglet-mode').forEach(btn => {
 // INITIALISATION
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
-    appliquerReglageStable();
-    calculerComparaison();
+    computeSatellite();
+    calculer();
+    computeProduction();
 });
 </script>
 
