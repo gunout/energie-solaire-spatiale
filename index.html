@@ -100,7 +100,6 @@ a:hover{text-decoration:underline}
 .ctrl input[type="range"]{width:100%;height:6px;background:var(--marianne-gris-mid);border-radius:3px;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer}
 .ctrl input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--marianne-bleu);border:2px solid white;border-radius:50%;cursor:grab;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
 .ctrl input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.ctrl input[type="range"]::-moz-range-thumb{width:20px;height:20px;background:var(--marianne-bleu);border:2px solid white;border-radius:50%;cursor:grab;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 
 .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:24px}
 .cr{background:var(--marianne-gris-clair);border:1px solid var(--marianne-gris-mid);border-radius:4px;padding:18px 16px;text-align:center;transition:all .2s}
@@ -273,7 +272,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
       <p id="sSD">Densité conforme ICNIRP.</p>
     </div>
   </div>
-  <span class="pas p-ok" id="sSP" style="padding:6px 14px;border-radius:4px;font-size:.75rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:var(--marianne-ok);color:white">Nominal</span>
 </div>
 
 <div class="gr"><div class="gt">🛰 Orbite et antennes</div>
@@ -316,7 +314,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <details class="dc">
 <summary>🧮 Détail complet des calculs satellite (modèle expert UIT)</summary>
 <div class="ct">
-
 <h4>1. Géométrie orbitale</h4>
 <code>d = h / sin(θ)</code>
 <p>Pour GEO à 90° : d = 35 786 km</p>
@@ -324,43 +321,33 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <h4>2. Constante solaire et puissance captée</h4>
 <code>P_solar = S₀ × S × η_PV</code>
 <p>S₀ = 1 361 W/m² (constante solaire AM0)</p>
-<p>Exemple 3 km² × 30 % → <strong>1 224,9 MW</strong></p>
 
 <h4>3. FSPL (Free Space Path Loss)</h4>
 <code>FSPL(dB) = 20·log₁₀(d_km) + 20·log₁₀(f_GHz) + 92,45</code>
-<p>GEO, 5,8 GHz : <strong>198,79 dB</strong></p>
+<p>GEO, 5,8 GHz : 198,79 dB</p>
 
 <h4>4. Pertes atmosphériques</h4>
-<p><strong>Gaz (ITU-R P.676-13)</strong> — modèle 3 raies :</p>
-<code>γ_O₂ = 0,00719·P·f²·60² / [(f²+60²)·((f-60)²+15²)]<br>γ_H₂O = 0,0021·ρ·f²·22,235² / [(f²+22,235²)·((f-22,235)²+4²)]<br>A_gaz = (γ_O₂ + γ_H₂O) × d / sin(θ)</code>
+<p><strong>Gaz (ITU-R P.676-13)</strong> :</p>
+<code>γ_O₂ = 0,00719·P·f²·60² / [(f²+60²)·((f-60)²+15²)]<br>γ_H₂O = 0,0021·ρ·f²·22,235² / [(f²+22,235²)·((f-22,235)²+4²)]</code>
+<p><strong>Pluie (ITU-R P.838-3)</strong> : γ_R = k·R^α</p>
+<p><strong>Nuages (ITU-R P.840)</strong> : K_l = 0,5·(f/10)^1,5</p>
 
-<p><strong>Pluie (ITU-R P.838-3)</strong> :</p>
-<code>k = 4,21·10⁻⁵·f^2,42 ; α = 1,41·f^(-0,0779)<br>γ_R = k·R^α ; A_pluie = γ_R × L_eff / sin(θ)</code>
-
-<p><strong>Nuages (ITU-R P.840)</strong> :</p>
-<code>K_l = 0,5·(f/10)^1,5 ; A_nuage = K_l × L_nuage / sin(θ)</code>
-
-<h4>5. Gains d'antennes paraboliques</h4>
+<h4>5. Gains d'antennes</h4>
 <code>G(dBi) = 10·log₁₀(η_A · (πD/λ)²) avec η_A = 0,55</code>
-<p>Pour D_Tx = 200 m → <strong>79,1 dBi</strong><br>Pour D_Rx = 5 km → <strong>107,1 dBi</strong></p>
 
 <h4>6. Bilan de liaison</h4>
 <code>P_rx(dBW) = P_tx(dBW) + G_Tx + G_Rx − FSPL − A_atm</code>
 
-<h4>7. Puissance nette et rendement</h4>
-<code>P_nette = P_rx × η_RF→DC<br>η_global = P_nette / P_solar</code>
+<h4>7. Rendement global</h4>
+<code>η_global = P_nette / P_solar</code>
 
 <h4>8. Tache de diffraction (Airy)</h4>
-<code>θ_Airy = 1,22 · λ / D_Tx<br>D_tache = θ_Airy × d</code>
+<code>θ_Airy = 1,22 · λ / D_Tx</code>
 
-<h4>9. Densité au sol</h4>
-<code>ρ = P_nette / (π · (D_tache/2)²)</code>
-
-<h4>10. Limites ICNIRP</h4>
+<h4>9. Limites ICNIRP</h4>
 <p>Public : 10 W/m² · Travailleurs : 50 W/m²</p>
 
 <div class="note">⚠️ Le rendement d'un SBSP GEO est structurellement faible (&lt; 2 %) à cause de la distance. Un système LEO atteint 15–20 %.</div>
-
 </div>
 </details>
 </div>
@@ -383,7 +370,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
       <p id="dSD">Le drone reçoit suffisamment d'énergie.</p>
     </div>
   </div>
-  <span class="pas p-ok" id="dSP" style="padding:6px 14px;border-radius:4px;font-size:.75rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:var(--marianne-ok);color:white">Systèmes nominaux</span>
 </div>
 
 <div class="gr"><div class="gt">🚁 Géométrie du vol</div>
@@ -421,54 +407,16 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <details class="dc">
 <summary>🧮 Détail complet des calculs drone</summary>
 <div class="ct">
-
 <h4>1. Distance slant</h4>
 <code>d_slant = √(h² + D²)</code>
-<p>h = 100 m, D = 300 m → <strong>316,2 m</strong></p>
-
 <h4>2. FSPL</h4>
 <code>FSPL = 20·log₁₀(d_km) + 20·log₁₀(f_GHz) + 92,45</code>
-<p><strong>97,72 dB</strong> pour la config par défaut</p>
-
 <h4>3. Gains d'antennes</h4>
-<code>G_Tx = 10·log₁₀(0,55 · (π×1,5/0,0517)²) = 36,6 dBi<br>G_Rx = 10·log₁₀(0,55 · (π×0,30/0,0517)²) = 22,6 dBi</code>
-
-<h4>4. Bilan de liaison (dBm)</h4>
-<code>P_tx = 10·log₁₀(2000 × 1000) = 63,01 dBm<br>P_rx = 63,01 + 36,6 + 22,6 − 97,72 = <strong>24,49 dBm</strong></code>
-<p>P_rx = 10^(24,49/10) / 1000 = <strong>0,281 W</strong></p>
-
-<h4>5. Marge de liaison</h4>
-<code>Marge = P_rx(dBm) − 10·log₁₀(P_conso × 1000)<br>Marge = 24,49 − 51,76 = <strong>−27,3 dB</strong></code>
-<div class="note">⚠️ Marge négative → le drone ne reçoit pas assez d'énergie !</div>
-
-<h4>6. Configuration optimale</h4>
-<table>
-<thead><tr><th>Paramètre</th><th>Valeur</th><th>Effet</th></tr></thead>
-<tbody>
-<tr><td>Altitude</td><td>50 m</td><td>Réduit la distance</td></tr>
-<tr><td>Distance</td><td>100 m</td><td>FSPL −10 dB</td></tr>
-<tr><td>Puissance RF</td><td>5 000 W</td><td>+8 dB</td></tr>
-<tr><td>D_Tx</td><td>3 m</td><td>Gain +6 dB</td></tr>
-<tr><td>D_Rx</td><td>1 m</td><td>Gain +10 dB</td></tr>
-<tr><td>Consommation</td><td>50 W</td><td>−5 dB seuil</td></tr>
-</tbody>
-</table>
-<p>Marge optimale : <strong>+19,4 dB</strong> → vol stable</p>
-
-<h4>7. Seuils de décision</h4>
-<table>
-<thead><tr><th>Marge</th><th>Statut</th></tr></thead>
-<tbody>
-<tr><td>&lt; 0 dB</td><td>🔴 CHUTE</td></tr>
-<tr><td>0–10 dB</td><td>⚠️ Dégradé</td></tr>
-<tr><td>&gt; 10 dB</td><td>✅ Stable</td></tr>
-</tbody>
-</table>
-
-<h4>8. Effet de la distance</h4>
-<code>Marge(d) = P_tx + G_Tx + G_Rx − 20·log₁₀(d) − 20·log₁₀(f) − 92,45 − S_conso</code>
-<p>Chaque doublement de distance coûte <strong>6 dB</strong> de marge.</p>
-
+<code>G(dBi) = 10·log₁₀(η_A · (πD/λ)²)</code>
+<h4>4. Bilan de liaison</h4>
+<code>P_rx(dBm) = P_tx + G_Tx + G_Rx − FSPL − A_vent</code>
+<h4>5. Marge</h4>
+<code>Marge = P_rx(dBm) − 10·log₁₀(P_conso × 1000)</code>
 </div>
 </details>
 </div>
@@ -505,34 +453,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Production et profit cumulés — 30 ans</div>
 <div class="chart-wrap"><canvas id="chartProd"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des calculs LCOE</summary>
-<div class="ct">
-<h4>1. Production annuelle</h4>
-<code>E = P × 8 760 × disponibilité / 1 000</code>
-<p>100 MW × 92 % → <strong>805,9 GWh/an</strong></p>
-
-<h4>2. Revenu annuel</h4>
-<code>Revenu = E × prix = 805,9 × 80 = <strong>64,5 M€/an</strong></code>
-
-<h4>3. LCOE actualisé (formule IEA)</h4>
-<code>LCOE = [Σ (CAPEX + OPEX_t) / (1+r)^t] / [Σ E_t / (1+r)^t]</code>
-<p>Pour 100 MW, 25 ans, WACC 5 % : <strong>1 129 €/MWh</strong></p>
-
-<h4>4. Comparaison LCOE</h4>
-<table>
-<thead><tr><th>Technologie</th><th>LCOE</th></tr></thead>
-<tbody>
-<tr><td>Solaire au sol</td><td>30–50 €/MWh</td></tr>
-<tr><td>Éolien terrestre</td><td>40–70 €/MWh</td></tr>
-<tr><td>Nucléaire EPR</td><td>110–150 €/MWh</td></tr>
-<tr><td><strong>SBSP GEO civil</strong></td><td><strong>1 129 €/MWh</strong></td></tr>
-</tbody>
-</table>
-<div class="note">Le SBSP n'est pas compétitif pour la production terrestre civile.</div>
-</div>
-</details>
 </div>
 </div>
 
@@ -559,38 +479,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Rendements des 4 étages</div>
 <div class="chart-wrap"><canvas id="chartConcept"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des 4 leviers technologiques</summary>
-<div class="ct">
-<h4>Levier 1 — Amplificateur GaN classe F⁻¹</h4>
-<code>η_F⁻¹ = 1 / (1 + (V_sat/V_dd) × (π/2))</code>
-<p>GaN (V_sat=2V, V_dd=28V) → η théorique = 89,9 %<br>Pratique : <strong>76 %</strong></p>
-
-<h4>Levier 2 — Faisceau Flat-Top</h4>
-<p>Uniformise la densité → évite la saturation de la diode centrale</p>
-<p>Rendement transmission : <strong>46,6 %</strong> (vs 30 % gaussien)</p>
-
-<h4>Levier 3 — Rectenna métasurface + GaAs Schottky</h4>
-<code>f_c = 1 / (2π · R_s · C_j)</code>
-<p>Avec R_s = 5 Ω, C_j = 0,1 pF → f_c ≈ <strong>318 GHz</strong><br>Rendement RF→DC : <strong>79,5 %</strong></p>
-
-<h4>Levier 4 — Signal pulsé à haut PAPR</h4>
-<code>PAPR_opt = 10·log₁₀(V_br / V_seuil) − 3</code>
-<p>PAPR théorique : 15,2 dB · pratique : 9 dB<br>Rapport cyclique optimal : 30 %</p>
-
-<h4>Rendement global (4 leviers combinés)</h4>
-<table>
-<thead><tr><th>Étage</th><th>Rendement</th></tr></thead>
-<tbody>
-<tr><td>Amplification DC→RF</td><td>76 %</td></tr>
-<tr><td>Transmission Flat-Top</td><td>46,6 %</td></tr>
-<tr><td>Réception RF→DC</td><td>79,5 %</td></tr>
-<tr><td><strong>Global</strong></td><td><strong>28,1 %</strong></td></tr>
-</tbody>
-</table>
-</div>
-</details>
 </div>
 </div>
 
@@ -614,28 +502,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Fenêtres de visibilité sur 24h</div>
 <div class="chart-wrap"><canvas id="chartLeo"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des calculs LEO vs GEO</summary>
-<div class="ct">
-<h4>1. Période orbitale (Kepler)</h4>
-<code>T = 2π · √(a³ / μ)   avec μ = 3,986×10¹⁴ m³/s²</code>
-<p>550 km → <strong>95,6 min</strong></p>
-
-<h4>2. Vitesse orbitale</h4>
-<code>v = √(μ / a) = <strong>7,59 km/s</strong></code>
-
-<h4>3. Temps de passage</h4>
-<code>t_pass = 2 · η · a / v ≈ <strong>363 s</strong></code>
-
-<h4>4. Nombre de satellites requis</h4>
-<code>N = ⌈T / t_pass⌉ = <strong>16</strong></code>
-
-<h4>5. Gain FSPL vs GEO</h4>
-<code>ΔFSPL = 20·log₁₀(35 786 / 550) = <strong>36,3 dB</strong></code>
-<div class="note">✅ Le LEO gagne 36 dB → rendement ×4 200 vs GEO</div>
-</div>
-</details>
 </div>
 </div>
 
@@ -657,27 +523,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div class="cr"><div class="eq">Tache</div><div class="ch"><span id="lasTache">0</span><span class="un">km</span></div></div>
 <div class="cr imp"><div class="eq">Rendement</div><div class="ch"><span id="lasRend">0</span><span class="un">%</span></div></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des calculs laser</summary>
-<div class="ct">
-<h4>1. FSPL optique</h4>
-<code>FSPL = 20·log₁₀(4πd / λ)</code>
-<p>Pour λ = 1064 nm, d = 35 786 km → <strong>293,5 dB</strong></p>
-
-<h4>2. Divergence</h4>
-<code>θ = λ / (π · w₀)   avec w₀ = D_Tx / 2</code>
-<p>Pour D_Tx = 1 m → <strong>0,68 μrad</strong></p>
-
-<h4>3. Tache au sol</h4>
-<code>D_tache = θ × d = <strong>24,3 m</strong></code>
-
-<h4>4. Rendement global</h4>
-<code>η_global = η_laser × η_transmission × η_PV</code>
-<p>Pour GEO : <strong>0,0001 %</strong></p>
-<div class="note">⚠️ Laser inefficace pour GEO. Utile uniquement pour LEO ou communications optiques.</div>
-</div>
-</details>
 </div>
 </div>
 
@@ -699,16 +544,16 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <details class="dc">
 <summary>🧮 Détail de l'optimisation Pareto</summary>
 <div class="ct">
-<h4>1. Principe</h4>
-<p>500 solutions aléatoires en variant 7 paramètres</p>
+<h4>Principe</h4>
+<p>500 solutions aléatoires en variant 7 paramètres (surface, diamètres, rendements, fréquence).</p>
 
-<h4>2. Filtre Pareto</h4>
+<h4>Filtre Pareto</h4>
 <code>A.eta ≥ B.eta ET A.capex ≤ B.capex ET A.masse ≤ B.masse</code>
 
-<h4>3. CAPEX (M€)</h4>
-<code>CAPEX = (S×100 + A_Tx×1e6 + A_Rx×1e5 + P_RF×50) / 1e6</code>
+<h4>CAPEX (Md€)</h4>
+<code>CAPEX = (S×100 + A_Tx×1e6 + A_Rx×1e5 + P_RF×50) / 1e9</code>
 
-<h4>4. Knee point</h4>
+<h4>Knee point</h4>
 <code>score = η / (CAPEX × Masse)</code>
 </div>
 </details>
@@ -734,26 +579,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Profil Cn²(h)</div>
 <div class="chart-wrap"><canvas id="chartTurb"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail du modèle Hufnagel-Valley</summary>
-<div class="ct">
-<h4>1. Profil Cn²(h)</h4>
-<code>Cn²(h) = 0,00594·(v/27)²·h¹⁰·exp(−h/1000)<br>+ 2,7×10⁻¹⁶·exp(−h/1500)<br>+ A·exp(−h/100)</code>
-
-<h4>2. Paramètre de Fried r₀</h4>
-<code>r₀ = [0,423 · k² · ∫Cn²(h)·dh]^(−3/5)</code>
-
-<h4>3. Angle isoplanétique θ₀</h4>
-<code>θ₀ = [2,91 · k² · ∫Cn²(h)·h^(5/3)·dh]^(−3/5)</code>
-
-<h4>4. Variance de scintillation</h4>
-<code>σ_I² = 2,25 · k^(7/6) · ∫Cn²(h)·h^(5/6)·dh</code>
-
-<h4>5. Seeing</h4>
-<code>seeing = 206 265 × λ / r₀</code>
-</div>
-</details>
 </div>
 </div>
 
@@ -777,27 +602,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Distribution du rendement</div>
 <div class="chart-wrap"><canvas id="chartMc"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail de la simulation Monte-Carlo</summary>
-<div class="ct">
-<h4>1. Principe</h4>
-<code>x_i = x_nominal × (1 + σ × N(0,1))</code>
-<p>Avec Box-Muller :</p>
-<code>N(0,1) = √(−2·ln(U₁)) × cos(2π·U₂)</code>
-
-<h4>2. Statistiques</h4>
-<code>μ = (1/N) · Σ η_i<br>σ = √[(1/N) · Σ (η_i − μ)²]</code>
-
-<h4>3. Interprétation</h4>
-<ul>
-<li><strong>μ</strong> : rendement attendu</li>
-<li><strong>σ</strong> : dispersion</li>
-<li><strong>P5</strong> : pessimiste</li>
-<li><strong>P95</strong> : optimiste</li>
-</ul>
-</div>
-</details>
 </div>
 </div>
 
@@ -825,34 +629,6 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Zones d'exclusion (vue du dessus)</div>
 <div class="chart-wrap" style="height:480px"><canvas id="chartIcnirp"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des limites ICNIRP</summary>
-<div class="ct">
-<h4>1. Limites d'exposition (ICNIRP 1998/2020)</h4>
-<table>
-<thead><tr><th>Fréquence</th><th>Public</th><th>Travailleurs</th></tr></thead>
-<tbody>
-<tr><td>10–400 MHz</td><td>2 W/m²</td><td>10 W/m²</td></tr>
-<tr><td>400–2000 MHz</td><td>f/200</td><td>f/40</td></tr>
-<tr><td>2–300 GHz</td><td>10 W/m²</td><td>50 W/m²</td></tr>
-</tbody>
-</table>
-
-<h4>2. Rayon d'exclusion</h4>
-<code>r_exc = √(P_net / (π · ρ_limite))</code>
-
-<h4>3. Densité actuelle</h4>
-<code>ρ = P_net / (π · r_tache²)</code>
-
-<h4>4. Zones</h4>
-<ul>
-<li>Zone rouge : interdite à tous</li>
-<li>Zone orange : travailleurs formés</li>
-<li>Zone verte : public autorisé</li>
-</ul>
-</div>
-</details>
 </div>
 </div>
 
@@ -870,10 +646,8 @@ details.dc .ct .note{background:#FFF4E5;border-left:3px solid var(--marianne-war
 <div class="pn">
 <div class="pt"><h2>📊 Résumé exécutif — Projet SBSP</h2></div>
 <p style="margin-bottom:20px;color:var(--marianne-texte-doux);line-height:1.9">
-Le projet SBSP (Space-Based Solar Power) vise à produire de l'énergie électrique
-depuis l'espace et à la transmettre vers le sol par faisceau micro-ondes.
-<strong>Non compétitif pour la production terrestre civile</strong>, il présente un intérêt
-stratégique majeur pour les <strong>applications militaires, spatiales et isolées</strong>.
+Le projet SBSP (Space-Based Solar Power) vise à produire de l'énergie électrique depuis l'espace et à la transmettre vers le sol par faisceau micro-ondes.
+<strong>Non compétitif pour la production terrestre civile</strong>, il présente un intérêt stratégique majeur pour les <strong>applications militaires, spatiales et isolées</strong>.
 </p>
 
 <div class="res">
@@ -959,30 +733,6 @@ stratégique majeur pour les <strong>applications militaires, spatiales et isol�
 <div style="font-size:1rem;font-weight:700;color:var(--marianne-bleu);margin-bottom:16px">📈 Cash-flow cumulé sur 30 ans</div>
 <div class="chart-wrap"><canvas id="chartBpCash"></canvas></div>
 </div>
-
-<details class="dc">
-<summary>🧮 Détail des calculs financiers</summary>
-<div class="ct">
-<h4>1. Production annuelle</h4>
-<code>E = P × 8 760 × disponibilité / 1 000<br>E = 10 × 8 760 × 0,95 / 1 000 = <strong>83,2 GWh/an</strong></code>
-
-<h4>2. Revenu annuel</h4>
-<code>Revenu = 83 200 × 200 / 1e6 = <strong>16,6 M€/an</strong></code>
-
-<h4>3. LCOE actualisé</h4>
-<code>LCOE = [CAPEX + Σ OPEX/(1+r)^t] / [Σ E/(1+r)^t]</code>
-<p>20 ans, r = 8 % → <strong>2 862 €/MWh</strong></p>
-
-<h4>4. VAN (sans bénéfices)</h4>
-<code>VAN = −1 700 + (16,6 − 65)×9,818 = <strong>−2 175 M€</strong></code>
-<div class="note">⚠️ Projet non rentable en l'état</div>
-
-<h4>5. VAN (avec bénéfices indirects)</h4>
-<p>Bénéfices indirects : 750 M€/an</p>
-<code>VAN_ind = −1 700 + (16,6 − 65 + 750)×9,818 = <strong>+6 891 M€</strong></code>
-<div class="note">✅ Projet très rentable avec les bénéfices stratégiques</div>
-</div>
-</details>
 </div>
 </div>
 
@@ -1172,7 +922,6 @@ document.querySelectorAll('.nav-onglet').forEach(b=>{
       if(tab==='mc'){ monteCarlo(); }
       if(tab==='icnirp'){ icnirpCalc(); }
       if(tab==='bp'){ bpCalc(); initBpScenarioCharts(); initBpRoadmapCharts(); }
-
       setTimeout(resizeAllVisibleCharts, 100);
     }, 100);
   });
@@ -1195,7 +944,7 @@ document.querySelectorAll('.sob').forEach(b=>{
 });
 
 /* ============================================================
-   CHART — RENDEMENT VS ALTITUDE (SATELLITE)
+   CHART — RENDEMENT VS ALTITUDE (SATELLITE) — CORRIGÉ
    ============================================================ */
 function updateChartRendement(){
   const elFreq = $('sFreq');
@@ -1226,7 +975,7 @@ function updateChartRendement(){
     const pRx_W = Math.pow(10, pRx_dBW/10);
     const pNet_W = pRx_W * rxE;
     let eta = (pNet_W / pSolar) * 100;
-    if(!isFinite(eta) || eta <= 0) eta = 0.0001;
+    if(!isFinite(eta) || eta <= 0) eta = 0.001;
     labels.push(fmtI(h));
     data.push(eta);
   });
@@ -1275,18 +1024,28 @@ function updateChartRendement(){
         }
       },
       scales:{
-        x:{title:{display:true,text:'Altitude (km)'},ticks:{maxRotation:45}},
+        x:{
+          title:{display:true,text:'Altitude (km)'},
+          ticks:{maxRotation:45},
+          grid:{color:'rgba(0,0,145,0.05)'}
+        },
         y:{
           title:{display:true,text:'Rendement (%) — log'},
           type:'logarithmic',
-          min:0.0001,
-          max:100,
+          min: 0.001,
+          max: 50,
           ticks:{
             callback:function(v){
-              const m={0.0001:'0,0001 %',0.001:'0,001 %',0.01:'0,01 %',0.1:'0,1 %',1:'1 %',10:'10 %',100:'100 %'};
-              return m[v] || '';
+              if(v===0.001) return '0,001 %';
+              if(v===0.01) return '0,01 %';
+              if(v===0.1) return '0,1 %';
+              if(v===1) return '1 %';
+              if(v===10) return '10 %';
+              if(v===50) return '50 %';
+              return '';
             }
-          }
+          },
+          grid:{color:'rgba(0,0,145,0.05)'}
         }
       }
     }
@@ -1783,7 +1542,7 @@ function laserCalc(){
 }
 
 /* ============================================================
-   PARETO
+   PARETO — CORRIGÉ (CAPEX en Md€)
    ============================================================ */
 function paretoOptimize(){
   const solutions=[];
@@ -1802,8 +1561,14 @@ function paretoOptimize(){
     const pRx_dBW=10*Math.log10(pRF)+gTx+gRx-fspl-aAtm;
     const pNet_W=Math.pow(10,pRx_dBW/10)*rxE;
     const eta=pNet_W/pSolar;
-    const capex=(sPA*1e6*100+Math.PI*Math.pow(txD/2,2)*1e6+Math.PI*Math.pow(rxD*1000/2,2)*1e6*0.1+pRF*50)/1e6;
-    const masse=(sPA*1e6*0.8+Math.PI*Math.pow(txD/2,2)*5+Math.PI*Math.pow(rxD*1000/2,2)*0.5)/1000;
+
+    // CAPEX en Md€ (divisé par 1000)
+    const capex=(sPA*1e6*100+Math.PI*Math.pow(txD/2,2)*1e6
+              +Math.PI*Math.pow(rxD*1000/2,2)*1e6*0.1
+              +pRF*50)/1e6/1000;
+
+    const masse=(sPA*1e6*0.8+Math.PI*Math.pow(txD/2,2)*5
+              +Math.PI*Math.pow(rxD*1000/2,2)*0.5)/1000;
     solutions.push({sPA,pE,txD,rxD,eta,capex,masse,pNet:pNet_W/1e6});
   }
   const pareto=solutions.filter((s,i)=>!solutions.some((t,j)=>{
@@ -1821,7 +1586,7 @@ function paretoOptimize(){
       return score>bestScore?s:best;
     });
     $('paretoKnee').innerHTML=`<strong>🎯 Point d'équilibre (knee point)</strong><br>
-      η = ${fmtF(knee.eta*100,4)} % · CAPEX = ${fmtI(knee.capex)} M€ · Masse = ${fmtI(knee.masse)} t<br>
+      η = ${fmtF(knee.eta*100,4)} % · CAPEX = ${fmtF(knee.capex,2)} Md€ · Masse = ${fmtI(knee.masse)} t<br>
       Surface = ${fmtF(knee.sPA,1)} km² · Tx = ${fmtF(knee.txD,0)} m · Rx = ${fmtF(knee.rxD,1)} km`;
   }
 
@@ -1837,18 +1602,28 @@ function paretoOptimize(){
       maintainAspectRatio:false,
       plugins:{
         title:{display:true,text:'Front de Pareto : Rendement vs CAPEX'},
-        tooltip:{callbacks:{label:c=>`η=${fmtF(c.parsed.y,4)}% · CAPEX=${fmtI(c.parsed.x)} M€`}}
+        tooltip:{callbacks:{label:c=>`η=${fmtF(c.parsed.y,4)}% · CAPEX=${fmtF(c.parsed.x,2)} Md€`}}
       },
       scales:{
-        x:{title:{display:true,text:'CAPEX (M€)'}},
-        y:{title:{display:true,text:'Rendement (%)'},type:'logarithmic',min:0.001,max:100}
+        x:{
+          title:{display:true,text:'CAPEX (Md€)'},
+          ticks:{
+            callback:function(v){ return fmtI(v) + ' Md€'; }
+          }
+        },
+        y:{
+          title:{display:true,text:'Rendement (%)'},
+          type:'logarithmic',
+          min:0.001,
+          max:100
+        }
       }
     }
   });
 }
 
 /* ============================================================
-   TURBULENCE
+   TURBULENCE — CORRIGÉ
    ============================================================ */
 function hufnagelValley(h,v,A){
   return 0.00594*Math.pow(v/27,2)*Math.pow(h/1000,10)*Math.exp(-h/1000)
@@ -1882,11 +1657,14 @@ function turbulenceCalc(){
   $('turbSeeing').textContent=fmtF(seeing,2);
   $('turbScint').textContent=fmtF(aScint,2);
 
+  // Échelle log pour l'altitude + valeurs réalistes
   const labels=[], data=[];
-  for(let h=0;h<=25000;h+=500){
-    labels.push(fmtI(h/1000)+' km');
-    data.push(hufnagelValley(h,vWind,A_ground));
-  }
+  const hSteps = [0.01, 0.05, 0.1, 0.5, 1, 2, 5, 10, 15, 20, 25]; // km
+  hSteps.forEach(h => {
+    const hMeters = h * 1000;
+    labels.push(h < 1 ? (h*1000) + ' m' : h + ' km');
+    data.push(hufnagelValley(hMeters, vWind, A_ground));
+  });
 
   destroyChart('chartTurb');
   createChart('chartTurb', {
@@ -1895,17 +1673,59 @@ function turbulenceCalc(){
       label:'Cn²(h) (m⁻²ᐟ³)',
       data:data,
       borderColor:'#000091',
-      borderWidth:2,
+      backgroundColor:'rgba(0,0,145,0.08)',
+      borderWidth:3,
       tension:0.3,
-      pointRadius:0
+      fill:true,
+      pointRadius:4,
+      pointBackgroundColor:'#000091',
+      pointBorderColor:'#FFFFFF',
+      pointBorderWidth:2
     }]},
     options:{
       responsive:true,
       maintainAspectRatio:false,
-      plugins:{legend:{position:'top'}},
+      plugins:{
+        legend:{position:'top'},
+        title:{
+          display:true,
+          text:'Profil Cn²(h) — Hufnagel-Valley',
+          font:{size:14,weight:'700'},
+          color:'#000091'
+        },
+        tooltip:{
+          backgroundColor:'rgba(0,0,145,0.92)',
+          padding:12,
+          callbacks:{
+            title:items=>'Altitude : '+items[0].label,
+            label:ctx=>{
+              const v = ctx.parsed.y;
+              return 'Cn² = ' + v.toExponential(2) + ' m⁻²ᐟ³';
+            }
+          }
+        }
+      },
       scales:{
-        x:{title:{display:true,text:'Altitude'},ticks:{maxTicksLimit:10}},
-        y:{title:{display:true,text:'Cn²(h)'},type:'logarithmic',min:1e-18,max:1e-12}
+        x:{
+          title:{display:true,text:'Altitude'},
+          ticks:{maxRotation:45}
+        },
+        y:{
+          title:{display:true,text:'Cn²(h) (m⁻²ᐟ³)'},
+          type:'logarithmic',
+          min: 1e-18,
+          max: 1e-11,
+          ticks:{
+            callback:function(v){
+              const exp = Math.log10(v);
+              if(Number.isInteger(exp)){
+                return '10^' + exp;
+              }
+              return '';
+            },
+            maxTicksLimit: 10
+          }
+        }
       }
     }
   });
@@ -2222,7 +2042,6 @@ function downloadFile(content,filename,mime){
    INITIALISATION
    ============================================================ */
 function init(){
-  // Listeners
   sIds.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',satCalc);});
   dIds.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',droneCalc);});
   pIds.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',proCalc);});
@@ -2243,32 +2062,20 @@ function init(){
     const el=$(id);if(el)el.addEventListener('input',monteCarlo);
   });
 
-  // Initialisation prioritaire
   satCalc();
   droneCalc();
   proCalc();
   conceptCalc();
   renderAcc('all');
 
-  // Forcer le resize après délai
+  setTimeout(()=>{ resizeAllVisibleCharts(); }, 300);
   setTimeout(()=>{
     resizeAllVisibleCharts();
-  }, 300);
-
-  setTimeout(()=>{
-    resizeAllVisibleCharts();
-    if(!charts.chartRendement){
-      console.warn('[Chart] Réessai chartRendement');
-      updateChartRendement();
-    }
-    if(!charts.chartDrone){
-      console.warn('[Chart] Réessai chartDrone');
-      droneCalc();
-    }
+    if(!charts.chartRendement){ updateChartRendement(); }
+    if(!charts.chartDrone){ droneCalc(); }
   }, 1000);
 }
 
-// Attendre que Chart.js soit chargé
 window.addEventListener('load', ()=>{
   let attempts = 0;
   const waitChart = setInterval(()=>{
